@@ -1,119 +1,336 @@
-<!-- 🧩 SECTION: FICTION / NON-FICTION CATEGORY NAVIGATION --><style>
-  .category-toggle {
-    background: #ffffff;
-    padding: 30px 20px 10px;
-    text-align: center;
+<!-- SECTION 1: HEADER WITH FULL NAVIGATION --><!-- Is section mein home, book library, about, contact, aur category dropdown ke sath search bar hoga --><!-- Yeh code pahla section hai 5 mein se. Agla "Next Section" likhne par milega. --><!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="GlobalBookShelf - A multilingual digital book library" />
+  <title>GlobalBookShelf</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --primary-color: #1a1a2e;
+      --secondary-color: #e94560;
+      --accent-color: #0f3460;
+      --light-bg: #f2f4f8;
+      --text-dark: #333;
+      --text-light: #fff;
+    }body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: var(--light-bg);
+  color: var(--text-dark);
+}
+
+header {
+  background: var(--primary-color);
+  color: var(--text-light);
+  text-align: center;
+  padding: 30px 20px 10px;
+}
+
+nav {
+  background: var(--accent-color);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.logo {
+  font-size: 22px;
+  font-weight: bold;
+  color: var(--text-light);
+}
+
+.menu-toggle {
+  display: none;
+  font-size: 26px;
+  cursor: pointer;
+  color: var(--text-light);
+}
+
+.menu-items {
+  display: flex;
+  gap: 20px;
+}
+
+.menu-items a {
+  color: var(--text-light);
+  text-decoration: none;
+  font-weight: 600;
+  padding: 10px 14px;
+  border-radius: 6px;
+  transition: 0.3s;
+}
+
+.menu-items a:hover {
+  background-color: var(--secondary-color);
+}
+
+.search-bar {
+  margin: 15px auto 10px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.search-bar input {
+  padding: 10px 15px;
+  width: 300px;
+  max-width: 90%;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  font-size: 16px;
+}
+
+.search-bar button {
+  padding: 10px 20px;
+  border: none;
+  background-color: var(--secondary-color);
+  color: white;
+  border-radius: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.search-bar button:hover {
+  background-color: #ff6b6b;
+}
+
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+  }
+  .menu-items {
+    display: none;
+    flex-direction: column;
+    background-color: var(--accent-color);
+    width: 100%;
+    position: absolute;
+    top: 65px;
+    left: 0;
+    z-index: 99;
+  }
+  .menu-items a {
+    padding: 12px;
+    border-top: 1px solid #444;
+  }
+  .menu-items.show {
+    display: flex;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <header>
+    <h1>📚 GlobalBookShelf</h1>
+    <p>Read Every Book, In Every Language — For Free</p>
+  </header>
+  <nav>
+    <div class="logo">🌍 GlobalBookShelf</div>
+    <div class="menu-toggle" onclick="document.getElementById('mainMenu').classList.toggle('show')">☰</div>
+    <div class="menu-items" id="mainMenu">
+      <a href="#home">🏠 Home</a>
+      <a href="books.html">📖 Books Library</a>
+      <a href="about.html">👤 About</a>
+      <a href="#contact">📞 Contact</a>
+    </div>
+  </nav>
+  <div class="search-bar">
+    <input type="text" placeholder="Search for books...">
+    <button>Search</button>
+  </div>
+</body>
+</html>
+<!-- 🌐 UPDATED NAVIGATION BAR -->
+<style>
+  nav {
+    background: var(--accent-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    position: relative;
   }
 
-  .category-toggle h3 {
-    font-size: 24px;
+  .logo {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--text-light);
+  }
+
+  .menu-toggle {
+    font-size: 28px;
+    cursor: pointer;
+    color: var(--text-light);
+    display: block;
+  }
+
+  .menu-items {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    background: var(--accent-color);
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    z-index: 10;
+  }
+
+  .menu-items a {
+    color: white;
+    padding: 12px 20px;
+    font-weight: 500;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    text-decoration: none;
+  }
+
+  .menu-items a:hover {
+    background-color: var(--secondary-color);
+  }
+
+  @media (min-width: 768px) {
+    .menu-toggle {
+      display: none;
+    }
+
+    .menu-items {
+      display: flex !important;
+      flex-direction: row;
+      position: static;
+      background: none;
+      box-shadow: none;
+    }
+
+    .menu-items a {
+      border: none;
+      margin: 0 12px;
+    }
+  }
+</style>
+
+<nav>
+  <div class="logo">🌍 GlobalBookShelf</div>
+  <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+  <div id="menu-items" class="menu-items">
+    <a href="#home">🏠 Home</a>
+    <a href="https://qureshi313737.github.io/GlobalBookShelf/books.html" target="_blank">📚 Books Library</a>
+    <a href="#featured">🌟 Featured</a>
+    <a href="about.html">ℹ️ About</a>
+    <a href="#contact">📞 Contact</a>
+  </div>
+</nav>
+
+<script>
+  function toggleMenu() {
+    const menu = document.getElementById('menu-items');
+    menu.style.display = (menu.style.display === 'flex') ? 'none' : 'flex';
+  }
+</script>
+<!-- 🔍 SECTION 3: SEARCH BAR + CTA Button -->
+<style>
+  .search-bar-wrapper {
+    background: #ffffff;
+    padding: 60px 20px 40px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .search-bar-wrapper h2 {
+    font-size: 28px;
     color: var(--primary-color);
     margin-bottom: 20px;
   }
 
-  .category-buttons {
+  .search-bar-container {
     display: flex;
     justify-content: center;
-    gap: 30px;
+    gap: 12px;
     flex-wrap: wrap;
   }
 
-  .category-buttons .category-btn {
+  .search-bar-container input {
+    padding: 14px 18px;
+    width: 340px;
+    max-width: 90%;
+    border-radius: 30px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    outline: none;
+  }
+
+  .search-bar-container button {
+    padding: 14px 24px;
     background-color: var(--secondary-color);
     color: white;
     border: none;
-    padding: 14px 30px;
     border-radius: 30px;
-    font-size: 16px;
     cursor: pointer;
-    font-weight: 600;
-    transition: 0.3s;
+    font-weight: bold;
+    transition: background 0.3s;
   }
 
-  .category-buttons .category-btn:hover {
+  .search-bar-container button:hover {
     background-color: #ff6b6b;
   }
 
-  .subcategory-container {
-    display: none;
-    margin-top: 20px;
-  }
-
-  .subcategory-list {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 20px;
-    padding: 10px 0;
-  }
-
-  .subcategory-list a {
-    padding: 10px 20px;
-    border: 1px solid #ccc;
-    border-radius: 20px;
-    text-decoration: none;
-    font-size: 15px;
-    background: #f9f9f9;
-    transition: 0.3s;
-    color: var(--primary-color);
-  }
-
-  .subcategory-list a:hover {
-    background: var(--secondary-color);
+  .cta-link {
+    display: inline-block;
+    margin-top: 30px;
+    padding: 14px 28px;
+    background-color: var(--accent-color);
     color: white;
-  }
-</style><section class="category-toggle">
-  <h3>📖 Choose a Book Category</h3>
-  <div class="category-buttons">
-    <button class="category-btn" onclick="toggleSubcategories('fiction')">📘 Fiction</button>
-    <button class="category-btn" onclick="toggleSubcategories('nonfiction')">📕 Non-Fiction</button>
-  </div>  <!-- Fiction Categories -->  <div id="fiction" class="subcategory-container">
-    <div class="subcategory-list">
-      <a href="mystery.html">Mystery & Thriller</a>
-      <a href="romance.html">Romance</a>
-      <a href="horror.html">Horror</a>
-      <a href="fantasy.html">Fantasy</a>
-      <a href="historical-fiction.html">Historical Fiction</a>
-      <a href="adventure.html">Adventure</a>
-      <a href="drama.html">Drama</a>
-      <a href="science-fiction.html">Science Fiction</a>
-      <a href="short-stories.html">Short Stories</a>
-    </div>
-  </div>  <!-- Non-Fiction Categories -->  <div id="nonfiction" class="subcategory-container">
-    <div class="subcategory-list">
-      <a href="biography.html">Biography</a>
-      <a href="self-help.html">Self Help</a>
-      <a href="history.html">History</a>
-      <a href="religion.html">Religion</a>
-      <a href="politics.html">Politics</a>
-      <a href="science.html">Science</a>
-      <a href="technology.html">Technology</a>
-      <a href="health.html">Health & Fitness</a>
-      <a href="education.html">Education</a>
-      <a href="philosophy.html">Philosophy</a>
-    </div>
-  </div>
-</section><script>
-  function toggleSubcategories(id) {
-    document.getElementById('fiction').style.display = 'none';
-    document.getElementById('nonfiction').style.display = 'none';
-    document.getElementById(id).style.display = 'block';
-  }
-  </script>
-  <!-- 🔰 SECTION 2: FICTION & NON-FICTION CATEGORY SELECTOR --><style>
-  .category-tabs {
-    background: #ffffff;
-    text-align: center;
-    padding: 60px 20px 30px;
+    font-weight: 600;
+    font-size: 16px;
+    border-radius: 30px;
+    text-decoration: none;
+    transition: background 0.3s;
   }
 
-  .category-tabs h2 {
+  .cta-link:hover {
+    background-color: var(--secondary-color);
+  }
+</style>
+
+<section class="search-bar-wrapper">
+  <h2>🔍 Search Your Favorite Book</h2>
+  <div class="search-bar-container">
+    <input type="text" id="searchInput" placeholder="Type book title or keyword...">
+    <button onclick="searchBook()">Search</button>
+  </div>
+  <a href="books.html" class="cta-link">📚 Go to Books Library</a>
+</section>
+
+<script>
+  function searchBook() {
+    const query = document.getElementById("searchInput").value.toLowerCase();
+    if (query) {
+      alert("Search for: " + query); // Placeholder
+    }
+  }
+</script>
+<!-- 📂 SECTION 4: FICTION & NON-FICTION CATEGORY SELECTOR -->
+<style>
+  .category-toggle-section {
+    background-color: #f9f9f9;
+    padding: 60px 20px;
+    text-align: center;
+  }
+
+  .category-toggle-section h2 {
     font-size: 28px;
     color: var(--primary-color);
     margin-bottom: 30px;
   }
 
-  .tab-buttons {
+  .category-buttons-wrapper {
     display: flex;
     justify-content: center;
     gap: 20px;
@@ -121,258 +338,58 @@
     margin-bottom: 30px;
   }
 
-  .tab-buttons button {
-    background: var(--secondary-color);
-    color: white;
-    padding: 12px 25px;
+  .category-toggle-btn {
+    background-color: var(--secondary-color);
+    color: #fff;
+    padding: 12px 28px;
     border: none;
     border-radius: 30px;
-    font-weight: 600;
+    font-size: 16px;
+    font-weight: bold;
     cursor: pointer;
     transition: 0.3s ease;
   }
 
-  .tab-buttons button.active,
-  .tab-buttons button:hover {
-    background: #ff6b6b;
+  .category-toggle-btn:hover {
+    background-color: #ff6f61;
   }
 
-  .category-lists {
+  .category-list-wrapper {
     display: none;
     flex-wrap: wrap;
     justify-content: center;
     gap: 15px;
   }
 
-  .category-lists.active {
+  .category-list-wrapper.active {
     display: flex;
   }
 
-  .category-lists a {
-    background: #f2f2f2;
-    padding: 10px 20px;
+  .category-list-wrapper a {
+    padding: 10px 22px;
+    background: #ffffff;
     border-radius: 25px;
-    color: #333;
-    font-weight: 500;
-    text-decoration: none;
-    transition: 0.2s ease;
-  }
-
-  .category-lists a:hover {
-    background: var(--secondary-color);
-    color: white;
-  }
-</style><section class="category-tabs">
-  <h2>📂 Browse by Category</h2>
-  <div class="tab-buttons">
-    <button class="active" onclick="showCategory('fiction')">📘 Fiction</button>
-    <button onclick="showCategory('nonfiction')">📕 Non-Fiction</button>
-  </div>  <div id="fiction" class="category-lists active">
-    <a href="mystery.html">Mystery & Thriller</a>
-    <a href="romance.html">Romance</a>
-    <a href="horror.html">Horror</a>
-    <a href="fantasy.html">Fantasy</a>
-    <a href="historical-fiction.html">Historical Fiction</a>
-    <a href="adventure.html">Adventure</a>
-    <a href="drama.html">Drama</a>
-    <a href="science-fiction.html">Science Fiction</a>
-    <a href="short-stories.html">Short Stories</a>
-  </div>  <div id="nonfiction" class="category-lists">
-    <a href="biography.html">Biography</a>
-    <a href="self-help.html">Self Help</a>
-    <a href="history.html">History</a>
-    <a href="religion.html">Religion</a>
-    <a href="politics.html">Politics</a>
-    <a href="science.html">Science</a>
-    <a href="technology.html">Technology</a>
-    <a href="health.html">Health & Fitness</a>
-    <a href="education.html">Education</a>
-    <a href="philosophy.html">Philosophy</a>
-  </div>
-</section><script>
-  function showCategory(category) {
-    const fiction = document.getElementById('fiction');
-    const nonfiction = document.getElementById('nonfiction');
-    const buttons = document.querySelectorAll('.tab-buttons button');
-
-    fiction.classList.remove('active');
-    nonfiction.classList.remove('active');
-    buttons.forEach(btn => btn.classList.remove('active'));
-
-    document.getElementById(category).classList.add('active');
-    if (category === 'fiction') buttons[0].classList.add('active');
-    else buttons[1].classList.add('active');
-  }
-</script>
-<!-- 📂 SECTION: CATEGORY LISTING PAGE (Fiction / Non-Fiction) --><!DOCTYPE html><html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Fiction Categories - GlobalBookShelf</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Poppins', sans-serif;
-      background: #f4f7fb;
-      color: #1a1a2e;
-    }
-    header {
-      background: #1a1a2e;
-      color: white;
-      padding: 30px 10px;
-      text-align: center;
-    }
-    h1 {
-      font-size: 28px;
-    }
-    .category-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      padding: 50px 20px;
-      gap: 30px;
-    }
-    .category-card {
-      background: white;
-      padding: 30px;
-      width: 240px;
-      border-radius: 12px;
-      box-shadow: 0 6px 15px rgba(0,0,0,0.1);
-      text-align: center;
-      transition: transform 0.3s;
-    }
-    .category-card:hover {
-      transform: scale(1.05);
-    }
-    .category-card a {
-      text-decoration: none;
-      color: #e94560;
-      font-weight: bold;
-      font-size: 18px;
-    }
-    .category-icon {
-      font-size: 32px;
-      margin-bottom: 15px;
-      color: #0f3460;
-    }
-  </style>
-</head>
-<body>
-  <header>
-    <h1>📘 Fiction Categories</h1>
-    <p>Explore Fiction Books by Genre</p>
-  </header>  <section class="category-container">
-    <div class="category-card">
-      <div class="category-icon">🕵️‍♂️</div>
-      <a href="mystery.html">Mystery & Thriller</a>
-    </div>
-    <div class="category-card">
-      <div class="category-icon">💖</div>
-      <a href="romance.html">Romance</a>
-    </div>
-    <div class="category-card">
-      <div class="category-icon">👻</div>
-      <a href="horror.html">Horror</a>
-    </div>
-    <div class="category-card">
-      <div class="category-icon">🧚‍♂️</div>
-      <a href="fantasy.html">Fantasy</a>
-    </div>
-    <div class="category-card">
-      <div class="category-icon">🏰</div>
-      <a href="historical-fiction.html">Historical Fiction</a>
-    </div>
-    <div class="category-card">
-      <div class="category-icon">🏕️</div>
-      <a href="adventure.html">Adventure</a>
-    </div>
-    <div class="category-card">
-      <div class="category-icon">🎭</div>
-      <a href="drama.html">Drama</a>
-    </div>
-    <div class="category-card">
-      <div class="category-icon">🚀</div>
-      <a href="science-fiction.html">Science Fiction</a>
-    </div>
-    <div class="category-card">
-      <div class="category-icon">📖</div>
-      <a href="short-stories.html">Short Stories</a>
-    </div>
-  </section>
-</body>
-</html>
-<!-- 🌍 SECTION 4: CATEGORY NAVIGATION DROPDOWN (Fiction / Non-Fiction) --><style>
-  .category-nav {
-    background-color: #ffffff;
-    padding: 30px 20px;
-    text-align: center;
-    border-top: 1px solid #ccc;
-    border-bottom: 1px solid #ccc;
-  }
-
-  .category-nav h2 {
-    font-size: 28px;
     color: var(--primary-color);
-    margin-bottom: 20px;
-  }
-
-  .category-buttons {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 30px;
-  }
-
-  .category-button {
-    background-color: var(--accent-color);
-    color: white;
-    border: none;
-    padding: 12px 25px;
-    font-size: 16px;
-    border-radius: 30px;
-    cursor: pointer;
-    transition: background 0.3s ease, transform 0.3s ease;
-  }
-
-  .category-button:hover {
-    background-color: var(--secondary-color);
-    transform: scale(1.05);
-  }
-
-  .subcategory-list {
-    display: none;
-    margin-top: 20px;
-    animation: fadeIn 0.4s ease-in-out;
-  }
-
-  .subcategory-list a {
-    display: inline-block;
-    margin: 5px 10px;
-    padding: 8px 15px;
-    background-color: #f1f1f1;
-    border-radius: 20px;
-    color: #333;
     text-decoration: none;
-    font-size: 14px;
+    font-weight: 500;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     transition: background 0.3s;
   }
 
-  .subcategory-list a:hover {
+  .category-list-wrapper a:hover {
     background-color: var(--secondary-color);
     color: white;
   }
+</style>
 
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-</style><section class="category-nav">
-  <h2>📚 Browse by Category</h2>
-  <div class="category-buttons">
-    <button class="category-button" onclick="toggleCategory('fiction')">📘 Fiction</button>
-    <button class="category-button" onclick="toggleCategory('nonfiction')">📕 Non-Fiction</button>
-  </div>  <div class="subcategory-list" id="fiction">
+<section class="category-toggle-section">
+  <h2>📖 Browse by Genre</h2>
+  <div class="category-buttons-wrapper">
+    <button class="category-toggle-btn" onclick="showCategory('fiction-list')">📘 Fiction</button>
+    <button class="category-toggle-btn" onclick="showCategory('nonfiction-list')">📕 Non-Fiction</button>
+  </div>
+
+  <div id="fiction-list" class="category-list-wrapper active">
     <a href="mystery.html">Mystery & Thriller</a>
     <a href="romance.html">Romance</a>
     <a href="horror.html">Horror</a>
@@ -382,7 +399,9 @@
     <a href="drama.html">Drama</a>
     <a href="science-fiction.html">Science Fiction</a>
     <a href="short-stories.html">Short Stories</a>
-  </div>  <div class="subcategory-list" id="nonfiction">
+  </div>
+
+  <div id="nonfiction-list" class="category-list-wrapper">
     <a href="biography.html">Biography</a>
     <a href="self-help.html">Self Help</a>
     <a href="history.html">History</a>
@@ -394,101 +413,107 @@
     <a href="education.html">Education</a>
     <a href="philosophy.html">Philosophy</a>
   </div>
-</section><script>
-  function toggleCategory(id) {
-    const allLists = document.querySelectorAll('.subcategory-list');
-    allLists.forEach(list => list.style.display = 'none');
-    const target = document.getElementById(id);
-    if (target) target.style.display = 'block';
+</section>
+
+<script>
+  function showCategory(id) {
+    const fictionList = document.getElementById("fiction-list");
+    const nonfictionList = document.getElementById("nonfiction-list");
+
+    fictionList.classList.remove("active");
+    nonfictionList.classList.remove("active");
+
+    document.getElementById(id).classList.add("active");
   }
 </script>
-<!-- 📚 SECTION: CATEGORY DROPDOWNS FOR DESKTOP --><style>
-  .category-bar {
-    background: #f4f4f4;
-    padding: 20px 10px;
-    display: flex;
-    justify-content: center;
-    gap: 40px;
-    flex-wrap: wrap;
-    border-bottom: 2px solid #ddd;
+<!-- 📌 SECTION 5: BOOK SHELF UI + FEATURED BOOKS -->
+<style>
+  .bookshelf-section {
+    background-color: #ffffff;
+    padding: 60px 20px;
+    text-align: center;
   }
 
-  .category-group {
+  .bookshelf-section h3 {
+    font-size: 30px;
+    color: var(--primary-color);
+    margin-bottom: 40px;
+  }
+
+  .shelf {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 40px;
+    padding-bottom: 50px;
     position: relative;
   }
 
-  .category-btn {
-    background: var(--secondary-color);
-    color: white;
-    padding: 10px 20px;
-    font-weight: 600;
-    border: none;
-    border-radius: 25px;
+  .book {
+    width: 170px;
+    text-align: center;
+  }
+
+  .book img {
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+    transition: transform 0.3s;
     cursor: pointer;
+  }
+
+  .book img:hover {
+    transform: scale(1.05);
+  }
+
+  .book-title {
+    margin-top: 12px;
     font-size: 16px;
-    transition: 0.3s ease;
+    font-weight: bold;
+    color: var(--text-dark);
   }
 
-  .category-btn:hover {
-    background: #ff6f61;
+  .download-link {
+    display: block;
+    margin-top: 6px;
+    font-size: 14px;
+    color: var(--secondary-color);
+    text-decoration: none;
   }
 
-  .dropdown {
-    display: none;
+  .shelf-line {
     position: absolute;
-    top: 50px;
+    width: 100%;
+    height: 6px;
+    background: #b08b57;
+    bottom: 0;
     left: 0;
-    background-color: #fff;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    border-radius: 8px;
-    overflow: hidden;
-    z-index: 999;
-    min-width: 200px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
   }
+</style>
 
-  .dropdown a {
-    display: block;
-    padding: 12px 16px;
-    color: #333;
-    font-weight: 500;
-    border-bottom: 1px solid #eee;
-    transition: 0.2s;
-  }
-
-  .dropdown a:hover {
-    background-color: #f2f2f2;
-  }
-
-  .category-group:hover .dropdown {
-    display: block;
-  }
-</style><div class="category-bar">
-  <div class="category-group">
-    <button class="category-btn">📘 Fiction</button>
-    <div class="dropdown">
-      <a href="mystery.html">Mystery & Thriller</a>
-      <a href="romance.html">Romance</a>
-      <a href="horror.html">Horror</a>
-      <a href="fantasy.html">Fantasy</a>
-      <a href="historical-fiction.html">Historical Fiction</a>
-      <a href="adventure.html">Adventure</a>
-      <a href="drama.html">Drama</a>
-      <a href="science-fiction.html">Science Fiction</a>
-      <a href="short-stories.html">Short Stories</a>
+<section class="bookshelf-section" id="featured">
+  <h3>📚 Featured Book Shelf</h3>
+  <div class="shelf">
+    
+    <!-- 📕 Book 1 -->
+    <div class="book">
+      <img src="https://i.imgur.com/0y8Ftya.jpeg" alt="Manipulation Book">
+      <div class="book-title">Manipulation – Dark Psychology</div>
+      <a class="download-link" href="https://raw.githubusercontent.com/Qureshi313737/GlobalBookShelf/main/Manipulation-Dark-Psychology-to-Manipulate-and-Control-People%20(1).pdf" target="_blank">📥 Download</a>
     </div>
-  </div>  <div class="category-group">
-    <button class="category-btn">📕 Non-Fiction</button>
-    <div class="dropdown">
-      <a href="biography.html">Biography</a>
-      <a href="self-help.html">Self Help</a>
-      <a href="history.html">History</a>
-      <a href="religion.html">Religion</a>
-      <a href="politics.html">Politics</a>
-      <a href="science.html">Science</a>
-      <a href="technology.html">Technology</a>
-      <a href="health.html">Health & Fitness</a>
-      <a href="education.html">Education</a>
-      <a href="philosophy.html">Philosophy</a>
+
+    <!-- 📘 Book 2 (example) -->
+    <!--
+    <div class="book">
+      <img src="YOUR_IMAGE_URL" alt="Book Title">
+      <div class="book-title">Book Name</div>
+      <a class="download-link" href="YOUR_BOOK_LINK" target="_blank">📥 Download</a>
     </div>
+    -->
+
+    <div class="shelf-line"></div>
   </div>
-</div>
+</section>
