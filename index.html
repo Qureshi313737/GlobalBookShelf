@@ -1,521 +1,557 @@
-<!-- ✅ SECTION 1: Header + Hero Section with Search (Theme Based) -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>GlobalBookShelf</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet"/>
   <style>
     :root {
-      --primary: #1d3557;
-      --secondary: #f76c6c;
-      --light: #f8f9fa;
-      --card-bg: #ffffffcc;
+      --primary-color: #1a1a2e;
+      --secondary-color: #e94560;
+      --accent-color: #0f3460;
+      --light-bg: #f2f4f8;
       --text-dark: #333;
+      --text-light: #fff;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
 
     body {
-      margin: 0;
       font-family: 'Poppins', sans-serif;
-      background: linear-gradient(to bottom, #cde9ff, #f1faff);
+      background-color: var(--light-bg);
       color: var(--text-dark);
     }
 
     header {
-      padding: 20px 30px;
+      background: var(--primary-color);
+      color: var(--text-light);
+      text-align: center;
+      padding: 30px 10px 20px;
+    }
+
+    nav {
+      background: var(--accent-color);
       display: flex;
       justify-content: space-between;
       align-items: center;
+      padding: 14px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      flex-wrap: wrap;
     }
 
     .logo {
       font-size: 22px;
       font-weight: bold;
-      color: var(--primary);
+      color: var(--text-light);
     }
 
-    nav a {
+    .menu {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .menu a, .dropdown-btn {
+      color: white;
       text-decoration: none;
-      color: var(--primary);
-      margin: 0 15px;
       font-weight: 600;
+      padding: 10px 14px;
+      border-radius: 6px;
+      transition: 0.3s;
+      background: transparent;
+      cursor: pointer;
     }
 
-    .hero {
-      text-align: center;
-      padding: 80px 20px 40px;
+    .menu a:hover, .dropdown-btn:hover {
+      background-color: var(--secondary-color);
     }
 
-    .hero h1 {
-      font-size: 40px;
-      color: var(--primary);
-      margin-bottom: 10px;
+    /* Dropdowns */
+    .dropdown {
+      position: relative;
     }
 
-    .hero p {
-      font-size: 18px;
-      max-width: 600px;
-      margin: 0 auto 30px;
-      color: #555;
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #fff;
+      min-width: 180px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      border-radius: 8px;
+      top: 48px;
+      z-index: 99;
     }
 
-    .search-container {
+    .dropdown-content a {
+      display: block;
+      padding: 10px 16px;
+      color: var(--primary-color);
+      text-decoration: none;
+      font-size: 15px;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #eee;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    .search-bar {
       display: flex;
       justify-content: center;
-      align-items: center;
+      padding: 25px 20px;
       gap: 10px;
+      flex-wrap: wrap;
+      background: #ffffff;
+      border-bottom: 1px solid #ddd;
     }
 
-    .search-container input {
-      padding: 14px 18px;
-      border-radius: 30px;
+    .search-bar input {
+      padding: 12px 18px;
       width: 300px;
+      border-radius: 25px;
       border: 1px solid #ccc;
       font-size: 16px;
     }
 
-    .search-container button {
-      padding: 14px 20px;
-      background-color: var(--secondary);
+    .search-bar button {
+      padding: 12px 22px;
+      background-color: var(--secondary-color);
       color: white;
       border: none;
-      border-radius: 30px;
+      border-radius: 25px;
       font-weight: bold;
       cursor: pointer;
+      transition: 0.3s;
     }
 
-    .search-container button:hover {
-      background-color: #ff5252;
+    .search-bar button:hover {
+      background-color: #ff6b6b;
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .menu {
+        flex-direction: column;
+        width: 100%;
+        gap: 10px;
+        margin-top: 10px;
+      }
+      .dropdown-content {
+        position: static;
+        width: 100%;
+        box-shadow: none;
+        border-radius: 0;
+      }
     }
   </style>
 </head>
 <body>
 
 <header>
-  <div class="logo">📚 GlobalBookShelf</div>
-  <nav>
-    <a href="#">Home</a>
-    <a href="#">Books</a>
-    <a href="#">Genres</a>
-    <a href="#">About</a>
-  </nav>
+  <h1>📚 GlobalBookShelf</h1>
+  <p>Read Every Book, In Every Language — For Free</p>
 </header>
 
-<section class="hero">
-  <h1>Explore the World of Free Books 🌍</h1>
-  <p>Discover, download and read books in every language — completely free.</p>
-  <div class="search-container">
-    <input type="text" placeholder="Search for books..." />
-    <button>🔍</button>
+<nav>
+  <div class="logo">🌍 GlobalBookShelf</div>
+  <div class="menu">
+    <a href="#home">🏠 Home</a>
+    <a href="books.html" target="_blank">📖 Library</a>
+    <a href="about.html">👤 About</a>
+    <a href="#contact">📞 Contact</a>
+
+    <!-- Fiction Dropdown -->
+    <div class="dropdown">
+      <div class="dropdown-btn">📘 Fiction ▾</div>
+      <div class="dropdown-content">
+        <a href="mystery.html">Mystery & Thriller</a>
+        <a href="romance.html">Romance</a>
+        <a href="horror.html">Horror</a>
+        <a href="fantasy.html">Fantasy</a>
+        <a href="historical-fiction.html">Historical Fiction</a>
+        <a href="adventure.html">Adventure</a>
+        <a href="drama.html">Drama</a>
+        <a href="science-fiction.html">Science Fiction</a>
+        <a href="short-stories.html">Short Stories</a>
+      </div>
+    </div>
+
+    <!-- Non-Fiction Dropdown -->
+    <div class="dropdown">
+      <div class="dropdown-btn">📕 Non-Fiction ▾</div>
+      <div class="dropdown-content">
+        <a href="biography.html">Biography</a>
+        <a href="self-help.html">Self Help</a>
+        <a href="history.html">History</a>
+        <a href="religion.html">Religion</a>
+        <a href="politics.html">Politics</a>
+        <a href="science.html">Science</a>
+        <a href="technology.html">Technology</a>
+        <a href="health.html">Health & Fitness</a>
+        <a href="education.html">Education</a>
+        <a href="philosophy.html">Philosophy</a>
+      </div>
+    </div>
   </div>
-</section>
-<!-- ✅ SECTION 2: Top Downloads Showcase -->
+</nav>
+
+<div class="search-bar">
+  <input type="text" id="searchInput" placeholder="Search for books...">
+  <button onclick="searchBook()">Search</button>
+</div>
+
+<script>
+  function searchBook() {
+    const query = document.getElementById("searchInput").value.toLowerCase();
+    if (query) {
+      alert("Searching for: " + query);
+    }
+  }
+</script>
+<!-- 🌄 SECTION 2: HERO SECTION WITH CTA -->
 <style>
-  .section-heading {
+  .hero-section {
+    background: url('https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=1400&q=80') center/cover no-repeat;
+    padding: 120px 20px 80px;
     text-align: center;
-    font-size: 28px;
-    margin: 60px 0 30px;
-    color: var(--primary);
+    color: white;
+    position: relative;
   }
 
-  .book-grid {
+  .hero-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 1;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    margin: auto;
+  }
+
+  .hero-content h2 {
+    font-size: 42px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    text-shadow: 1px 1px 5px #000;
+  }
+
+  .hero-content p {
+    font-size: 18px;
+    margin-bottom: 30px;
+    text-shadow: 1px 1px 3px #000;
+  }
+
+  .hero-content a {
+    display: inline-block;
+    padding: 14px 30px;
+    font-size: 16px;
+    background-color: var(--secondary-color);
+    color: white;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    transition: 0.3s ease;
+  }
+
+  .hero-content a:hover {
+    background-color: #ff6b6b;
+    transform: scale(1.05);
+  }
+
+  @media (max-width: 600px) {
+    .hero-content h2 {
+      font-size: 32px;
+    }
+  }
+</style>
+
+<section class="hero-section" id="home">
+  <div class="hero-content">
+    <h2>Welcome to GlobalBookShelf 📚</h2>
+    <p>Explore & Download Free Books in Every Language. Join Millions of Global Readers!</p>
+    <a href="books.html" target="_blank">📖 Go to Books Library</a>
+  </div>
+</section>
+<!-- 🎯 SECTION 3: CATEGORY SELECTOR -->
+<style>
+  .category-section {
+    background-color: #f9f9f9;
+    padding: 60px 20px;
+    text-align: center;
+  }
+
+  .category-section h2 {
+    font-size: 30px;
+    color: var(--primary-color);
+    margin-bottom: 30px;
+  }
+
+  .category-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+  }
+
+  .category-buttons button {
+    background-color: var(--secondary-color);
+    color: white;
+    border: none;
+    padding: 12px 28px;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s ease;
+  }
+
+  .category-buttons button:hover {
+    background-color: #ff6b6b;
+  }
+
+  .subcategories {
+    display: none;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    animation: fadeIn 0.4s ease;
+  }
+
+  .subcategories.active {
+    display: flex;
+  }
+
+  .subcategories a {
+    padding: 10px 22px;
+    background: #fff;
+    border-radius: 25px;
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    transition: 0.3s;
+  }
+
+  .subcategories a:hover {
+    background-color: var(--secondary-color);
+    color: white;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+</style>
+
+<section class="category-section">
+  <h2>📚 Explore by Genre</h2>
+
+  <div class="category-buttons">
+    <button onclick="toggleCategory('fiction')">📘 Fiction</button>
+    <button onclick="toggleCategory('nonfiction')">📕 Non-Fiction</button>
+  </div>
+
+  <!-- 📘 Fiction Categories -->
+  <div id="fiction" class="subcategories active">
+    <a href="mystery.html">Mystery & Thriller</a>
+    <a href="romance.html">Romance</a>
+    <a href="horror.html">Horror</a>
+    <a href="fantasy.html">Fantasy</a>
+    <a href="historical-fiction.html">Historical Fiction</a>
+    <a href="adventure.html">Adventure</a>
+    <a href="drama.html">Drama</a>
+    <a href="science-fiction.html">Science Fiction</a>
+    <a href="short-stories.html">Short Stories</a>
+  </div>
+
+  <!-- 📕 Non-Fiction Categories -->
+  <div id="nonfiction" class="subcategories">
+    <a href="biography.html">Biography</a>
+    <a href="self-help.html">Self Help</a>
+    <a href="history.html">History</a>
+    <a href="religion.html">Religion</a>
+    <a href="politics.html">Politics</a>
+    <a href="science.html">Science</a>
+    <a href="technology.html">Technology</a>
+    <a href="health.html">Health & Fitness</a>
+    <a href="education.html">Education</a>
+    <a href="philosophy.html">Philosophy</a>
+  </div>
+</section>
+
+<script>
+  function toggleCategory(id) {
+    document.getElementById("fiction").classList.remove("active");
+    document.getElementById("nonfiction").classList.remove("active");
+    document.getElementById(id).classList.add("active");
+  }
+</script>
+<!-- ⭐ SECTION 4: FEATURED BOOK SHELF -->
+<style>
+  .bookshelf-section {
+    background-color: #ffffff;
+    padding: 60px 20px;
+    text-align: center;
+  }
+
+  .bookshelf-section h3 {
+    font-size: 30px;
+    color: var(--primary-color);
+    margin-bottom: 40px;
+  }
+
+  .shelf {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 30px;
-    padding: 0 20px 60px;
+    gap: 40px;
+    padding-bottom: 50px;
+    position: relative;
   }
 
-  .book-card {
-    width: 160px;
-    background-color: var(--card-bg);
-    backdrop-filter: blur(5px);
-    border-radius: 16px;
-    padding: 15px;
+  .book {
+    width: 170px;
     text-align: center;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
-    transition: transform 0.3s;
   }
 
-  .book-card:hover {
-    transform: translateY(-5px);
-  }
-
-  .book-card img {
+  .book img {
     width: 100%;
-    height: 210px;
+    height: 240px;
     object-fit: cover;
-    border-radius: 12px;
-    margin-bottom: 10px;
+    border-radius: 10px;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+    transition: transform 0.3s;
+    cursor: pointer;
+  }
+
+  .book img:hover {
+    transform: scale(1.05);
   }
 
   .book-title {
-    font-size: 15px;
-    font-weight: 600;
-    color: var(--primary);
-  }
-
-  .book-author {
-    font-size: 13px;
-    color: #666;
-    margin-top: 4px;
-  }
-
-  .download-btn {
-    display: inline-block;
-    margin-top: 10px;
-    font-size: 13px;
-    color: var(--secondary);
-    text-decoration: none;
+    margin-top: 12px;
+    font-size: 16px;
     font-weight: bold;
+    color: var(--text-dark);
   }
 
-  .download-btn:hover {
+  .download-link {
+    display: block;
+    margin-top: 6px;
+    font-size: 14px;
+    color: var(--secondary-color);
+    text-decoration: none;
+  }
+
+  .download-link:hover {
     text-decoration: underline;
   }
-</style>
 
-<section>
-  <h2 class="section-heading">📥 Top Downloads</h2>
-  <div class="book-grid">
-    <!-- Book 1 -->
-    <div class="book-card">
-      <img src="https://i.imgur.com/XdJcHjU.jpeg" alt="Book 1">
-      <div class="book-title">The Good Girl's Cure</div>
-      <div class="book-author">by Lillian Bias</div>
-      <a href="#" class="download-btn">📥 Download</a>
-    </div>
-
-    <!-- Book 2 -->
-    <div class="book-card">
-      <img src="https://i.imgur.com/KjUKpTP.jpeg" alt="Book 2">
-      <div class="book-title">The Walking Place</div>
-      <div class="book-author">by Fiona Haze</div>
-      <a href="#" class="download-btn">📥 Download</a>
-    </div>
-
-    <!-- Book 3 -->
-    <div class="book-card">
-      <img src="https://i.imgur.com/UWXbGKT.jpeg" alt="Book 3">
-      <div class="book-title">Shinrin Yoku</div>
-      <div class="book-author">by Green Mind</div>
-      <a href="#" class="download-btn">📥 Download</a>
-    </div>
-
-    <!-- Book 4 -->
-    <div class="book-card">
-      <img src="https://i.imgur.com/0y8Ftya.jpeg" alt="Book 4">
-      <div class="book-title">Manipulation</div>
-      <div class="book-author">by Dark Psychology</div>
-      <a href="#" class="download-btn">📥 Download</a>
-    </div>
-  </div>
-    </section>
-    <!-- ✅ SECTION 3: Browse by Genre -->
-<style>
-  .genre-section {
-    background: #f9fafe;
-    padding: 60px 20px;
-    text-align: center;
-  }
-
-  .genre-section h2 {
-    font-size: 28px;
-    margin-bottom: 40px;
-    color: var(--primary);
-  }
-
-  .genre-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 25px;
-  }
-
-  .genre-card {
-    width: 160px;
-    background: white;
-    padding: 20px 15px;
-    border-radius: 16px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.05);
-    transition: 0.3s;
-    cursor: pointer;
-  }
-
-  .genre-card:hover {
-    transform: translateY(-6px);
-  }
-
-  .genre-icon {
-    font-size: 32px;
-    margin-bottom: 10px;
-    color: var(--secondary);
-  }
-
-  .genre-title {
-    font-size: 15px;
-    font-weight: 600;
-    color: var(--primary);
+  .shelf-line {
+    position: absolute;
+    width: 100%;
+    height: 6px;
+    background: #b08b57;
+    bottom: 0;
+    left: 0;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
   }
 </style>
 
-<section class="genre-section">
-  <h2>📚 Browse by Genre</h2>
-  <div class="genre-grid">
-    <!-- Each genre card -->
-    <div class="genre-card">
-      <div class="genre-icon">🕵️‍♂️</div>
-      <div class="genre-title">Mystery</div>
+<section class="bookshelf-section" id="featured">
+  <h3>📚 Featured Book Shelf</h3>
+  <div class="shelf">
+
+    <!-- 🔥 Book 1 -->
+    <div class="book" onclick="openModal('https://i.imgur.com/0y8Ftya.jpeg', 'Manipulation – Dark Psychology', 'https://raw.githubusercontent.com/Qureshi313737/GlobalBookShelf/main/Manipulation-Dark-Psychology-to-Manipulate-and-Control-People%20(1).pdf')">
+      <img src="https://i.imgur.com/0y8Ftya.jpeg" alt="Manipulation Book">
+      <div class="book-title">Manipulation – Dark Psychology</div>
+      <a class="download-link" href="https://raw.githubusercontent.com/Qureshi313737/GlobalBookShelf/main/Manipulation-Dark-Psychology-to-Manipulate-and-Control-People%20(1).pdf" target="_blank">📥 Download</a>
     </div>
-    <div class="genre-card">
-      <div class="genre-icon">💖</div>
-      <div class="genre-title">Romance</div>
-    </div>
-    <div class="genre-card">
-      <div class="genre-icon">👻</div>
-      <div class="genre-title">Horror</div>
-    </div>
-    <div class="genre-card">
-      <div class="genre-icon">🌌</div>
-      <div class="genre-title">Sci-Fi</div>
-    </div>
-    <div class="genre-card">
-      <div class="genre-icon">🏰</div>
-      <div class="genre-title">Historical</div>
-    </div>
-    <div class="genre-card">
-      <div class="genre-icon">🧠</div>
-      <div class="genre-title">Self Help</div>
-    </div>
-    <div class="genre-card">
-      <div class="genre-icon">📖</div>
-      <div class="genre-title">Philosophy</div>
-    </div>
-    <div class="genre-card">
-      <div class="genre-icon">🏋️‍♀️</div>
-      <div class="genre-title">Fitness</div>
-    </div>
+
+    <!-- ✅ Add More Books Below by Copy-Pasting Book Box -->
+
+    <div class="shelf-line"></div>
   </div>
 </section>
-<!-- ✅ SECTION 4: Top Downloads + Sidebar -->
+<!-- 🔚 SECTION 5: FOOTER -->
 <style>
-  .download-section {
-    background: #fff;
-    padding: 60px 20px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 50px;
-  }
-
-  .downloads,
-  .recommendations {
-    flex: 1;
-    min-width: 300px;
-  }
-
-  .downloads h3,
-  .recommendations h3 {
-    font-size: 24px;
-    margin-bottom: 20px;
-    color: var(--primary);
-  }
-
-  .book-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-    gap: 25px;
-  }
-
-  .book-card {
-    background: #f9f9f9;
-    border-radius: 14px;
-    padding: 14px;
-    box-shadow: 0 6px 14px rgba(0,0,0,0.05);
-    text-align: center;
-    transition: 0.3s;
-  }
-
-  .book-card img {
-    width: 100%;
-    height: 190px;
-    object-fit: cover;
-    border-radius: 10px;
-  }
-
-  .book-card h4 {
-    font-size: 15px;
-    margin: 10px 0 5px;
-    color: var(--primary);
-  }
-
-  .recommend-list {
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
-  }
-
-  .recommend-item {
-    display: flex;
-    gap: 14px;
-    align-items: center;
-    background: #f4f4f4;
-    padding: 12px;
-    border-radius: 12px;
-  }
-
-  .recommend-item img {
-    width: 50px;
-    height: 70px;
-    object-fit: cover;
-    border-radius: 6px;
-  }
-
-  .recommend-item .text {
-    font-size: 14px;
-    color: #333;
-    font-weight: 500;
-  }
-</style>
-
-<section class="download-section">
-  <!-- 📥 Left Column – Top Downloads -->
-  <div class="downloads">
-    <h3>🔥 Top Downloads</h3>
-    <div class="book-grid">
-      <div class="book-card">
-        <img src="https://i.imgur.com/0y8Ftya.jpeg" alt="Book">
-        <h4>Dark Psychology</h4>
-      </div>
-      <div class="book-card">
-        <img src="https://i.imgur.com/0y8Ftya.jpeg" alt="Book">
-        <h4>Emotional Mastery</h4>
-      </div>
-      <div class="book-card">
-        <img src="https://i.imgur.com/0y8Ftya.jpeg" alt="Book">
-        <h4>Power of Mind</h4>
-      </div>
-      <div class="book-card">
-        <img src="https://i.imgur.com/0y8Ftya.jpeg" alt="Book">
-        <h4>Atomic Habits</h4>
-      </div>
-    </div>
-  </div>
-
-  <!-- ⭐ Right Column – Recommendations -->
-  <div class="recommendations">
-    <h3>⭐ Recommendations</h3>
-    <div class="recommend-list">
-      <div class="recommend-item">
-        <img src="https://i.imgur.com/0y8Ftya.jpeg" alt="Rec">
-        <div class="text">Best Self – Mike Bayer</div>
-      </div>
-      <div class="recommend-item">
-        <img src="https://i.imgur.com/0y8Ftya.jpeg" alt="Rec">
-        <div class="text">Can't Hurt Me – David Goggins</div>
-      </div>
-      <div class="recommend-item">
-        <img src="https://i.imgur.com/0y8Ftya.jpeg" alt="Rec">
-        <div class="text">Rich Dad Poor Dad</div>
-      </div>
-    </div>
-  </div>
-    </section>
-    <!-- ✅ SECTION 5: Newsletter + Footer -->
-<style>
-  .newsletter {
-    background: #fefefe;
-    padding: 60px 20px;
-    text-align: center;
-    border-top: 1px solid #eee;
-  }
-
-  .newsletter h2 {
-    font-size: 26px;
-    color: var(--primary-color);
-    margin-bottom: 10px;
-  }
-
-  .newsletter p {
-    font-size: 16px;
-    color: #444;
-    margin-bottom: 25px;
-  }
-
-  .newsletter form {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-
-  .newsletter input {
-    padding: 12px 18px;
-    border-radius: 25px;
-    border: 1px solid #ccc;
-    font-size: 15px;
-    width: 280px;
-  }
-
-  .newsletter button {
-    background: var(--secondary-color);
-    border: none;
-    color: white;
-    padding: 12px 24px;
-    border-radius: 25px;
-    font-weight: bold;
-    font-size: 15px;
-    cursor: pointer;
-    transition: background 0.3s;
-  }
-
-  .newsletter button:hover {
-    background: #ff6b6b;
-  }
-
   footer {
-    background: var(--primary-color);
-    color: #fff;
+    background-color: var(--primary-color);
+    color: var(--text-light);
     text-align: center;
-    padding: 40px 20px 30px;
-    font-size: 15px;
+    padding: 50px 20px;
+  }
+
+  footer p {
+    margin: 8px 0;
+    font-size: 16px;
   }
 
   footer a {
     color: #99ccff;
     text-decoration: none;
+    font-weight: 500;
   }
 
   footer a:hover {
     text-decoration: underline;
   }
 
-  footer .footer-credit {
-    margin-top: 12px;
-    color: #ccc;
+  .footer-credit {
+    margin-top: 25px;
     font-size: 14px;
+    color: #ccc;
+  }
+
+  .social-icons {
+    margin-top: 15px;
+  }
+
+  .social-icons a {
+    margin: 0 10px;
+    color: white;
+    font-size: 20px;
+    display: inline-block;
+    transition: 0.3s;
+  }
+
+  .social-icons a:hover {
+    color: var(--secondary-color);
+    transform: scale(1.2);
   }
 </style>
 
-<section class="newsletter">
-  <h2>📬 Subscribe to our Newsletter</h2>
-  <p>Get notified whenever new books are added in your favorite languages!</p>
-  <form onsubmit="subscribeNewsletter(event)">
-    <input type="email" placeholder="Enter your email address" required />
-    <button type="submit">Subscribe</button>
-  </form>
-</section>
-
-<footer>
+<footer id="contact">
   <p>📧 Email: <a href="mailto:Mustafaqureahi786@gmail.com">Mustafaqureahi786@gmail.com</a></p>
   <p>📞 Phone: <a href="tel:+919921437547">+91 9921437547</a></p>
-  <p class="footer-credit">© 2025 GlobalBookShelf — Made with ❤️ for global readers</p>
-</footer>
+  
+  <div class="social-icons">
+    <a href="https://facebook.com" target="_blank" title="Facebook">📘</a>
+    <a href="https://twitter.com" target="_blank" title="Twitter">🐦</a>
+    <a href="https://instagram.com" target="_blank" title="Instagram">📸</a>
+  </div>
 
-<script>
-  function subscribeNewsletter(event) {
-    event.preventDefault();
-    alert("✅ Thank you for subscribing!");
-  }
-</script>
+  <p class="footer-credit">© 2025 GlobalBookShelf — Made with ❤️ by Mustafa Qureshi</p>
+</footer>
