@@ -1,214 +1,637 @@
-<!-- 🔰 SECTION 1: HEADER + HERO START --><!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="GlobalBookShelf - A multilingual digital book library" />
   <title>GlobalBookShelf</title>
-  <meta name="description" content="GlobalBookShelf is a free multilingual library offering downloadable PDF books in all global languages." />
+
+  <!-- 💎 Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+
+  <!-- 💅 Base CSS Styling -->
   <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    :root {
+      --primary-color: #1a1a2e;
+      --secondary-color: #e94560;
+      --accent-color: #0f3460;
+      --light-bg: #f2f4f8;
+      --text-dark: #333;
+      --text-light: #fff;
+    }
+
+    * {
       margin: 0;
-      background: #f0f4f8;
-      color: #333;
+      padding: 0;
+      box-sizing: border-box;
     }
-    header {
-      background: #1a1a2e;
-      color: #fff;
-      padding: 20px 10px;
-      text-align: center;
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--light-bg);
+      color: var(--text-dark);
+      line-height: 1.6;
     }
-    nav {
-      background: #16213e;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 10px 20px;
-      color: white;
+
+    a {
+      text-decoration: none;
+      color: inherit;
     }
-    .menu-toggle {
-      font-size: 24px;
-      cursor: pointer;
+
+    img {
+      max-width: 100%;
       display: block;
     }
-    .menu-items {
-      display: none;
-      flex-direction: column;
-      background: #0f3460;
-      padding: 10px;
-      position: absolute;
-      top: 60px;
-      right: 20px;
-      border-radius: 6px;
+
+    html {
+      scroll-behavior: smooth;
     }
-    .menu-items a {
-      padding: 8px 10px;
-      text-decoration: none;
-      color: white;
-      font-weight: bold;
+
+    /* 🌐 Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
     }
-    .menu-items a:hover {
-      background: #e94560;
-      border-radius: 4px;
+    ::-webkit-scrollbar-track {
+      background: #ddd;
     }
-    .hero {
-      background: url('https://images.unsplash.com/photo-1512820790803-83ca734da794') no-repeat center center/cover;
-      color: white;
-      padding: 100px 20px;
-      text-align: center;
-    }
-    .hero h2 {
-      font-size: 48px;
-      text-shadow: 1px 1px 4px #000;
-    }
-    .hero p {
-      font-size: 20px;
-      text-shadow: 1px 1px 3px #000;
-    }
-    .hero a {
-      background-color: #e94560;
-      color: white;
-      padding: 12px 30px;
-      border-radius: 6px;
-      text-decoration: none;
-      font-size: 18px;
-      display: inline-block;
-      margin-top: 30px;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    ::-webkit-scrollbar-thumb {
+      background-color: var(--primary-color);
+      border-radius: 10px;
     }
   </style>
-  <script>
-    function toggleMenu() {
-      const menu = document.getElementById('menu-items');
-      menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
-    }
-  </script>
 </head>
 <body>
-  <header>
-    <h1>GlobalBookShelf</h1>
-    <p>Read Every Book, In Every Language — For Free</p>
-  </header>
-  <nav>
-    <div class="menu-toggle" onclick="toggleMenu()">&#9776;</div>
-    <div id="menu-items" class="menu-items">
-      <a href="#home">Home</a>
-      <a href="books.html">Books Library</a>
-      <a href="#featured">Featured Books</a>
-      <a href="about.html">About</a>
-      <a href="#contact">Contact</a>
+  <!-- 🔰 SECTION 2: NAVIGATION BAR -->
+<style>
+  header {
+    background: var(--primary-color);
+    color: var(--text-light);
+    padding: 20px;
+    text-align: center;
+  }
+
+  nav {
+    background: var(--accent-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    position: relative;
+  }
+
+  .logo {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--text-light);
+  }
+
+  .menu-toggle {
+    font-size: 28px;
+    cursor: pointer;
+    color: var(--text-light);
+    display: block;
+  }
+
+  .menu-items {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    background: var(--accent-color);
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    z-index: 10;
+  }
+
+  .menu-items a {
+    color: white;
+    padding: 12px 20px;
+    font-weight: 500;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .menu-items a:hover {
+    background-color: var(--secondary-color);
+  }
+
+  @media (min-width: 768px) {
+    .menu-toggle {
+      display: none;
+    }
+
+    .menu-items {
+      display: flex !important;
+      flex-direction: row;
+      position: static;
+      box-shadow: none;
+    }
+
+    .menu-items a {
+      border: none;
+      margin: 0 10px;
+    }
+  }
+</style>
+
+<header>
+  <h1>📚 GlobalBookShelf</h1>
+  <p>Read Every Book, In Every Language — For Free</p>
+</header>
+
+<nav>
+  <div class="logo">🌍 Library</div>
+  <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+  <div id="menu-items" class="menu-items">
+    <a href="#home">Home</a>
+    <a href="books.html">Books Library</a>
+    <a href="#featured">Featured</a>
+    <a href="about.html">About</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<script>
+  function toggleMenu() {
+    const menu = document.getElementById('menu-items');
+    if (menu.style.display === 'flex') {
+      menu.style.display = 'none';
+    } else {
+      menu.style.display = 'flex';
+    }
+  }
+</script>
+<!-- 🔰 SECTION 3: HERO SECTION -->
+<style>
+  .hero {
+    background: url('https://images.unsplash.com/photo-1512820790803-83ca734da794') no-repeat center center/cover;
+    color: white;
+    text-align: center;
+    padding: 120px 20px 80px;
+    position: relative;
+  }
+
+  .hero h2 {
+    font-size: 44px;
+    font-weight: 700;
+    text-shadow: 1px 1px 4px #000;
+    margin-bottom: 20px;
+  }
+
+  .hero p {
+    font-size: 18px;
+    text-shadow: 1px 1px 3px #000;
+    margin-bottom: 30px;
+  }
+
+  .hero a {
+    background-color: var(--secondary-color);
+    color: white;
+    padding: 14px 30px;
+    font-size: 16px;
+    border-radius: 6px;
+    text-decoration: none;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+    transition: all 0.3s ease;
+  }
+
+  .hero a:hover {
+    background-color: #ff6f61;
+    transform: scale(1.05);
+  }
+</style>
+
+<section class="hero" id="home">
+  <h2>Welcome to GlobalBookShelf 📚</h2>
+  <p>Explore free books in all global languages. Search, read, and download easily.</p>
+  <a href="books.html">📖 Go to Books Library</a>
+</section>
+<!-- 🔎 SECTION 4: SEARCH BAR -->
+<style>
+  .search-section {
+    background: #ffffff;
+    padding: 50px 20px 30px;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+  }
+
+  .search-section h3 {
+    font-size: 26px;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+  }
+
+  .search-bar-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+  }
+
+  .search-bar-container input {
+    padding: 12px 16px;
+    width: 300px;
+    max-width: 80%;
+    border: 1px solid #ccc;
+    border-radius: 25px;
+    font-size: 16px;
+    outline: none;
+  }
+
+  .search-bar-container button {
+    padding: 12px 20px;
+    background-color: var(--secondary-color);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+  }
+
+  .search-bar-container button:hover {
+    background-color: #ff6b6b;
+  }
+</style>
+
+<section class="search-section">
+  <h3>🔍 Search Books</h3>
+  <div class="search-bar-container">
+    <input type="text" id="searchInput" placeholder="Enter book name or keyword...">
+    <button onclick="alert('Search functionality coming soon!')">Search</button>
+  </div>
+</section>
+<!-- 🪵 SECTION 5: BOOK SHELF UI -->
+<style>
+  .bookshelf-section {
+    background: #fdfdfd;
+    padding: 60px 20px;
+    text-align: center;
+  }
+
+  .bookshelf-section h3 {
+    font-size: 32px;
+    color: var(--primary-color);
+    margin-bottom: 30px;
+  }
+
+  .shelf {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 40px;
+    position: relative;
+    padding-bottom: 50px;
+  }
+
+  .book {
+    width: 160px;
+    text-align: center;
+    position: relative;
+  }
+
+  .book img {
+    width: 100%;
+    height: 230px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    transition: transform 0.3s;
+    cursor: pointer;
+  }
+
+  .book img:hover {
+    transform: scale(1.05);
+  }
+
+  .book-title {
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    color: var(--text-dark);
+  }
+
+  .download-link {
+    display: block;
+    margin-top: 6px;
+    font-size: 14px;
+    color: var(--secondary-color);
+    text-decoration: none;
+  }
+
+  .shelf-line {
+    position: absolute;
+    width: 100%;
+    height: 6px;
+    background: #b08b57;
+    bottom: 0;
+    left: 0;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  }
+</style>
+
+<section class="bookshelf-section" id="featured">
+  <h3>📚 Featured Book Shelf</h3>
+  <div class="shelf">
+    
+    <!-- 🧠 Book 1 -->
+    <div class="book">
+      <img src="https://i.imgur.com/0y8Ftya.jpeg" alt="Manipulation Book">
+      <div class="book-title">Manipulation – Dark Psychology</div>
+      <a class="download-link" href="https://raw.githubusercontent.com/Qureshi313737/GlobalBookShelf/main/Manipulation-Dark-Psychology-to-Manipulate-and-Control-People%20(1).pdf" target="_blank">📥 Download</a>
     </div>
-  </nav>
-  <section class="hero" id="home">
-    <h2>Welcome to GlobalBookShelf 📚</h2>
-    <p>Explore a world of books in all global languages.</p>
-    <a href="books.html">Go to Book Library</a>
-  </section>
-<!-- 🔰 SECTION 1 END -->
-  <style>
-    .section {
-      padding: 60px 20px;
-      text-align: center;
-    }
-    .section h3 {
-      color: #1a1a2e;
-      font-size: 32px;
-      margin-bottom: 20px;
-    }
-    .books {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 30px;
-      margin-top: 40px;
-    }
-    .card {
-      background: white;
-      border-radius: 12px;
-      padding: 15px;
-      width: 260px;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
-      text-align: center;
-      transition: transform 0.3s;
-    }
-    .card:hover {
-      transform: translateY(-10px);
-    }
-    .card img {
-      width: 100%;
-      height: auto;
-      border-radius: 8px;
-      margin-bottom: 10px;
-    }
-    .card h4 {
-      font-size: 18px;
-      margin: 10px 0 5px;
-    }
-    .card p {
-      font-size: 14px;
-      color: #555;
-    }
-    .download-btn {
-      background: linear-gradient(to right, #00c9ff, #92fe9d);
-      color: #0d3b66;
-      font-weight: bold;
-      padding: 10px 20px;
-      border-radius: 30px;
-      text-decoration: none;
-      display: inline-block;
-      transition: 0.3s;
-      margin-top: 10px;
-    }
-    .download-btn:hover {
-      transform: scale(1.05);
-    }
-  </style>
 
-  <section class="section" id="featured">
-    <h3>📚 Featured Books</h3>
-    <div class="books">
-      <!-- Book 1 -->
-      <div class="card">
-        <img src="https://i.imgur.com/0y8Ftya.jpeg" alt="Dark Psychology">
-        <h4>🧠 Manipulation – Dark Psychology (Urdu)</h4>
-        <p>This Urdu version explores the dark side of human behavior and manipulation tactics.</p>
-        <a class="download-btn" href="https://raw.githubusercontent.com/Qureshi313737/GlobalBookShelf/main/Manipulation-Dark-Psychology-to-Manipulate-and-Control-People%20(1).pdf" target="_blank">📥 Download PDF</a>
-      </div>
-
-      <!-- Book 2 -->
-      <div class="card">
-        <img src="https://i.imgur.com/GjOekLj.jpeg" alt="Farameen Siddiq e Akbar">
-        <h4>📘 Farameen-e-Siddiq-e-Akbar</h4>
-        <p>A collection of sayings and writings of Hazrat Abu Bakr Siddiq R.A. in Urdu.</p>
-        <a class="download-btn" href="https://raw.githubusercontent.com/Qureshi313737/GlobalBookShelf/main/farameen-e-siddiq-e-akbar.pdf" target="_blank">📥 Download PDF</a>
-      </div>
+    <!-- 📘 Book 2 (Example: add more books like this) -->
+    <!--
+    <div class="book">
+      <img src="YOUR_IMAGE_URL" alt="Book Title">
+      <div class="book-title">Book Name</div>
+      <a class="download-link" href="YOUR_BOOK_LINK" target="_blank">📥 Download</a>
     </div>
-  </section>
-  <!-- 🔔 CALL TO ACTION SECTION -->
-  <section class="section" style="background:#e8f0fe; margin-top: 50px;">
-    <h3 style="font-size:28px; color:#0d3b66;">Enjoying the Library?</h3>
-    <p style="font-size:16px; max-width:600px; margin:auto;">
-      Bookmark this site and share it with friends. We update books regularly in all languages for free download.
-    </p>
-    <a href="books.html" class="download-btn" style="margin-top:20px;">📚 Explore More Books</a>
-  </section>
+    -->
 
-  <!-- ✉️ NEWSLETTER SECTION -->
-  <section class="section" style="background:#fefefe; margin-top: 50px;">
-    <h3 style="font-size:26px; color:#16213e;">📬 Subscribe to our newsletter</h3>
-    <p style="max-width:500px; margin:auto;">Get notified when we upload new books and languages!</p>
-    <form style="margin-top: 20px;">
-      <input type="email" placeholder="Enter your email" style="padding: 10px; width: 250px; border: 1px solid #ccc; border-radius: 5px;" required>
-      <button type="submit" style="padding: 10px 20px; background:#e94560; color:white; border:none; border-radius: 5px; margin-left:10px;">Subscribe</button>
-    </form>
-  </section>
+    <div class="shelf-line"></div>
+  </div>
+</section>
+<!-- 📖 SECTION 6: BOOK MODAL PREVIEW -->
+<style>
+  /* Modal styles */
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+  }
 
-  <!-- ⚓️ FOOTER -->
-  <footer id="contact" style="background: #1a1a2e; color: white; text-align: center; padding: 30px 10px; margin-top: 50px;">
-    <p style="margin-bottom:8px;">&copy; 2025 GlobalBookShelf</p>
-    <p style="margin:4px 0;">📧 Email: <a href="mailto:Mustafaqureahi786@gmail.com" style="color:#99ccff;">Mustafaqureahi786@gmail.com</a></p>
-    <p style="margin:4px 0;">📞 Phone: <a href="tel:+919921437547" style="color:#99ccff;">+91 9921437547</a></p>
-    <p style="margin-top:12px;">Made with ❤️ for global readers</p>
-  </footer>
+  .modal-content {
+    background: white;
+    padding: 30px;
+    width: 90%;
+    max-width: 400px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+    position: relative;
+  }
 
-</body>
-</html>
+  .modal-content img {
+    width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+    border-radius: 8px;
+  }
+
+  .modal-content h4 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: var(--primary-color);
+  }
+
+  .modal-content a {
+    display: inline-block;
+    margin-top: 15px;
+    background: var(--secondary-color);
+    color: white;
+    padding: 10px 25px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+  }
+
+  .modal-content a:hover {
+    background: #ff6f61;
+  }
+
+  .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 22px;
+    cursor: pointer;
+    color: #aaa;
+  }
+
+  .close-btn:hover {
+    color: red;
+  }
+</style>
+
+<!-- 🔲 Modal Container -->
+<div class="modal-overlay" id="bookModal">
+  <div class="modal-content">
+    <span class="close-btn" onclick="closeModal()">×</span>
+    <img id="modalImage" src="" alt="Book Preview" />
+    <h4 id="modalTitle">Book Title</h4>
+    <a id="modalDownload" href="#" target="_blank">📥 Download PDF</a>
+  </div>
+</div>
+
+<!-- 🧠 JS For Modal Preview -->
+<script>
+  function openModal(imgUrl, title, downloadUrl) {
+    document.getElementById('modalImage').src = imgUrl;
+    document.getElementById('modalTitle').innerText = title;
+    document.getElementById('modalDownload').href = downloadUrl;
+    document.getElementById('bookModal').style.display = 'flex';
+  }
+
+  function closeModal() {
+    document.getElementById('bookModal').style.display = 'none';
+  }
+</script>
+<!-- 📢 SECTION 7: CALL TO ACTION -->
+<style>
+  .cta-section {
+    background: #e8f0fe;
+    padding: 60px 20px;
+    text-align: center;
+  }
+
+  .cta-section h3 {
+    font-size: 28px;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+  }
+
+  .cta-section p {
+    max-width: 600px;
+    margin: auto;
+    font-size: 16px;
+    color: #444;
+    line-height: 1.7;
+  }
+
+  .cta-buttons {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .cta-buttons a {
+    background-color: var(--secondary-color);
+    color: white;
+    padding: 12px 25px;
+    border-radius: 30px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: 0.3s ease;
+  }
+
+  .cta-buttons a:hover {
+    background-color: #ff6f61;
+    transform: scale(1.05);
+  }
+</style>
+
+<section class="cta-section">
+  <h3>📣 Love What You Read?</h3>
+  <p>Bookmark this website to access free books in every language anytime. Don’t forget to share it with your friends and family who love reading!</p>
+  <div class="cta-buttons">
+    <a href="books.html">📚 Browse More Books</a>
+    <a href="#" onclick="window.print()">🔖 Bookmark This Page</a>
+  </div>
+</section>
+<!-- 💌 SECTION 8: NEWSLETTER SUBSCRIPTION -->
+<style>
+  .newsletter-section {
+    background: #ffffff;
+    padding: 60px 20px;
+    text-align: center;
+    border-top: 1px solid #ddd;
+  }
+
+  .newsletter-section h3 {
+    font-size: 26px;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+  }
+
+  .newsletter-section p {
+    max-width: 500px;
+    margin: 0 auto 25px;
+    color: #444;
+    font-size: 16px;
+  }
+
+  .newsletter-form {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+  }
+
+  .newsletter-form input[type="email"] {
+    padding: 12px 16px;
+    width: 300px;
+    max-width: 90%;
+    border-radius: 25px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    outline: none;
+  }
+
+  .newsletter-form button {
+    padding: 12px 24px;
+    background-color: var(--secondary-color);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s ease;
+  }
+
+  .newsletter-form button:hover {
+    background-color: #ff6b6b;
+  }
+</style>
+
+<section class="newsletter-section">
+  <h3>📬 Subscribe to our Newsletter</h3>
+  <p>Get notified whenever new books are added in your favorite languages!</p>
+  <form class="newsletter-form" onsubmit="alert('Thanks for subscribing!'); return false;">
+    <input type="email" placeholder="Enter your email address" required />
+    <button type="submit">Subscribe</button>
+  </form>
+</section>
+<!-- 🧭 SECTION 9: FOOTER -->
+<style>
+  footer {
+    background-color: var(--primary-color);
+    color: var(--text-light);
+    text-align: center;
+    padding: 40px 20px;
+  }
+
+  footer p {
+    margin: 8px 0;
+    font-size: 15px;
+  }
+
+  footer a {
+    color: #99ccff;
+    text-decoration: none;
+  }
+
+  footer a:hover {
+    text-decoration: underline;
+  }
+
+  .footer-credit {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #ccc;
+  }
+</style>
+
+<footer id="contact">
+  <p>📧 Email: <a href="mailto:Mustafaqureahi786@gmail.com">Mustafaqureahi786@gmail.com</a></p>
+  <p>📞 Phone: <a href="tel:+919921437547">+91 9921437547</a></p>
+  <p class="footer-credit">© 2025 GlobalBookShelf — Made with ❤️ for global readers</p>
+</footer>
+<!-- 🧠 SECTION 10: JAVASCRIPT LOGIC -->
+<script>
+  // Toggle Menu for mobile nav
+  function toggleMenu() {
+    const menu = document.getElementById('menu-items');
+    menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
+  }
+
+  // Search Filter Logic
+  document.getElementById('searchInput')?.addEventListener('keyup', function () {
+    const input = this.value.toLowerCase();
+    const books = document.querySelectorAll('.book, .card, .shelf .book');
+
+    books.forEach(book => {
+      const title = book.innerText.toLowerCase();
+      if (title.includes(input)) {
+        book.style.display = 'block';
+      } else {
+        book.style.display = 'none';
+      }
+    });
+  });
+
+  // Modal close by pressing ESC
+  window.addEventListener('keydown', function (e) {
+    if (e.key === "Escape") {
+      const modal = document.getElementById('bookModal');
+      if (modal && modal.style.display === 'flex') {
+        modal.style.display = 'none';
+      }
+    }
+  });
+</script>
