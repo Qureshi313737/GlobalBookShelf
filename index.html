@@ -507,3 +507,269 @@
   <p>📞 Phone: <a href="tel:+919921437547">+91 9921437547</a></p>
   <p class="footer-credit">© 2025 GlobalBookShelf — Made with ❤️ for global readers</p>
 </footer>
+<!-- 📖 SECTION 7: BOOK MODAL PREVIEW -->
+<style>
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+  }
+
+  .modal-content {
+    background: white;
+    padding: 30px;
+    width: 90%;
+    max-width: 400px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+    position: relative;
+  }
+
+  .modal-content img {
+    width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+    border-radius: 8px;
+  }
+
+  .modal-content h4 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: var(--primary-color);
+  }
+
+  .modal-content a {
+    display: inline-block;
+    margin-top: 15px;
+    background: var(--secondary-color);
+    color: white;
+    padding: 10px 25px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+  }
+
+  .modal-content a:hover {
+    background: #ff6f61;
+  }
+
+  .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 22px;
+    cursor: pointer;
+    color: #aaa;
+  }
+
+  .close-btn:hover {
+    color: red;
+  }
+</style>
+
+<!-- 🔲 Modal Container -->
+<div class="modal-overlay" id="bookModal">
+  <div class="modal-content">
+    <span class="close-btn" onclick="closeModal()">×</span>
+    <img id="modalImage" src="" alt="Book Preview" />
+    <h4 id="modalTitle">Book Title</h4>
+    <a id="modalDownload" href="#" target="_blank">📥 Download PDF</a>
+  </div>
+</div>
+
+<!-- 🧠 JS For Modal -->
+<script>
+  function openModal(imgUrl, title, downloadUrl) {
+    document.getElementById('modalImage').src = imgUrl;
+    document.getElementById('modalTitle').innerText = title;
+    document.getElementById('modalDownload').href = downloadUrl;
+    document.getElementById('bookModal').style.display = 'flex';
+  }
+
+  function closeModal() {
+    document.getElementById('bookModal').style.display = 'none';
+  }
+
+  // Close modal with ESC key
+  window.addEventListener('keydown', function (e) {
+    if (e.key === "Escape") {
+      closeModal();
+    }
+  });
+</script>
+<!-- 📬 SECTION 8: NEWSLETTER SUBSCRIPTION -->
+<style>
+  .newsletter-section {
+    background: #ffffff;
+    padding: 60px 20px;
+    text-align: center;
+    border-top: 1px solid #ddd;
+  }
+
+  .newsletter-section h3 {
+    font-size: 26px;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+  }
+
+  .newsletter-section p {
+    max-width: 500px;
+    margin: 0 auto 25px;
+    color: #444;
+    font-size: 16px;
+  }
+
+  .newsletter-form {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+  }
+
+  .newsletter-form input[type="email"] {
+    padding: 12px 16px;
+    width: 300px;
+    max-width: 90%;
+    border-radius: 25px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    outline: none;
+  }
+
+  .newsletter-form button {
+    padding: 12px 24px;
+    background-color: var(--secondary-color);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s ease;
+  }
+
+  .newsletter-form button:hover {
+    background-color: #ff6b6b;
+  }
+</style>
+
+<section class="newsletter-section">
+  <h3>📬 Subscribe to our Newsletter</h3>
+  <p>Get notified whenever new books are added in your favorite languages!</p>
+  <form class="newsletter-form" onsubmit="subscribeUser(event)">
+    <input type="email" placeholder="Enter your email address" required />
+    <button type="submit">Subscribe</button>
+  </form>
+</section>
+
+<script>
+  function subscribeUser(event) {
+    event.preventDefault();
+    alert("Thanks for subscribing! (Functionality coming soon...)");
+  }
+</script>
+<!-- 🧭 SECTION 9: FOOTER -->
+<style>
+  footer {
+    background-color: var(--primary-color);
+    color: var(--text-light);
+    text-align: center;
+    padding: 40px 20px;
+  }
+
+  footer p {
+    margin: 8px 0;
+    font-size: 15px;
+  }
+
+  footer a {
+    color: #99ccff;
+    text-decoration: none;
+  }
+
+  footer a:hover {
+    text-decoration: underline;
+  }
+
+  .footer-credit {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #ccc;
+  }
+</style>
+
+<footer id="contact">
+  <p>📧 Email: <a href="mailto:Mustafaqureahi786@gmail.com">Mustafaqureahi786@gmail.com</a></p>
+  <p>📞 Phone: <a href="tel:+919921437547">+91 9921437547</a></p>
+  <p class="footer-credit">© 2025 GlobalBookShelf — Made with ❤️ for global readers</p>
+</footer>
+<!-- 🧠 SECTION 10: JAVASCRIPT LOGIC -->
+<script>
+  // 📱 Toggle Mobile Menu
+  function toggleMenu() {
+    const menu = document.getElementById('menu-items');
+    menu.classList.toggle('show');
+  }
+
+  // 🔍 Live Book Search (Featured Books Section ke liye)
+  document.getElementById('searchInput')?.addEventListener('keyup', function () {
+    const query = this.value.toLowerCase();
+    const books = document.querySelectorAll('.book');
+
+    books.forEach(book => {
+      const title = book.innerText.toLowerCase();
+      book.style.display = title.includes(query) ? 'block' : 'none';
+    });
+  });
+
+  // ⛔ Close Modal with ESC Key
+  window.addEventListener('keydown', function (e) {
+    if (e.key === "Escape") {
+      const modal = document.getElementById('bookModal');
+      if (modal && modal.style.display === 'flex') {
+        modal.style.display = 'none';
+      }
+    }
+  });
+
+  // 🧭 Category Toggle Between Fiction / Non-Fiction
+  function showCategory(id) {
+    const fictionList = document.getElementById("fiction-list");
+    const nonfictionList = document.getElementById("nonfiction-list");
+
+    fictionList.classList.remove("active");
+    nonfictionList.classList.remove("active");
+
+    document.getElementById(id).classList.add("active");
+  }
+
+  // 🔍 Search Button Action (Home Search)
+  function searchBook() {
+    const query = document.getElementById("searchInput").value.toLowerCase();
+    if (query) {
+      alert("Search for: " + query); // Placeholder – replace with real logic or redirect
+    }
+  }
+
+  // 📖 Modal Preview (If Used)
+  function openModal(imgUrl, title, downloadUrl) {
+    document.getElementById('modalImage').src = imgUrl;
+    document.getElementById('modalTitle').innerText = title;
+    document.getElementById('modalDownload').href = downloadUrl;
+    document.getElementById('bookModal').style.display = 'flex';
+  }
+
+  function closeModal() {
+    document.getElementById('bookModal').style.display = 'none';
+  }
+</script>
