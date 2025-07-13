@@ -1,382 +1,521 @@
+<!-- ✅ SECTION 1: Header + Hero Section with Search (Theme Based) -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GlobalBookShelf</title>
-    <style>
-        :root {
-            --primary-color: #4b6cb7;
-            --secondary-color: #182848;
-            --text-dark: #2d3748;
-            --text-light: #718096;
-            --bg-light: #f5f7fa;
-        }
-        body {
-            font-family: 'Inter', sans-serif;
-            margin: 0;
-            background: var(--bg-light);
-            color: var(--text-dark);
-            line-height: 1.6;
-        }
-        
-        /* Header Styles */
-        .header {
-            background: white;
-            padding: 15px 5%;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .logo {
-            font-size: 24px;
-            font-weight: 700;
-            color: var(--primary-color);
-        }
-        .nav-links {
-            display: flex;
-            gap: 25px;
-        }
-        .nav-links a {
-            text-decoration: none;
-            color: var(--text-dark);
-            font-weight: 500;
-        }
-        
-        /* Hero Section */
-        .hero {
-            text-align: center;
-            padding: 80px 20px;
-            background: linear-gradient(to right, #e0eafc, #cfdef3);
-        }
-        .hero h1 {
-            font-size: 2.8rem;
-            margin-bottom: 20px;
-            color: var(--text-dark);
-        }
-        .search-box {
-            max-width: 600px;
-            margin: 0 auto;
-            display: flex;
-        }
-        .search-box input {
-            flex: 1;
-            padding: 15px;
-            border: 1px solid #ddd;
-            border-radius: 30px 0 0 30px;
-            font-size: 16px;
-        }
-        .search-box button {
-            padding: 15px 25px;
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            border-radius: 0 30px 30px 0;
-            cursor: pointer;
-        }
-        
-        /* Categories Section */
-        .categories {
-            padding: 50px 5%;
-        }
-        .section-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-        }
-        .section-header h2 {
-            font-size: 28px;
-            color: var(--text-dark);
-        }
-        .category-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 25px;
-        }
-        .category-card {
-            background: white;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
-        }
-        .category-card h3 {
-            margin-top: 0;
-            color: var(--primary-color);
-            border-bottom: 1px solid #eee;
-            padding-bottom: 10px;
-        }
-        .category-card ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-        .category-card li {
-            padding: 8px 0;
-            border-bottom: 1px dashed #eee;
-        }
-        
-        /* Featured Books */
-        .featured-books {
-            padding: 50px 5%;
-            background: white;
-        }
-        .filter-options {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-        .filter-options button {
-            padding: 8px 16px;
-            border: 1px solid #ddd;
-            background: none;
-            border-radius: 20px;
-            cursor: pointer;
-        }
-        .filter-options button.active {
-            background: var(--primary-color);
-            color: white;
-            border-color: var(--primary-color);
-        }
-        .books-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 25px;
-        }
-        .book-card {
-            background: var(--bg-light);
-            border-radius: 8px;
-            padding: 20px;
-            text-align: center;
-            transition: transform 0.3s;
-        }
-        .book-card:hover {
-            transform: translateY(-5px);
-        }
-        .book-cover {
-            font-size: 60px;
-            margin-bottom: 15px;
-            color: var(--primary-color);
-        }
-        .book-card h3 {
-            margin: 0 0 5px;
-            font-size: 18px;
-        }
-        .author {
-            color: var(--text-light);
-            font-size: 14px;
-            margin: 0 0 15px;
-        }
-        .download-btn {
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 4px;
-            cursor: pointer;
-            width: 100%;
-        }
-        
-        /* Newsletter */
-        .newsletter {
-            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
-            color: white;
-            padding: 60px 5%;
-            text-align: center;
-        }
-        .newsletter h2 {
-            margin-top: 0;
-            font-size: 28px;
-        }
-        .newsletter p {
-            margin-bottom: 25px;
-            opacity: 0.9;
-        }
-        .subscribe-form {
-            display: flex;
-            max-width: 500px;
-            margin: 0 auto;
-        }
-        .subscribe-form input {
-            flex: 1;
-            padding: 15px;
-            border: none;
-            border-radius: 4px 0 0 4px;
-        }
-        .subscribe-form button {
-            padding: 15px 25px;
-            background: #f5f7fa;
-            color: var(--primary-color);
-            border: none;
-            border-radius: 0 4px 4px 0;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        
-        /* Footer */
-        footer {
-            background: var(--text-dark);
-            color: white;
-            padding: 40px 5%;
-            text-align: center;
-        }
-        .footer-logo {
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 20px;
-            color: var(--primary-color);
-        }
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 25px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-        }
-        .footer-links a {
-            color: white;
-            text-decoration: none;
-        }
-        .copyright {
-            opacity: 0.7;
-            font-size: 14px;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GlobalBookShelf</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --primary: #1d3557;
+      --secondary: #f76c6c;
+      --light: #f8f9fa;
+      --card-bg: #ffffffcc;
+      --text-dark: #333;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to bottom, #cde9ff, #f1faff);
+      color: var(--text-dark);
+    }
+
+    header {
+      padding: 20px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: bold;
+      color: var(--primary);
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--primary);
+      margin: 0 15px;
+      font-weight: 600;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 80px 20px 40px;
+    }
+
+    .hero h1 {
+      font-size: 40px;
+      color: var(--primary);
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      font-size: 18px;
+      max-width: 600px;
+      margin: 0 auto 30px;
+      color: #555;
+    }
+
+    .search-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .search-container input {
+      padding: 14px 18px;
+      border-radius: 30px;
+      width: 300px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+
+    .search-container button {
+      padding: 14px 20px;
+      background-color: var(--secondary);
+      color: white;
+      border: none;
+      border-radius: 30px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .search-container button:hover {
+      background-color: #ff5252;
+    }
+  </style>
 </head>
 <body>
-    <header class="header">
-        <div class="logo">GlobalBookShelf</div>
-        <div class="nav-links">
-            <a href="#">Home</a>
-            <a href="#">Categories</a>
-            <a href="#">Popular</a>
-            <a href="#">About</a>
-        </div>
-    </header>
 
-    <section class="hero">
-        <h1>Discover Your Next Favorite Book</h1>
-        <div class="search-box">
-            <input type="text" placeholder="Search by title, author or genre...">
-            <button>Search</button>
-        </div>
+<header>
+  <div class="logo">📚 GlobalBookShelf</div>
+  <nav>
+    <a href="#">Home</a>
+    <a href="#">Books</a>
+    <a href="#">Genres</a>
+    <a href="#">About</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <h1>Explore the World of Free Books 🌍</h1>
+  <p>Discover, download and read books in every language — completely free.</p>
+  <div class="search-container">
+    <input type="text" placeholder="Search for books..." />
+    <button>🔍</button>
+  </div>
+</section>
+<!-- ✅ SECTION 2: Top Downloads Showcase -->
+<style>
+  .section-heading {
+    text-align: center;
+    font-size: 28px;
+    margin: 60px 0 30px;
+    color: var(--primary);
+  }
+
+  .book-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    padding: 0 20px 60px;
+  }
+
+  .book-card {
+    width: 160px;
+    background-color: var(--card-bg);
+    backdrop-filter: blur(5px);
+    border-radius: 16px;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+    transition: transform 0.3s;
+  }
+
+  .book-card:hover {
+    transform: translateY(-5px);
+  }
+
+  .book-card img {
+    width: 100%;
+    height: 210px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 10px;
+  }
+
+  .book-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .book-author {
+    font-size: 13px;
+    color: #666;
+    margin-top: 4px;
+  }
+
+  .download-btn {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 13px;
+    color: var(--secondary);
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  .download-btn:hover {
+    text-decoration: underline;
+  }
+</style>
+
+<section>
+  <h2 class="section-heading">📥 Top Downloads</h2>
+  <div class="book-grid">
+    <!-- Book 1 -->
+    <div class="book-card">
+      <img src="https://i.imgur.com/XdJcHjU.jpeg" alt="Book 1">
+      <div class="book-title">The Good Girl's Cure</div>
+      <div class="book-author">by Lillian Bias</div>
+      <a href="#" class="download-btn">📥 Download</a>
+    </div>
+
+    <!-- Book 2 -->
+    <div class="book-card">
+      <img src="https://i.imgur.com/KjUKpTP.jpeg" alt="Book 2">
+      <div class="book-title">The Walking Place</div>
+      <div class="book-author">by Fiona Haze</div>
+      <a href="#" class="download-btn">📥 Download</a>
+    </div>
+
+    <!-- Book 3 -->
+    <div class="book-card">
+      <img src="https://i.imgur.com/UWXbGKT.jpeg" alt="Book 3">
+      <div class="book-title">Shinrin Yoku</div>
+      <div class="book-author">by Green Mind</div>
+      <a href="#" class="download-btn">📥 Download</a>
+    </div>
+
+    <!-- Book 4 -->
+    <div class="book-card">
+      <img src="https://i.imgur.com/0y8Ftya.jpeg" alt="Book 4">
+      <div class="book-title">Manipulation</div>
+      <div class="book-author">by Dark Psychology</div>
+      <a href="#" class="download-btn">📥 Download</a>
+    </div>
+  </div>
     </section>
+    <!-- ✅ SECTION 3: Browse by Genre -->
+<style>
+  .genre-section {
+    background: #f9fafe;
+    padding: 60px 20px;
+    text-align: center;
+  }
 
-    <section class="categories">
-        <div class="section-header">
-            <h2>Top Downloads</h2>
-            <a href="#" class="view-all">View All</a>
-        </div>
-        
-        <div class="category-grid">
-            <div class="category-card">
-                <h3>Plenion</h3>
-                <ul>
-                    <li>The Dollking title for Fahud Place</li>
-                    <li>Nous Etats</li>
-                    <li>Dollums Touds</li>
-                    <li>Riakando</li>
-                </ul>
-            </div>
-            
-            <div class="category-card">
-                <h3>Cattaks</h3>
-                <ul>
-                    <li>6 Neckfbroump</li>
-                    <li>Pretoriff</li>
-                    <li>Taurock</li>
-                </ul>
-            </div>
-            
-            <div class="category-card">
-                <h3>Kirteleal</h3>
-                <ul>
-                    <li>The Lontzel Thokies</li>
-                    <li>FISHER BOOKS</li>
-                    <li>BACKSTEPS</li>
-                </ul>
-            </div>
-        </div>
+  .genre-section h2 {
+    font-size: 28px;
+    margin-bottom: 40px;
+    color: var(--primary);
+  }
+
+  .genre-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px;
+  }
+
+  .genre-card {
+    width: 160px;
+    background: white;
+    padding: 20px 15px;
+    border-radius: 16px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+    transition: 0.3s;
+    cursor: pointer;
+  }
+
+  .genre-card:hover {
+    transform: translateY(-6px);
+  }
+
+  .genre-icon {
+    font-size: 32px;
+    margin-bottom: 10px;
+    color: var(--secondary);
+  }
+
+  .genre-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--primary);
+  }
+</style>
+
+<section class="genre-section">
+  <h2>📚 Browse by Genre</h2>
+  <div class="genre-grid">
+    <!-- Each genre card -->
+    <div class="genre-card">
+      <div class="genre-icon">🕵️‍♂️</div>
+      <div class="genre-title">Mystery</div>
+    </div>
+    <div class="genre-card">
+      <div class="genre-icon">💖</div>
+      <div class="genre-title">Romance</div>
+    </div>
+    <div class="genre-card">
+      <div class="genre-icon">👻</div>
+      <div class="genre-title">Horror</div>
+    </div>
+    <div class="genre-card">
+      <div class="genre-icon">🌌</div>
+      <div class="genre-title">Sci-Fi</div>
+    </div>
+    <div class="genre-card">
+      <div class="genre-icon">🏰</div>
+      <div class="genre-title">Historical</div>
+    </div>
+    <div class="genre-card">
+      <div class="genre-icon">🧠</div>
+      <div class="genre-title">Self Help</div>
+    </div>
+    <div class="genre-card">
+      <div class="genre-icon">📖</div>
+      <div class="genre-title">Philosophy</div>
+    </div>
+    <div class="genre-card">
+      <div class="genre-icon">🏋️‍♀️</div>
+      <div class="genre-title">Fitness</div>
+    </div>
+  </div>
+</section>
+<!-- ✅ SECTION 4: Top Downloads + Sidebar -->
+<style>
+  .download-section {
+    background: #fff;
+    padding: 60px 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 50px;
+  }
+
+  .downloads,
+  .recommendations {
+    flex: 1;
+    min-width: 300px;
+  }
+
+  .downloads h3,
+  .recommendations h3 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: var(--primary);
+  }
+
+  .book-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 25px;
+  }
+
+  .book-card {
+    background: #f9f9f9;
+    border-radius: 14px;
+    padding: 14px;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.05);
+    text-align: center;
+    transition: 0.3s;
+  }
+
+  .book-card img {
+    width: 100%;
+    height: 190px;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+
+  .book-card h4 {
+    font-size: 15px;
+    margin: 10px 0 5px;
+    color: var(--primary);
+  }
+
+  .recommend-list {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .recommend-item {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    background: #f4f4f4;
+    padding: 12px;
+    border-radius: 12px;
+  }
+
+  .recommend-item img {
+    width: 50px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 6px;
+  }
+
+  .recommend-item .text {
+    font-size: 14px;
+    color: #333;
+    font-weight: 500;
+  }
+</style>
+
+<section class="download-section">
+  <!-- 📥 Left Column – Top Downloads -->
+  <div class="downloads">
+    <h3>🔥 Top Downloads</h3>
+    <div class="book-grid">
+      <div class="book-card">
+        <img src="https://i.imgur.com/0y8Ftya.jpeg" alt="Book">
+        <h4>Dark Psychology</h4>
+      </div>
+      <div class="book-card">
+        <img src="https://i.imgur.com/0y8Ftya.jpeg" alt="Book">
+        <h4>Emotional Mastery</h4>
+      </div>
+      <div class="book-card">
+        <img src="https://i.imgur.com/0y8Ftya.jpeg" alt="Book">
+        <h4>Power of Mind</h4>
+      </div>
+      <div class="book-card">
+        <img src="https://i.imgur.com/0y8Ftya.jpeg" alt="Book">
+        <h4>Atomic Habits</h4>
+      </div>
+    </div>
+  </div>
+
+  <!-- ⭐ Right Column – Recommendations -->
+  <div class="recommendations">
+    <h3>⭐ Recommendations</h3>
+    <div class="recommend-list">
+      <div class="recommend-item">
+        <img src="https://i.imgur.com/0y8Ftya.jpeg" alt="Rec">
+        <div class="text">Best Self – Mike Bayer</div>
+      </div>
+      <div class="recommend-item">
+        <img src="https://i.imgur.com/0y8Ftya.jpeg" alt="Rec">
+        <div class="text">Can't Hurt Me – David Goggins</div>
+      </div>
+      <div class="recommend-item">
+        <img src="https://i.imgur.com/0y8Ftya.jpeg" alt="Rec">
+        <div class="text">Rich Dad Poor Dad</div>
+      </div>
+    </div>
+  </div>
     </section>
+    <!-- ✅ SECTION 5: Newsletter + Footer -->
+<style>
+  .newsletter {
+    background: #fefefe;
+    padding: 60px 20px;
+    text-align: center;
+    border-top: 1px solid #eee;
+  }
 
-    <section class="featured-books">
-        <div class="section-header">
-            <h2>Featured Books</h2>
-            <div class="filter-options">
-                <button class="active">All</button>
-                <button>Fiction</button>
-                <button>Non-Fiction</button>
-                <button>Popular</button>
-            </div>
-        </div>
+  .newsletter h2 {
+    font-size: 26px;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+  }
 
-        <div class="books-grid">
-            <div class="book-card">
-                <div class="book-cover">📘</div>
-                <h3>The Dollking title for Fahud Place</h3>
-                <p class="author">Author Name</p>
-                <button class="download-btn">Download</button>
-            </div>
-            
-            <div class="book-card">
-                <div class="book-cover">📗</div>
-                <h3>Nous Etats</h3>
-                <p class="author">Author Name</p>
-                <button class="download-btn">Download</button>
-            </div>
-            
-            <div class="book-card">
-                <div class="book-cover">📕</div>
-                <h3>Dollums Touds</h3>
-                <p class="author">Author Name</p>
-                <button class="download-btn">Download</button>
-            </div>
-        </div>
-    </section>
+  .newsletter p {
+    font-size: 16px;
+    color: #444;
+    margin-bottom: 25px;
+  }
 
-    <section class="newsletter">
-        <div class="newsletter-content">
-            <h2>Subscribe to Our Newsletter</h2>
-            <p>Get updates on new book releases and special offers</p>
-            <form class="subscribe-form">
-                <input type="email" placeholder="Your email address">
-                <button type="submit">Subscribe</button>
-            </form>
-        </div>
-    </section>
+  .newsletter form {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
 
-    <footer>
-        <div class="footer-content">
-            <div class="footer-logo">GlobalBookShelf</div>
-            <div class="footer-links">
-                <a href="#">Home</a>
-                <a href="#">Books</a>
-                <a href="#">Categories</a>
-                <a href="#">About</a>
-                <a href="#">Contact</a>
-            </div>
-            <div class="copyright">© 2025 GlobalBookShelf. All rights reserved.</div>
-        </div>
-    </footer>
+  .newsletter input {
+    padding: 12px 18px;
+    border-radius: 25px;
+    border: 1px solid #ccc;
+    font-size: 15px;
+    width: 280px;
+  }
 
-    <script>
-        // Category filter functionality
-        document.querySelectorAll('.filter-options button').forEach(button => {
-            button.addEventListener('click', function() {
-                document.querySelector('.filter-options button.active').classList.remove('active');
-                this.classList.add('active');
-            });
-        });
+  .newsletter button {
+    background: var(--secondary-color);
+    border: none;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 25px;
+    font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
 
-        // Newsletter form submission
-        document.querySelector('.subscribe-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const email = this.querySelector('input').value;
-            alert(`Thank you for subscribing with ${email}!`);
-            this.querySelector('input').value = '';
-        });
-    </script>
-</body>
-              </html>
+  .newsletter button:hover {
+    background: #ff6b6b;
+  }
 
+  footer {
+    background: var(--primary-color);
+    color: #fff;
+    text-align: center;
+    padding: 40px 20px 30px;
+    font-size: 15px;
+  }
+
+  footer a {
+    color: #99ccff;
+    text-decoration: none;
+  }
+
+  footer a:hover {
+    text-decoration: underline;
+  }
+
+  footer .footer-credit {
+    margin-top: 12px;
+    color: #ccc;
+    font-size: 14px;
+  }
+</style>
+
+<section class="newsletter">
+  <h2>📬 Subscribe to our Newsletter</h2>
+  <p>Get notified whenever new books are added in your favorite languages!</p>
+  <form onsubmit="subscribeNewsletter(event)">
+    <input type="email" placeholder="Enter your email address" required />
+    <button type="submit">Subscribe</button>
+  </form>
+</section>
+
+<footer>
+  <p>📧 Email: <a href="mailto:Mustafaqureahi786@gmail.com">Mustafaqureahi786@gmail.com</a></p>
+  <p>📞 Phone: <a href="tel:+919921437547">+91 9921437547</a></p>
+  <p class="footer-credit">© 2025 GlobalBookShelf — Made with ❤️ for global readers</p>
+</footer>
+
+<script>
+  function subscribeNewsletter(event) {
+    event.preventDefault();
+    alert("✅ Thank you for subscribing!");
+  }
+</script>
