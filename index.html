@@ -97,7 +97,7 @@
     .hero {
       position: relative;
       width: 100%;
-      height: 100vh; /* Takes full viewport height */
+      height: 65vh; /* Reduced height as requested */
       overflow: hidden;
     }
 
@@ -204,11 +204,13 @@
 
     /* Responsive adjustments for Hero section */
     @media (max-width: 768px) {
+      .hero { height: 55vh; } /* Adjust height for tablets */
       .welcome-text-overlay h2 { font-size: 2.5rem; }
       .welcome-text-overlay p { font-size: 1rem; }
       .welcome-text-overlay { padding: 20px; }
     }
     @media (max-width: 480px) {
+      .hero { height: 45vh; } /* Adjust height for smaller mobiles */
       .welcome-text-overlay h2 { font-size: 1.8rem; margin-bottom: 15px; }
       .welcome-text-overlay p { font-size: 0.9rem; margin-bottom: 20px; }
       .welcome-text-overlay a { padding: 10px 20px; font-size: 0.9rem; }
@@ -693,4 +695,4 @@
     });
   </script>
 </body>
-      </html>
+  </html>
