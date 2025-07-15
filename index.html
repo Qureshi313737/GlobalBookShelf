@@ -120,14 +120,13 @@
       background-position: center;
       background-repeat: no-repeat;
       height: 100%;
-      /* transition: background-image 0.5s ease-in-out; Not needed with transform animation */
     }
 
     /* Define your 4 specific library/book images */
-    .slide-item:nth-child(1) { background-image: url('https://source.unsplash.com/1600x900/?library,bookshelf,interior'); }
-    .slide-item:nth-child(2) { background-image: url('https://source.unsplash.com/1600x900/?openbook,desk,study'); }
-    .slide-item:nth-child(3) { background-image: url('https://source.unsplash.com/1600x900/?stackofbooks,oldbooks'); }
-    .slide-item:nth-child(4) { background-image: url('https://source.unsplash.com/1600x900/?modernlibrary,readingroom'); }
+    .slide-item.slide1 { background-image: url('https://source.unsplash.com/1600x900/?library,bookshelf,interior'); }
+    .slide-item.slide2 { background-image: url('https://source.unsplash.com/1600x900/?openbook,desk,study'); }
+    .slide-item.slide3 { background-image: url('https://source.unsplash.com/1600x900/?stackofbooks,oldbooks'); }
+    .slide-item.slide4 { background-image: url('https://source.unsplash.com/1600x900/?modernlibrary,readingroom'); }
 
     @keyframes slide-show {
       0% { transform: translateX(0%); }
@@ -151,33 +150,6 @@
       border-radius: 12px;
       max-width: 90%; /* Responsive width */
       box-sizing: border-box; /* Ensures padding is included in the max-width */
-    }
-
-    .hero-content h2 {
-      font-size: 36px;
-      font-weight: 600;
-      margin-bottom: 16px;
-    }
-
-    .hero-content p {
-      font-size: 18px;
-      margin-bottom: 25px;
-    }
-
-    .hero-content a {
-      background: var(--secondary-color);
-      color: var(--text-secondary); /* Text color on gold button */
-      padding: 12px 28px;
-      border-radius: 30px;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 16px;
-      transition: background 0.3s ease;
-    }
-
-    .hero-content a:hover {
-      background: var(--button-hover);
-      color: var(--text-secondary);
     }
 
     /* Responsive adjustments for Hero section */
@@ -546,17 +518,17 @@
     <div class="menu">
       <a href="#home">Home</a>
       <a href="books.html">Library</a>
-      <a href="fiction.html">Fiction</a> <a href="nonfiction.html">Non-Fiction</a> <a href="about.html">About</a>
+      <a href="about.html">About</a>
       <a href="#contact">Contact</a>
     </div>
   </nav>
 
   <section class="hero" id="home">
     <div class="slides-container">
-      <div class="slide-item"></div>
-      <div class="slide-item"></div>
-      <div class="slide-item"></div>
-      <div class="slide-item"></div>
+      <div class="slide-item slide1"></div>
+      <div class="slide-item slide2"></div>
+      <div class="slide-item slide3"></div>
+      <div class="slide-item slide4"></div>
     </div>
     <div class="hero-content">
       <h2>Welcome to GlobalBookShelf</h2>
