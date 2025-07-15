@@ -61,10 +61,11 @@
     nav {
       background: var(--nav-background);
       display: flex;
-      justify-content: space-between;
+      justify-content: space-around; /* Distribute items with space */
       align-items: center;
       padding: 14px 20px;
-      flex-wrap: wrap;
+      flex-wrap: wrap; /* Allows items to wrap on smaller screens */
+      gap: 15px; /* Spacing between nav items */
     }
 
     .logo {
@@ -92,6 +93,63 @@
       background: var(--soft-blue);
       color: var(--text-primary);
     }
+
+    /* Search Bar Styles (Integrated from your provided code) */
+    .search-container {
+      position: relative;
+      width: 100%; /* Make it responsive */
+      max-width: 320px; /* Limit its maximum width */
+    }
+
+    input[type="text"]#searchBar { /* Specificity for searchBar input */
+      width: 100%;
+      padding: 10px 14px; /* Adjusted padding for consistency */
+      font-size: 16px;
+      border: 2px solid var(--border-color); /* Use existing color var */
+      border-radius: 8px;
+      outline: none;
+      transition: border-color 0.3s;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Slightly softer shadow */
+      background-color: var(--background); /* Ensure background matches theme */
+      color: var(--text-secondary); /* Text color */
+    }
+
+    input[type="text"]#searchBar:focus {
+      border-color: var(--secondary-color); /* Use gold for focus */
+    }
+
+    ul#suggestions {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      z-index: 100; /* Ensure it's above other content */
+      background: var(--background); /* Use theme background */
+      border: 1px solid var(--border-color); /* Use theme border */
+      border-top: none;
+      max-height: 200px;
+      overflow-y: auto;
+      border-radius: 0 0 8px 8px;
+      list-style-type: none; /* Remove bullet points */
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow for pop-out effect */
+    }
+
+    ul#suggestions li {
+      padding: 10px 16px;
+      cursor: pointer;
+      border-bottom: 1px solid var(--border-color); /* Use theme border */
+      color: var(--text-secondary); /* Text color */
+    }
+
+    ul#suggestions li:last-child {
+        border-bottom: none; /* No border on the last item */
+    }
+
+    ul#suggestions li:hover {
+      background-color: var(--button-hover); /* Use hover color */
+      color: var(--text-secondary); /* Keep text color readable on hover */
+    }
+
 
     /* Hero Section with New Sliding Background Images and Text Overlay */
     .hero {
@@ -202,8 +260,24 @@
       color: var(--text-secondary);
     }
 
-    /* Responsive adjustments for Hero section */
+    /* Responsive adjustments */
     @media (max-width: 768px) {
+      nav {
+          flex-direction: column; /* Stack items vertically on smaller screens */
+          align-items: center; /* Center items when stacked */
+          padding: 15px; /* Adjust padding for smaller screens */
+      }
+      .search-container {
+          width: 90%; /* Make search bar wider on small screens */
+          max-width: none; /* Remove max-width restriction for very small screens */
+          margin-top: 10px; /* Add spacing when stacked */
+      }
+      .menu {
+          margin-top: 10px; /* Add spacing below search bar */
+          justify-content: center; /* Center menu items */
+          width: 100%; /* Ensure menu takes full width */
+      }
+
       .hero { height: 55vh; } /* Adjust height for tablets */
       .welcome-text-overlay h2 { font-size: 2.5rem; }
       .welcome-text-overlay p { font-size: 1rem; }
@@ -568,6 +642,11 @@
   </header>
   <nav>
     <div class="logo">GlobalBookShelf</div>
+
+    <div class="search-container">
+      <input type="text" id="searchBar" placeholder="Search books..." oninput="showSuggestions()">
+      <ul id="suggestions"></ul>
+    </div>
     <div class="menu">
       <a href="#home">Home</a>
       <a href="books.html">Library</a>
@@ -667,6 +746,59 @@
   </div>
 
   <script>
+    // JavaScript for Search Bar (Integrated from your provided code)
+    let books = [
+      "Atomic Habits", "Ali Baba", "Aliens in Space", "Alif Laila", "Ali Ka Safar",
+      "Algorithm Design", "All About Love", "Alice in Wonderland", "AI for Beginners"
+      // You can add more book titles here
+    ];
+
+    function showSuggestions() {
+      const input = document.getElementById('searchBar').value.toLowerCase();
+      const suggestions = document.getElementById('suggestions');
+      suggestions.innerHTML = ''; // Clear previous suggestions
+
+      if (input === '') {
+        return; // Don't show suggestions if input is empty
+      }
+
+      // Filter books that start with the input (case-insensitive)
+      const filtered = books.filter(book => book.toLowerCase().startsWith(input));
+
+      if (filtered.length === 0) {
+        const li = document.createElement('li');
+        li.textContent = 'No suggestions found';
+        li.style.fontStyle = 'italic';
+        li.style.color = '#888';
+        li.style.cursor = 'default';
+        li.style.borderBottom = 'none'; // No border for "no suggestions"
+        suggestions.appendChild(li);
+        return;
+      }
+
+      filtered.forEach(book => {
+        const li = document.createElement('li');
+        li.textContent = book;
+        li.onclick = () => {
+          document.getElementById('searchBar').value = book;
+          suggestions.innerHTML = ''; // Hide suggestions after selection
+        };
+        suggestions.appendChild(li);
+      });
+    }
+
+    // Optional: Hide suggestions when clicking outside
+    document.addEventListener('click', function(event) {
+      const searchContainer = document.querySelector('.search-container');
+      const suggestions = document.getElementById('suggestions');
+      if (!searchContainer.contains(event.target)) {
+        suggestions.innerHTML = ''; // Clear suggestions if clicked outside
+      }
+    });
+
+    // End JavaScript for Search Bar
+
+
     function toggleCategory(id) {
       document.getElementById('fiction').classList.remove('active');
       document.getElementById('nonfiction').classList.remove('active');
