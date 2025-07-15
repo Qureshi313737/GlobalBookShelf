@@ -41,7 +41,7 @@
     }
 
     nav {
-      background: var(--light-background); /* Changed to light background */
+      background: var(--light-background);
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -53,7 +53,7 @@
     .logo {
       font-size: 22px;
       font-weight: bold;
-      color: var(--dark-text); /* Darker text for contrast */
+      color: var(--dark-text);
     }
 
     .menu {
@@ -72,33 +72,41 @@
     }
 
     .menu a:hover {
-      background: var(--accent-light); /* Lighter olive on hover */
-      color: var(--dark-text); /* Keep text dark for contrast */
+      background: var(--accent-light);
+      color: var(--dark-text);
     }
 
     /* Hero Section Slider */
     .hero {
       position: relative;
-      height: 70vh;
+      height: 70vh; /* Adjust height as needed */
       overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .slides {
       display: flex;
-      width: 300%;
+      width: 300%; /* For 3 slides */
       height: 100%;
-      animation: slide 12s infinite;
+      animation: slide 12s infinite; /* Adjust timing as needed (e.g., 4s per slide * 3 slides) */
+      position: absolute;
+      top: 0;
+      left: 0;
     }
 
     .slide {
       flex: 1 0 100%;
       background-size: cover;
       background-position: center;
+      background-repeat: no-repeat;
+      transition: background-image 0.5s ease-in-out;
     }
 
-    .slide1 { background-image: url('https://source.unsplash.com/1600x900/?bookshelf'); }
-    .slide2 { background-image: url('https://source.unsplash.com/1600x900/?library'); }
-    .slide3 { background-image: url('https://source.unsplash.com/1600x900/?reading'); }
+    .slide1 { background-image: url('https://source.unsplash.com/1600x900/?library,books'); }
+    .slide2 { background-image: url('https://source.unsplash.com/1600x900/?reading,diverse'); }
+    .slide3 { background-image: url('https://source.unsplash.com/1600x900/?bookstack,global'); }
 
     @keyframes slide {
       0% { transform: translateX(0%); }
@@ -108,15 +116,14 @@
     }
 
     .hero-content {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
+      position: relative; /* Changed to relative to be on top of slides */
+      z-index: 10; /* Ensure content is above sliding images */
       text-align: center;
       color: var(--light-text);
-      background: rgba(0, 0, 0, 0.5);
+      background: rgba(0, 0, 0, 0.6); /* Slightly darker overlay for better text contrast */
       padding: 30px;
       border-radius: 12px;
+      max-width: 90%; /* Responsive width */
     }
 
     .hero-content h2 {
@@ -131,7 +138,7 @@
     }
 
     .hero-content a {
-      background: var(--olive-green); /* Olive Green Button */
+      background: var(--olive-green);
       color: white;
       padding: 12px 28px;
       border-radius: 30px;
@@ -142,12 +149,19 @@
     }
 
     .hero-content a:hover {
-      background: var(--accent-dark); /* Darker olive on hover */
+      background: var(--accent-dark);
     }
 
     @media (max-width: 768px) {
       .hero-content h2 { font-size: 26px; }
       .hero-content p { font-size: 16px; }
+      .hero { height: 60vh; } /* Adjust height for smaller screens */
+    }
+    @media (max-width: 480px) {
+      .hero-content h2 { font-size: 20px; }
+      .hero-content p { font-size: 14px; }
+      .hero-content { padding: 20px; }
+      .hero { height: 50vh; }
     }
 
   </style>
@@ -198,7 +212,7 @@
     }
 
     .category-buttons button {
-      background: var(--olive-green); /* Olive Green Button */
+      background: var(--olive-green);
       color: white;
       border: none;
       padding: 10px 24px;
@@ -210,7 +224,7 @@
     }
 
     .category-buttons button:hover {
-      background: var(--accent-dark); /* Darker olive on hover */
+      background: var(--accent-dark);
     }
 
     .subcategories {
@@ -227,7 +241,7 @@
 
     .subcategories a {
       padding: 10px 20px;
-      background: var(--light-background); /* Light background for subcategories */
+      background: var(--light-background);
       border-radius: 20px;
       color: var(--dark-text);
       text-decoration: none;
@@ -237,8 +251,8 @@
     }
 
     .subcategories a:hover {
-      background: var(--accent-light); /* Lighter olive on hover */
-      color: var(--dark-text); /* Keep text dark for contrast */
+      background: var(--accent-light);
+      color: var(--dark-text);
     }
 
     @keyframes fadeIn {
@@ -340,13 +354,13 @@
     .download-link {
       font-size: 14px;
       text-decoration: none;
-      color: var(--olive-green); /* Olive Green for download link */
+      color: var(--olive-green);
       font-weight: 500;
     }
 
     .download-link:hover {
       text-decoration: underline;
-      color: var(--accent-dark); /* Darker olive on hover */
+      color: var(--accent-dark);
     }
   </style>
   <section class="bookshelf-section" id="featured">
@@ -405,7 +419,7 @@
 
     .newsletter-form button {
       padding: 12px 24px;
-      background-color: var(--olive-green); /* Olive Green Button */
+      background-color: var(--olive-green);
       color: white;
       border: none;
       border-radius: 30px;
@@ -415,7 +429,7 @@
     }
 
     .newsletter-form button:hover {
-      background-color: var(--accent-dark); /* Darker olive on hover */
+      background-color: var(--accent-dark);
     }
   </style>
 
@@ -435,7 +449,7 @@
   </script>
   <style>
     footer {
-      background-color: var(--light-background); /* Light background for footer */
+      background-color: var(--light-background);
       color: var(--dark-text);
       text-align: center;
       padding: 50px 20px;
@@ -448,14 +462,14 @@
     }
 
     footer a {
-      color: var(--olive-green); /* Olive Green for footer links */
+      color: var(--olive-green);
       text-decoration: none;
       font-weight: 500;
     }
 
     footer a:hover {
       text-decoration: underline;
-      color: var(--accent-dark); /* Darker olive on hover */
+      color: var(--accent-dark);
     }
 
     .footer-credit {
@@ -470,14 +484,14 @@
 
     .social-icons a {
       margin: 0 10px;
-      color: var(--dark-text); /* Dark text for social icons */
+      color: var(--dark-text);
       font-size: 20px;
       display: inline-block;
       transition: 0.3s;
     }
 
     .social-icons a:hover {
-      color: var(--olive-green); /* Olive Green on hover */
+      color: var(--olive-green);
       transform: scale(1.15);
     }
   </style>
@@ -529,7 +543,7 @@
     .modal-content a {
       display: inline-block;
       margin-top: 15px;
-      background: var(--olive-green); /* Olive Green Button */
+      background: var(--olive-green);
       color: white;
       padding: 10px 25px;
       border-radius: 25px;
@@ -539,7 +553,7 @@
     }
 
     .modal-content a:hover {
-      background: var(--accent-dark); /* Darker olive on hover */
+      background: var(--accent-dark);
     }
 
     .close-btn {
