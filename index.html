@@ -101,13 +101,14 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      /* No background-color here directly, it's handled by slides */
     }
 
     .slides {
       display: flex;
-      width: 500%; /* For 5 slides (100% * 5) */
+      width: 400%; /* For 4 slides (100% * 4) */
       height: 100%;
-      animation: slide 25s infinite; /* Adjusted timing (e.g., 5s per slide * 5 slides = 25s) */
+      animation: slide 20s infinite; /* Adjusted timing (e.g., 5s per slide * 4 slides = 20s) */
       position: absolute;
       top: 0;
       left: 0;
@@ -122,23 +123,20 @@
     }
 
     /* Using Unsplash with relevant keywords for varied images */
-    .slide1 { background-image: url('https://source.unsplash.com/1600x900/?library,books'); }
-    .slide2 { background-image: url('https://source.unsplash.com/1600x900/?reading,diverse'); }
-    .slide3 { background-image: url('https://source.unsplash.com/1600x900/?bookstack,global'); }
+    .slide1 { background-image: url('https://source.unsplash.com/1600x900/?library,bookshelf'); }
+    .slide2 { background-image: url('https://source.unsplash.com/1600x900/?books,reading'); }
+    .slide3 { background-image: url('https://source.unsplash.com/1600x900/?oldlibrary,study'); }
     .slide4 { background-image: url('https://source.unsplash.com/1600x900/?openbook,knowledge'); }
-    .slide5 { background-image: url('https://source.unsplash.com/1600x900/?readers,world'); }
 
     @keyframes slide {
       0% { transform: translateX(0%); }
-      18% { transform: translateX(0%); } /* Stay on slide 1 */
-      20% { transform: translateX(-100%); } /* Move to slide 2 */
-      38% { transform: translateX(-100%); } /* Stay on slide 2 */
-      40% { transform: translateX(-200%); } /* Move to slide 3 */
-      58% { transform: translateX(-200%); } /* Stay on slide 3 */
-      60% { transform: translateX(-300%); } /* Move to slide 4 */
-      78% { transform: translateX(-300%); } /* Stay on slide 4 */
-      80% { transform: translateX(-400%); } /* Move to slide 5 */
-      98% { transform: translateX(-400%); } /* Stay on slide 5 */
+      23% { transform: translateX(0%); } /* Stay on slide 1 */
+      25% { transform: translateX(-100%); } /* Move to slide 2 */
+      48% { transform: translateX(-100%); } /* Stay on slide 2 */
+      50% { transform: translateX(-200%); } /* Move to slide 3 */
+      73% { transform: translateX(-200%); } /* Stay on slide 3 */
+      75% { transform: translateX(-300%); } /* Move to slide 4 */
+      98% { transform: translateX(-300%); } /* Stay on slide 4 */
       100% { transform: translateX(0%); } /* Return to slide 1 */
     }
 
@@ -151,6 +149,7 @@
       padding: 30px;
       border-radius: 12px;
       max-width: 90%;
+      box-sizing: border-box; /* Include padding in width calculation */
     }
 
     .hero-content h2 {
@@ -546,7 +545,7 @@
     <div class="menu">
       <a href="#home">Home</a>
       <a href="books.html">Library</a>
-      <a href="about.html">About</a>
+      <a href="fiction.html">Fiction</a> <a href="nonfiction.html">Non-Fiction</a> <a href="about.html">About</a>
       <a href="#contact">Contact</a>
     </div>
   </nav>
@@ -556,7 +555,6 @@
       <div class="slide slide2"></div>
       <div class="slide slide3"></div>
       <div class="slide slide4"></div>
-      <div class="slide slide5"></div>
     </div>
     <div class="hero-content">
       <h2>Welcome to GlobalBookShelf</h2>
