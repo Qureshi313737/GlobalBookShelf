@@ -93,77 +93,62 @@
       color: var(--text-primary);
     }
 
-    /* Hero Section with Sliding Background Images */
+    /* Hero Section - Reverted to original simpler form */
     .hero {
-      position: relative;
-      height: 70vh; /* Consistent height for the hero section */
-      overflow: hidden; /* Crucial to hide overflowing parts of slides */
-      display: flex;
-      align-items: center;
+      background: var(--primary-color); /* Original solid background color */
+      color: var(--text-primary); /* Text color on the dark background */
+      text-align: center;
+      padding: 80px 20px; /* Original padding */
+      min-height: 50vh; /* Ensure it takes up some vertical space */
+      display: flex; /* Use flex for centering */
+      flex-direction: column;
       justify-content: center;
-      text-align: center;
+      align-items: center;
     }
 
-    .slides-container {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      display: flex; /* Allow slides to sit side-by-side */
-      animation: slide-show 20s infinite ease-in-out; /* 4 images * 5s per image = 20s */
+    .hero h2 {
+      font-size: 48px; /* Original font size */
+      font-weight: 600;
+      margin-bottom: 20px;
     }
 
-    .slide-item {
-      flex: 0 0 100%; /* Each slide takes up exactly 100% of the container width */
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      height: 100%;
+    .hero p {
+      font-size: 20px; /* Original font size */
+      margin-bottom: 40px;
+      max-width: 800px; /* Limit paragraph width for readability */
+      line-height: 1.5;
     }
 
-    /* Define your 4 specific library/book images */
-    .slide-item.slide1 { background-image: url('https://source.unsplash.com/1600x900/?library,bookshelf,interior'); }
-    .slide-item.slide2 { background-image: url('https://source.unsplash.com/1600x900/?openbook,desk,study'); }
-    .slide-item.slide3 { background-image: url('https://source.unsplash.com/1600x900/?stackofbooks,oldbooks'); }
-    .slide-item.slide4 { background-image: url('https://source.unsplash.com/1600x900/?modernlibrary,readingroom'); }
-
-    @keyframes slide-show {
-      0% { transform: translateX(0%); }
-      20% { transform: translateX(0%); } /* Show first image for 20% of time */
-      25% { transform: translateX(-100%); } /* Transition to second image */
-      45% { transform: translateX(-100%); } /* Show second image */
-      50% { transform: translateX(-200%); } /* Transition to third image */
-      70% { transform: translateX(-200%); } /* Show third image */
-      75% { transform: translateX(-300%); } /* Transition to fourth image */
-      95% { transform: translateX(-300%); } /* Show fourth image */
-      100% { transform: translateX(0%); } /* Transition back to first image (seamless loop) */
+    .hero a {
+      background: var(--secondary-color); /* Gold button background */
+      color: var(--text-secondary); /* Dark text on gold button */
+      padding: 15px 40px;
+      border-radius: 30px; /* Modern rounded button */
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 18px; /* Slightly larger button text */
+      transition: background 0.3s ease;
     }
 
-    .hero-content {
-      position: relative; /* Stays on top of the absolute positioned slides */
-      z-index: 10; /* Ensures content is above sliding images */
-      text-align: center;
-      color: var(--text-primary);
-      background: rgba(0, 0, 0, 0.6); /* Semi-transparent overlay for text readability */
-      padding: 30px;
-      border-radius: 12px;
-      max-width: 90%; /* Responsive width */
-      box-sizing: border-box; /* Ensures padding is included in the max-width */
+    .hero a:hover {
+      background: var(--button-hover);
+      color: var(--text-secondary); /* Maintain text color on hover */
     }
 
     /* Responsive adjustments for Hero section */
     @media (max-width: 768px) {
-      .hero { height: 60vh; }
-      .hero-content h2 { font-size: 26px; }
-      .hero-content p { font-size: 16px; }
+      .hero { padding: 60px 15px; }
+      .hero h2 { font-size: 38px; }
+      .hero p { font-size: 18px; margin-bottom: 30px; }
+      .hero a { padding: 12px 30px; font-size: 16px; }
     }
     @media (max-width: 480px) {
-      .hero { height: 50vh; }
-      .hero-content h2 { font-size: 20px; }
-      .hero-content p { font-size: 14px; }
-      .hero-content { padding: 20px; }
+      .hero { padding: 40px 10px; }
+      .hero h2 { font-size: 28px; }
+      .hero p { font-size: 16px; margin-bottom: 20px; }
+      .hero a { padding: 10px 25px; font-size: 14px; }
     }
+
 
     /* Category Section Styles */
     .category-section {
@@ -524,17 +509,9 @@
   </nav>
 
   <section class="hero" id="home">
-    <div class="slides-container">
-      <div class="slide-item slide1"></div>
-      <div class="slide-item slide2"></div>
-      <div class="slide-item slide3"></div>
-      <div class="slide-item slide4"></div>
-    </div>
-    <div class="hero-content">
-      <h2>Welcome to GlobalBookShelf</h2>
-      <p>Explore a world of free books in every language.</p>
-      <a href="books.html">Explore Library</a>
-    </div>
+    <h2>Welcome to GlobalBookShelf</h2>
+    <p>Explore a world of free books in every language.</p>
+    <a href="books.html">Explore Library</a>
   </section>
 
   <section class="category-section">
@@ -577,7 +554,6 @@
           <div class="book-title">Manipulation – Dark Psychology</div>
         </div>
         <div class="book-button-container">
-          <a href="#" class="book-button" onclick="openModal('https://i.imgur.com/0y8Ftya.jpeg', 'Manipulation – Dark Psychology', 'https://raw.githubusercontent.com/Qureshi313737/GlobalBookShelf/main/Manipulation-Dark-Psychology-to-Manipulate-and-Control-People%20(1).pdf')">Read Now</a>
           <a href="https://raw.githubusercontent.com/Qureshi313737/GlobalBookShelf/main/Manipulation-Dark-Psychology-to-Manipulate-and-Control-People%20(1).pdf" target="_blank" class="book-button">Download</a>
         </div>
       </div>
@@ -641,16 +617,15 @@
       if (e.key === "Escape") closeModal();
     });
 
-    // Live book search (optional logic if featured books increase)
-    document.getElementById('searchInput')?.addEventListener('keyup', function () {
-      const query = this.value.toLowerCase();
-      const books = document.querySelectorAll('.book');
-
-      books.forEach(book => {
-        const title = book.innerText.toLowerCase();
-        book.style.display = title.includes(query) ? 'block' : 'none';
-      });
-    });
+    // The searchInput script block was commented out and had no active functionality.
+    // document.getElementById('searchInput')?.addEventListener('keyup', function () {
+    //   const query = this.value.toLowerCase();
+    //   const books = document.querySelectorAll('.book');
+    //   books.forEach(book => {
+    //     const title = book.innerText.toLowerCase();
+    //     book.style.display = title.includes(query) ? 'block' : 'none';
+    //   });
+    // });
   </script>
 </body>
   </html>
