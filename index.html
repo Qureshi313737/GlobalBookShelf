@@ -38,7 +38,7 @@
     }
 
     body {
-      font-family: 'Poppins', sans-serif;
+      font-family: 'Poppins', sans-serif; /* Poppins remains the main font */
       background-color: var(--background);
       color: var(--text-secondary);
     }
@@ -93,107 +93,129 @@
       color: var(--text-primary);
     }
 
-    /* Hero Section with Sliding Background Images */
+    /* Hero Section with New Sliding Background Images and Text Overlay */
     .hero {
       position: relative;
-      height: 70vh; /* Consistent height for the hero section */
-      overflow: hidden; /* Crucial to hide overflowing parts of slides */
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
+      width: 100%;
+      height: 100vh; /* Takes full viewport height */
+      overflow: hidden;
+      /* font-family: Arial, sans-serif; Removed this from here, better to keep on body if general */
     }
 
-    .slides-container {
-      position: absolute;
+    .slideshow-container {
+      position: absolute; /* Occupy the entire hero space */
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      display: flex; /* Allow slides to sit side-by-side */
-      animation: slide-show 25s infinite ease-in-out; /* 5 images * 5s per image = 25s */
+      overflow: hidden; /* Hide parts of slides that are not current */
     }
 
-    .slide-item {
-      flex: 0 0 100%; /* Each slide takes up exactly 100% of the container width */
+    .slide {
+      position: absolute;
+      width: 100%;
+      height: 100%;
       background-size: cover;
       background-position: center;
-      background-repeat: no-repeat;
-      height: 100%;
+      opacity: 0; /* Starts hidden for fade-in effect */
+      animation: fadeSlide 25s infinite; /* 5 slides * 5s = 25s cycle */
+      transition: opacity 1s ease-in-out;
     }
 
-    /* Define your 5 specific library/book images - UPDATED PATHS */
-    .slide-item.slide1 { background-image: url('./images/slide1.png'); }
-    .slide-item.slide2 { background-image: url('./images/slide2.png'); }
-    .slide-item.slide3 { background-image: url('./images/slide3.png'); }
-    .slide-item.slide4 { background-image: url('./images/slide4.png'); }
-    .slide-item.slide5 { background-image: url('./images/slide5.png'); }
-
-    @keyframes slide-show {
-      0% { transform: translateX(0%); }
-      16% { transform: translateX(0%); } /* Show first image for 16% of time */
-      20% { transform: translateX(-100%); } /* Transition to second image */
-      36% { transform: translateX(-100%); } /* Show second image */
-      40% { transform: translateX(-200%); } /* Transition to third image */
-      56% { transform: translateX(-200%); } /* Show third image */
-      60% { transform: translateX(-300%); } /* Transition to fourth image */
-      76% { transform: translateX(-300%); } /* Show fourth image */
-      80% { transform: translateX(-400%); } /* Transition to fifth image */
-      96% { transform: translateX(-400%); } /* Show fifth image */
-      100% { transform: translateX(0%); } /* Transition back to first image (seamless loop) */
+    /* URLs for the sliding background images (from your provided code) */
+    .slide:nth-child(1) {
+      background-image: url('https://images.unsplash.com/photo-1524995997946-a1c2e315a42f');
+      animation-delay: 0s;
     }
 
-    .hero-content {
-      position: relative; /* Stays on top of the absolute positioned slides */
-      z-index: 10; /* Ensures content is above sliding images */
+    .slide:nth-child(2) {
+      background-image: url('https://images.unsplash.com/photo-1512820790803-83ca734da794');
+      animation-delay: 5s;
+    }
+
+    .slide:nth-child(3) {
+      background-image: url('https://images.unsplash.com/photo-1507842217343-583bb7270b66');
+      animation-delay: 10s;
+    }
+
+    .slide:nth-child(4) {
+      background-image: url('https://images.unsplash.com/photo-1529156069898-49953e39b3ac');
+      animation-delay: 15s;
+    }
+
+    .slide:nth-child(5) {
+      background-image: url('https://images.unsplash.com/photo-1581092160619-1f6c25f27c50');
+      animation-delay: 20s;
+    }
+
+    @keyframes fadeSlide {
+      0% { opacity: 0; }
+      4% { opacity: 1; }   /* Fade in */
+      20% { opacity: 1; }  /* Stay visible */
+      24% { opacity: 0; }  /* Fade out */
+      100% { opacity: 0; } /* Remain hidden until next cycle */
+    }
+
+    .welcome-text-overlay { /* New container for all hero text/button */
+      position: absolute;
+      z-index: 10;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
       text-align: center;
-      color: var(--text-primary);
-      background: rgba(0, 0, 0, 0.6); /* Semi-transparent overlay for text readability */
+      padding: 0 20px;
+      width: 90%; /* Max width for responsiveness */
+      max-width: 800px; /* Limit text container width */
+      background: rgba(0, 0, 0, 0.5); /* Semi-transparent background for readability */
+      border-radius: 10px;
       padding: 30px;
-      border-radius: 12px;
-      max-width: 90%; /* Responsive width */
-      box-sizing: border-box; /* Ensures padding is included in the max-width */
+      box-sizing: border-box;
     }
 
-    .hero h2 {
-      font-size: 36px;
-      font-weight: 600;
-      margin-bottom: 16px;
+    .welcome-text-overlay h2 { /* Applying the new text style to the H2 */
+      font-size: 3.5rem; /* From your provided .welcome-text */
+      font-weight: bold;
+      text-shadow: 2px 2px 10px #000;
+      margin-bottom: 20px; /* Added spacing */
+      font-family: 'Poppins', sans-serif; /* Ensure Poppins font for hero text */
     }
 
-    .hero p {
-      font-size: 18px;
-      margin-bottom: 25px;
+    .welcome-text-overlay p {
+      font-size: 1.25rem; /* Adjusted for better readability */
+      margin-bottom: 30px;
+      line-height: 1.5;
     }
 
-    .hero a {
+    .welcome-text-overlay a {
       background: var(--secondary-color);
       color: var(--text-secondary); /* Text color on gold button */
       padding: 12px 28px;
       border-radius: 30px;
       text-decoration: none;
       font-weight: 600;
-      font-size: 16px;
+      font-size: 1rem; /* Consistent button font size */
       transition: background 0.3s ease;
     }
 
-    .hero a:hover {
+    .welcome-text-overlay a:hover {
       background: var(--button-hover);
       color: var(--text-secondary);
     }
 
     /* Responsive adjustments for Hero section */
     @media (max-width: 768px) {
-      .hero { height: 60vh; }
-      .hero-content h2 { font-size: 26px; }
-      .hero-content p { font-size: 16px; }
+      .welcome-text-overlay h2 { font-size: 2.5rem; }
+      .welcome-text-overlay p { font-size: 1rem; }
+      .welcome-text-overlay { padding: 20px; }
     }
     @media (max-width: 480px) {
-      .hero { height: 50vh; }
-      .hero-content h2 { font-size: 20px; }
-      .hero-content p { font-size: 14px; }
-      .hero-content { padding: 20px; }
+      .welcome-text-overlay h2 { font-size: 1.8rem; margin-bottom: 15px; }
+      .welcome-text-overlay p { font-size: 0.9rem; margin-bottom: 20px; }
+      .welcome-text-overlay a { padding: 10px 20px; font-size: 0.9rem; }
+      .welcome-text-overlay { padding: 15px; }
     }
+
 
     /* Category Section Styles */
     .category-section {
@@ -554,14 +576,14 @@
   </nav>
 
   <section class="hero" id="home">
-    <div class="slides-container">
-      <div class="slide-item slide1"></div>
-      <div class="slide-item slide2"></div>
-      <div class="slide-item slide3"></div>
-      <div class="slide-item slide4"></div>
-      <div class="slide-item slide5"></div>
+    <div class="slideshow-container">
+        <div class="slide slide1"></div>
+        <div class="slide slide2"></div>
+        <div class="slide slide3"></div>
+        <div class="slide slide4"></div>
+        <div class="slide slide5"></div>
     </div>
-    <div class="hero-content">
+    <div class="welcome-text-overlay">
       <h2>Welcome to GlobalBookShelf</h2>
       <p>Explore a world of free books in every language.</p>
       <a href="books.html">Explore Library</a>
