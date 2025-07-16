@@ -94,7 +94,7 @@
       color: var(--text-primary);
     }
 
-    /* Search Bar Styles */
+    /* Search Bar Styles (These styles will remain but won't be applied on this page as the HTML element is removed) */
     .search-container {
       position: relative;
       width: 100%; /* Make it responsive */
@@ -206,34 +206,26 @@
           align-items: center; /* Center items when stacked */
           padding: 15px; /* Adjust padding for smaller screens */
       }
-      .search-container {
-          width: 90%; /* Make search bar wider on small screens */
-          max-width: none; /* Remove max-width restriction for very small screens */
-          margin-top: 10px; /* Add spacing when stacked */
-      }
+      /* Removed search-container responsive styles as it's not on this page */
+      /* .search-container {
+          width: 90%;
+          max-width: none;
+          margin-top: 10px;
+      } */
       .menu {
-          margin-top: 10px; /* Add spacing below search bar */
+          margin-top: 10px; /* Add spacing below search bar (if it were here) */
           justify-content: center; /* Center menu items */
           width: 100%; /* Ensure menu takes full width */
       }
 
-      /* Hero section styles are not needed on about.html */
-      /* .hero { height: 55vh; } */
-      /* .welcome-text-overlay h2 { font-size: 2.5rem; } */
-      /* .welcome-text-overlay p { font-size: 1rem; } */
-      /* .welcome-text-overlay { padding: 20px; } */
-    }
-    @media (max-width: 480px) {
-      /* Hero section styles are not needed on about.html */
-      /* .hero { height: 45vh; } */
-      /* .welcome-text-overlay h2 { font-size: 1.8rem; margin-bottom: 15px; } */
-      /* .welcome-text-overlay p { font-size: 0.9rem; margin-bottom: 20px; } */
-      /* .welcome-text-overlay a { padding: 10px 20px; font-size: 0.9rem; } */
-      /* .welcome-text-overlay { padding: 15px; } */
-
       .about-section h2 { font-size: 28px; }
       .about-section h3 { font-size: 20px; }
       .about-section p, .about-section ul li { font-size: 15px; }
+    }
+    @media (max-width: 480px) {
+      .about-section h2 { font-size: 24px; } /* Further adjust for very small screens */
+      .about-section h3 { font-size: 18px; }
+      .about-section p, .about-section ul li { font-size: 14px; }
     }
 
     /* Bookshelf Section Styles (Included for consistency, even if not directly used on this page for actual books) */
@@ -517,11 +509,6 @@
   <nav>
     <div class="logo">GlobalBookShelf</div>
 
-    <div class="search-container">
-      <input type="text" id="searchBar" placeholder="Search books..." oninput="showSuggestions()">
-      <ul id="suggestions"></ul>
-    </div>
-
     <div class="menu">
       <a href="index.html">Home</a>
       <a href="books.html">Library</a>
@@ -579,7 +566,7 @@
   </div>
 
   <script>
-    // JavaScript for Search Bar
+    // JavaScript for Search Bar (Not used on this page but kept for reference if needed elsewhere)
     let books = [
       "Atomic Habits", "Ali Baba", "Aliens in Space", "Alif Laila", "Ali Ka Safar",
       "Algorithm Design", "All About Love", "Alice in Wonderland", "AI for Beginners"
@@ -587,15 +574,15 @@
     ];
 
     function showSuggestions() {
+      // This function won't be called as the search bar input is removed from HTML
       const input = document.getElementById('searchBar').value.toLowerCase();
       const suggestions = document.getElementById('suggestions');
-      suggestions.innerHTML = ''; // Clear previous suggestions
+      suggestions.innerHTML = '';
 
       if (input === '') {
-        return; // Don't show suggestions if input is empty
+        return;
       }
 
-      // Filter books that start with the input (case-insensitive)
       const filtered = books.filter(book => book.toLowerCase().startsWith(input));
 
       if (filtered.length === 0) {
@@ -604,7 +591,7 @@
         li.style.fontStyle = 'italic';
         li.style.color = '#888';
         li.style.cursor = 'default';
-        li.style.borderBottom = 'none'; // No border for "no suggestions"
+        li.style.borderBottom = 'none';
         suggestions.appendChild(li);
         return;
       }
@@ -614,18 +601,18 @@
         li.textContent = book;
         li.onclick = () => {
           document.getElementById('searchBar').value = book;
-          suggestions.innerHTML = ''; // Hide suggestions after selection
+          suggestions.innerHTML = '';
         };
         suggestions.appendChild(li);
       });
     }
 
-    // Optional: Hide suggestions when clicking outside
     document.addEventListener('click', function(event) {
       const searchContainer = document.querySelector('.search-container');
       const suggestions = document.getElementById('suggestions');
-      if (!searchContainer.contains(event.target)) {
-        suggestions.innerHTML = ''; // Clear suggestions if clicked outside
+      // This check will fail if searchContainer is null, but won't cause errors
+      if (searchContainer && !searchContainer.contains(event.target)) {
+        suggestions.innerHTML = '';
       }
     });
 
@@ -649,8 +636,6 @@
     window.addEventListener('keydown', function (e) {
       if (e.key === "Escape") closeModal();
     });
-
-    // The `toggleCategory` function is specific to index.html and is NOT included here.
   </script>
 </body>
-  </html>
+        </html>
