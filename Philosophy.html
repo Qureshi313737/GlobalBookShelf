@@ -1,133 +1,575 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Philosophy: An Introduction</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            margin: 20px;
-            background-color: #f4f4f4;
-            color: #333;
-        }
-        .container {
-            max-width: 900px;
-            margin: auto;
-            background: #fff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        h1, h2, h3 {
-            color: #0056b3;
-        }
-        ul {
-            list-style-type: disc;
-            margin-left: 20px;
-        }
-        blockquote {
-            background: #e9e9e9;
-            border-left: 5px solid #0056b3;
-            margin: 1.5em 10px;
-            padding: 0.5em 10px;
-            quotes: "\201C""\201D""\2018""\2019";
-        }
-        blockquote:before {
-            color: #ccc;
-            content: open-quote;
-            font-size: 4em;
-            line-height: 0.1em;
-            margin-right: 0.25em;
-            vertical-align: -0.4em;
-        }
-        .footer {
-            margin-top: 30px;
-            text-align: center;
-            font-size: 0.9em;
-            color: #666;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GlobalBookShelf - Philosophy</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet"/>
+  <style>
+    /* Color Variables based on your provided scheme */
+    :root {
+      --midnight-blue: #0B132B;
+      --gold: #FFD700;
+      --deep-blue: #1C2541;
+      --white: #F9F9F9;
+      --dark-blue: #0B132B; /* Using Midnight Blue as Dark Blue */
+      --soft-blue: #3A506B;
+      --light-gold: #FFE066;
+
+      /* Mapping your colors to website elements */
+      --primary-color: var(--deep-blue); /* Header, Navigation, Footer background */
+      --secondary-color: var(--gold); /* Buttons, important links, accents */
+      --text-primary: var(--white); /* Text on dark backgrounds (header, nav, hero content) */
+      --text-secondary: var(--midnight-blue); /* Main body text, text on light backgrounds, text on gold buttons */
+      --background: var(--white); /* Main page background, modal background, category section */
+      --button-hover: var(--light-gold); /* Button hover color */
+      --nav-background: var(--primary-color); /* Explicitly setting nav background */
+      --nav-text: var(--text-primary); /* Explicitly setting nav text */
+      --link-color: var(--secondary-color); /* Link color in footer, download links */
+      --link-hover: var(--light-gold); /* Link hover color */
+      --border-color: #E0E0E0; /* General border color */
+    }
+
+    /* Base Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif; /* Poppins remains the main font */
+      background-color: var(--background);
+      color: var(--text-secondary);
+    }
+
+    /* Header Styles */
+    header {
+      background: var(--primary-color);
+      color: var(--text-primary);
+      text-align: center;
+      padding: 20px 10px;
+    }
+
+    header h1 {
+      font-size: 32px;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+
+    /* Navigation Styles */
+    nav {
+      background: var(--nav-background);
+      display: flex;
+      justify-content: space-around; /* Distribute items with space */
+      align-items: center;
+      padding: 14px 20px;
+      flex-wrap: wrap; /* Allows items to wrap on smaller screens */
+      gap: 15px; /* Spacing between nav items */
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: bold;
+      color: var(--text-primary);
+    }
+
+    .menu {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .menu a {
+      color: var(--nav-text);
+      text-decoration: none;
+      font-weight: 500;
+      padding: 10px;
+      border-radius: 4px;
+      transition: 0.3s;
+    }
+
+    .menu a:hover {
+      background: var(--soft-blue);
+      color: var(--text-primary);
+    }
+
+    /* Search Bar Styles */
+    .search-container {
+      position: relative;
+      width: 100%; /* Make it responsive */
+      max-width: 320px; /* Limit its maximum width */
+    }
+
+    input[type="text"]#searchBar { /* Specificity for searchBar input */
+      width: 100%;
+      padding: 10px 14px; /* Adjusted padding for consistency */
+      font-size: 16px;
+      border: 2px solid var(--border-color); /* Use existing color var */
+      border-radius: 8px;
+      outline: none;
+      transition: border-color 0.3s;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Slightly softer shadow */
+      background-color: var(--background); /* Ensure background matches theme */
+      color: var(--text-secondary); /* Text color */
+    }
+
+    input[type="text"]#searchBar:focus {
+      border-color: var(--secondary-color); /* Use gold for focus */
+    }
+
+    ul#suggestions {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      z-index: 100; /* Ensure it's above other content */
+      background: var(--background); /* Use theme background */
+      border: 1px solid var(--border-color); /* Use theme border */
+      border-top: none;
+      max-height: 200px;
+      overflow-y: auto;
+      border-radius: 0 0 8px 8px;
+      list-style-type: none; /* Remove bullet points */
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow for pop-out effect */
+    }
+
+    ul#suggestions li {
+      padding: 10px 16px;
+      cursor: pointer;
+      border-bottom: 1px solid var(--border-color); /* Use theme border */
+      color: var(--text-secondary); /* Text color */
+    }
+
+    ul#suggestions li:last-child {
+        border-bottom: none; /* No border on the last item */
+    }
+
+    ul#suggestions li:hover {
+      background-color: var(--button-hover); /* Use hover color */
+      color: var(--text-secondary); /* Keep text color readable on hover */
+    }
+
+    /* Bookshelf Section Styles */
+    .bookshelf-section {
+      background: #f9fafb; /* Slightly off-white for book section */
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    .bookshelf-section h3 {
+      font-size: 32px;
+      color: var(--text-secondary);
+      margin-bottom: 40px;
+      font-weight: 600;
+    }
+
+    .shelf {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 40px;
+      position: relative;
+    }
+
+    .book {
+      width: 180px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
+      transition: transform 0.3s ease;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .book:hover {
+      transform: translateY(-8px);
+    }
+
+    .book img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+    }
+
+    .book-info {
+      padding: 15px 12px;
+    }
+
+    .book-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-bottom: 8px;
+    }
+
+    .download-link {
+      font-size: 14px;
+      text-decoration: none;
+      color: var(--link-color);
+      font-weight: 500;
+    }
+
+    .download-link:hover {
+      text-decoration: underline;
+      color: var(--link-hover);
+    }
+
+    .book-button-container {
+      text-align: center;
+      padding: 0 12px 15px; /* Add padding at the bottom */
+    }
+
+    .book-button {
+      background: var(--secondary-color);
+      color: var(--text-secondary); /* Ensure text is readable on gold button */
+      border: none;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background 0.3s;
+      text-decoration: none;
+      display: inline-block; /* Make buttons behave like inline blocks */
+      margin: 5px; /* Add margin between buttons */
+    }
+
+    .book-button:hover {
+      background: var(--button-hover);
+      color: var(--text-secondary);
+    }
+
+    /* Newsletter Section Styles */
+    .newsletter-section {
+      background-color: var(--background);
+      padding: 60px 20px;
+      text-align: center;
+      border-top: 1px solid var(--border-color);
+    }
+    .newsletter-section h3 {
+      font-size: 28px;
+      color: var(--text-secondary);
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .newsletter-section p {
+      color: #6b7280;
+      font-size: 16px;
+      margin-bottom: 25px;
+    }
+
+    .newsletter-form {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
+    .newsletter-form input::placeholder {
+      color: #999;
+    }
+
+    .newsletter-form input::-webkit-input-placeholder {
+      color: #999;
+    }
+
+    .newsletter-form input:-ms-input-placeholder {
+      color: #999;
+    }
+
+    .newsletter-form input {
+      padding: 12px 18px;
+      width: 300px;
+      border-radius: 30px;
+      border: 1px solid var(--border-color);
+      font-size: 16px;
+      outline: none;
+      color: var(--text-secondary);
+      transition: border-color 0.3s ease;
+    }
+
+    .newsletter-form input:focus {
+      border-color: var(--secondary-color);
+    }
+
+    .newsletter-form button {
+      padding: 12px 24px;
+      background-color: var(--secondary-color);
+      color: var(--text-secondary);
+      border: none;
+      border-radius: 30px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .newsletter-form button:hover {
+      background-color: var(--button-hover);
+      color: var(--text-secondary);
+    }
+
+    /* Footer Styles */
+    footer {
+      background-color: var(--primary-color);
+      color: var(--text-primary);
+      text-align: center;
+      padding: 50px 20px;
+      border-top: 1px solid var(--border-color);
+    }
+
+    footer p {
+      margin: 10px 0;
+      font-size: 15px;
+    }
+
+    footer a {
+      color: var(--link-color);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+      color: var(--link-hover);
+    }
+
+    .footer-credit {
+      margin-top: 25px;
+      font-size: 13px;
+      color: #6b7280; /* Slightly lighter gray for copyright text */
+    }
+
+    .social-icons {
+      margin-top: 20px;
+    }
+
+    .social-icons a {
+      margin: 0 10px;
+      color: var(--text-primary);
+      font-size: 20px;
+      display: inline-block;
+      transition: 0.3s;
+    }
+
+    .social-icons a:hover {
+      color: var(--secondary-color);
+      transform: scale(1.15);
+    }
+
+    /* Modal Styles */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      display: none; /* Hidden by default */
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+
+    .modal-content {
+      background: var(--background);
+      padding: 30px;
+      width: 90%;
+      max-width: 400px;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+      position: relative;
+    }
+
+    .modal-content img {
+      width: 100%;
+      height: auto;
+      margin-bottom: 20px;
+      border-radius: 8px;
+    }
+
+    .modal-content h4 {
+      font-size: 20px;
+      margin-bottom: 10px;
+      color: var(--text-secondary);
+    }
+
+    .modal-content a {
+      display: inline-block;
+      margin-top: 15px;
+      background: var(--secondary-color);
+      color: var(--text-secondary);
+      padding: 10px 25px;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .modal-content a:hover {
+      background: var(--button-hover);
+      color: var(--text-secondary);
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 22px;
+      cursor: pointer;
+      color: #999;
+    }
+
+    .close-btn:hover {
+      color: red;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      nav {
+          flex-direction: column; /* Stack items vertically on smaller screens */
+          align-items: center; /* Center items when stacked */
+          padding: 15px; /* Adjust padding for smaller screens */
+      }
+      .search-container {
+          width: 90%; /* Make search bar wider on small screens */
+          max-width: none; /* Remove max-width restriction for very small screens */
+          margin-top: 10px; /* Add spacing when stacked */
+      }
+      .menu {
+          margin-top: 10px; /* Add spacing below search bar */
+          justify-content: center; /* Center menu items */
+          width: 100%; /* Ensure menu takes full width */
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Philosophy: An Introduction</h1>
+  <header>
+    <h1>GlobalBookShelf</h1>
+  </header>
+  <nav>
+    <div class="logo">GlobalBookShelf</div>
 
-        <p>Philosophy, derived from the Greek words "philo" (love) and "sophia" (wisdom), literally means "the love of wisdom." It is a vast and ancient field of study that explores fundamental questions about existence, knowledge, values, reason, mind, and language. Unlike empirical sciences that rely on observation and experimentation, philosophy primarily uses rational argumentation and critical thinking to investigate these profound inquiries.</p>
-
-        <h2>What Do Philosophers Do?</h2>
-        <p>Philosophers engage in rigorous intellectual inquiry by:</p>
-        <ul>
-            <li><strong>Asking fundamental questions:</strong> Why are we here? What is truth? What is justice? What does it mean to be good?</li>
-            <li><strong>Analyzing concepts:</strong> Breaking down complex ideas (like freedom, consciousness, or causality) to understand their components and implications.</li>
-            <li><strong>Constructing arguments:</strong> Developing logical reasons and evidence to support a particular viewpoint or theory.</li>
-            <li><strong>Critiquing arguments:</strong> Examining the logical coherence and premises of others' arguments to identify flaws or weaknesses.</li>
-            <li><strong>Developing theories:</strong> Proposing systematic explanations for various phenomena or aspects of reality.</li>
-        </ul>
-
-        <h2>Core Branches of Philosophy</h2>
-        <p>Philosophy is traditionally divided into several core branches, each focusing on a specific set of questions:</p>
-        
-        <h3>Metaphysics</h3>
-        <p>This branch explores the fundamental nature of reality, including the relationship between mind and matter, substance and attribute, potentiality and actuality, and existence itself.</p>
-        <ul>
-            <li>Questions include: What is reality? Does God exist? What is time? What is the nature of consciousness?</li>
-        </ul>
-
-        <h3>Epistemology</h3>
-        <p>Epistemology is the study of knowledge. It investigates the nature, origin, scope, and limits of human knowledge.</p>
-        <ul>
-            <li>Questions include: What is knowledge? How do we acquire knowledge? What are the limits of what we can know? What is truth?</li>
-        </ul>
-
-        <h3>Ethics (Moral Philosophy)</h3>
-        <p>This branch deals with moral principles that govern a person's behavior or the conducting of an activity. It explores what is good, bad, right, and wrong.</p>
-        <ul>
-            <li>Questions include: What is the good life? What are our moral obligations? How should we act? Is morality objective or subjective?</li>
-        </ul>
-
-        <h3>Logic</h3>
-        <p>Logic is the study of correct reasoning. It provides tools and methods for analyzing and constructing arguments, ensuring their validity and soundness.</p>
-        <ul>
-            <li>Questions include: What constitutes a valid argument? What are logical fallacies? How can we reason effectively?</li>
-        </ul>
-
-        <h3>Aesthetics</h3>
-        <p>Aesthetics is concerned with the nature of art, beauty, and taste, and the creation and appreciation of beauty.</p>
-        <ul>
-            <li>Questions include: What is beauty? What is art? What makes something aesthetically pleasing?</li>
-        </ul>
-
-        <h2>Other Important Branches and Fields</h2>
-        <ul>
-            <li><strong>Political Philosophy:</strong> Deals with the state, government, politics, liberty, justice, and the enforcement of a legal code by authority.</li>
-            <li><strong>Philosophy of Mind:</strong> Explores the nature of the mind, mental events, mental functions, mental properties, consciousness, and their relationship to the physical body.</li>
-            <li><strong>Philosophy of Science:</strong> Investigates the fundamental principles, methods, and implications of science.</li>
-            <li><strong>Philosophy of Language:</strong> Examines the relationship between language, reality, and thought.</li>
-            <li><strong>Social Philosophy:</strong> Studies questions about social behavior and interpretations of society and social institutions.</li>
-        </ul>
-
-        <h2>Why Study Philosophy?</h2>
-        <p>Studying philosophy offers numerous benefits, including:</p>
-        <ul>
-            <li><strong>Improved critical thinking skills:</strong> Learning to analyze arguments, identify assumptions, and evaluate evidence.</li>
-            <li><strong>Enhanced problem-solving abilities:</strong> Developing the capacity to approach complex issues systematically.</li>
-            <li><strong>Better communication skills:</strong> Articulating ideas clearly, precisely, and persuasively.</li>
-            <li><strong>Deeper self-understanding:</strong> Reflecting on one's own beliefs, values, and purpose.</li>
-            <li><strong>Broader perspective:</strong> Gaining insights into different cultures, historical periods, and ways of thinking.</li>
-        </ul>
-
-        <blockquote>
-            <p>"The unexamined life is not worth living."</p>
-            <p>– Socrates</p>
-        </blockquote>
-
-        <p>In conclusion, philosophy is not merely an academic discipline; it is a fundamental human endeavor to understand ourselves and our place in the cosmos. It challenges us to think deeply, question assumptions, and seek wisdom in all aspects of life.</p>
+    <div class="search-container">
+      <input type="text" id="searchBar" placeholder="Search books..." oninput="showSuggestions()">
+      <ul id="suggestions"></ul>
     </div>
-
-    <div class="footer">
-        <p>&copy; 2025 Introduction to Philosophy. All rights reserved.</p>
+    <div class="menu">
+      <a href="index.html">Home</a>
+      <a href="books.html">Library</a>
+      <a href="about.html">About</a>
+      <a href="#contact">Contact</a>
     </div>
+  </nav>
+
+  <section class="bookshelf-section">
+    <h3>Education Books</h3>
+    <div class="shelf">
+        </div>
+  </section>
+
+  <section class="newsletter-section">
+    <h3>📬 Subscribe to our Newsletter</h3>
+    <p>Be the first to know when new books are added to GlobalBookShelf.</p>
+    <form class="newsletter-form" onsubmit="subscribeNewsletter(event)">
+      <input type="email" placeholder="Enter your email address" required />
+      <button type="submit">Subscribe</button>
+    </form>
+  </section>
+
+  <footer id="contact">
+    <p>📧 Email: <a href="mailto:Mustafaqureahi786@gmail.com">Mustafaqureahi786@gmail.com</a></p>
+    <p>📞 Phone: <a href="tel:+919921437547">+91 9921437547</a></p>
+    <div class="social-icons">
+      <a href="https://facebook.com" target="_blank" title="Facebook">📘</a>
+      <a href="https://twitter.com" target="_blank" title="Twitter">🐦</a>
+      <a href="https://instagram.com" target="_blank" title="Instagram">📸</a>
+    </div>
+    <p class="footer-credit">© 2025 GlobalBookShelf — Crafted with ❤️ by Mustafa Qureshi</p>
+  </footer>
+
+  <div class="modal-overlay" id="bookModal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal()">×</span>
+      <img id="modalImage" src="" alt="Book Preview" />
+      <h4 id="modalTitle">Book Title</h4>
+      <a id="modalDownload" href="#" target="_blank">📥 Download PDF</a>
+    </div>
+  </div>
+
+  <script>
+    // JavaScript for Search Bar
+    let books = [
+      "Atomic Habits", "Ali Baba", "Aliens in Space", "Alif Laila", "Ali Ka Safar",
+      "Algorithm Design", "All About Love", "Alice in Wonderland", "AI for Beginners",
+      // You can add more book titles here that should appear in search suggestions across all pages
+    ];
+
+    function showSuggestions() {
+      const input = document.getElementById('searchBar').value.toLowerCase();
+      const suggestions = document.getElementById('suggestions');
+      suggestions.innerHTML = ''; // Clear previous suggestions
+
+      if (input === '') {
+        return; // Don't show suggestions if input is empty
+      }
+
+      // Filter books that start with the input (case-insensitive)
+      const filtered = books.filter(book => book.toLowerCase().startsWith(input));
+
+      if (filtered.length === 0) {
+        const li = document.createElement('li');
+        li.textContent = 'No suggestions found';
+        li.style.fontStyle = 'italic';
+        li.style.color = '#888';
+        li.style.cursor = 'default';
+        li.style.borderBottom = 'none'; // No border for "no suggestions"
+        suggestions.appendChild(li);
+        return;
+      }
+
+      filtered.forEach(book => {
+        const li = document.createElement('li');
+        li.textContent = book;
+        li.onclick = () => {
+          document.getElementById('searchBar').value = book;
+          suggestions.innerHTML = ''; // Hide suggestions after selection
+        };
+        suggestions.appendChild(li);
+      });
+    }
+
+    // Optional: Hide suggestions when clicking outside
+    document.addEventListener('click', function(event) {
+      const searchContainer = document.querySelector('.search-container');
+      const suggestions = document.getElementById('suggestions');
+      if (searchContainer && !searchContainer.contains(event.target)) {
+        suggestions.innerHTML = ''; // Clear suggestions if clicked outside
+      }
+    });
+
+    // General Functions (Newsletter, Modal)
+    function subscribeNewsletter(e) {
+      e.preventDefault();
+      alert("✅ Thanks for subscribing!");
+    }
+
+    function openModal(imgUrl, title, downloadUrl) {
+      document.getElementById('modalImage').src = imgUrl;
+      document.getElementById('modalTitle').innerText = title;
+      document.getElementById('modalDownload').href = downloadUrl;
+      document.getElementById('bookModal').style.display = 'flex';
+    }
+
+    function closeModal() {
+      document.getElementById('bookModal').style.display = 'none';
+    }
+
+    window.addEventListener('keydown', function (e) {
+      if (e.key === "Escape") closeModal();
+    });
+
+    // The `toggleCategory` function is specific to index.html and is NOT included here.
+  </script>
 </body>
-</html>
+    </html>
