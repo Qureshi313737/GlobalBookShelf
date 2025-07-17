@@ -4,6 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>GlobalBookShelf - Horror</title>
+  
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5898495207015669"
+     crossorigin="anonymous"></script>
+
+  <script async custom-element="amp-auto-ads"
+          src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+  </script>
+
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet"/>
   <style>
     /* Color Variables based on your provided scheme */
@@ -444,6 +452,10 @@
   </style>
 </head>
 <body>
+  <amp-auto-ads type="adsense"
+          data-ad-client="ca-pub-5898495207015669">
+  </amp-auto-ads>
+
   <header>
     <h1>GlobalBookShelf</h1>
   </header>
@@ -529,47 +541,4 @@
       }
 
       filtered.forEach(book => {
-        const li = document.createElement('li');
-        li.textContent = book;
-        li.onclick = () => {
-          document.getElementById('searchBar').value = book;
-          suggestions.innerHTML = ''; // Hide suggestions after selection
-        };
-        suggestions.appendChild(li);
-      });
-    }
-
-    // Optional: Hide suggestions when clicking outside
-    document.addEventListener('click', function(event) {
-      const searchContainer = document.querySelector('.search-container');
-      const suggestions = document.getElementById('suggestions');
-      if (searchContainer && !searchContainer.contains(event.target)) {
-        suggestions.innerHTML = ''; // Clear suggestions if clicked outside
-      }
-    });
-
-    // General Functions (Newsletter, Modal)
-    function subscribeNewsletter(e) {
-      e.preventDefault();
-      alert("✅ Thanks for subscribing!");
-    }
-
-    function openModal(imgUrl, title, downloadUrl) {
-      document.getElementById('modalImage').src = imgUrl;
-      document.getElementById('modalTitle').innerText = title;
-      document.getElementById('modalDownload').href = downloadUrl;
-      document.getElementById('bookModal').style.display = 'flex';
-    }
-
-    function closeModal() {
-      document.getElementById('bookModal').style.display = 'none';
-    }
-
-    window.addEventListener('keydown', function (e) {
-      if (e.key === "Escape") closeModal();
-    });
-
-    // The `toggleCategory` function is specific to index.html and is NOT included here.
-  </script>
-</body>
-  </html>
+        const li = document.
