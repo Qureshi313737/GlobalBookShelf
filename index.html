@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>GlobalBookShelf - Your Online Library</title>
+  <title>GlobalBookShelf</title>
   
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5898495207015669"
      crossorigin="anonymous"></script>
@@ -13,6 +13,7 @@
   </script>
 
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet"/>
+  
   <style>
     /* Color Variables based on your provided scheme */
     :root {
@@ -102,7 +103,7 @@
       color: var(--text-primary);
     }
 
-    /* Search Bar Styles */
+    /* Search Bar Styles (Integrated from your provided code) */
     .search-container {
       position: relative;
       width: 100%; /* Make it responsive */
@@ -158,179 +159,216 @@
       color: var(--text-secondary); /* Keep text color readable on hover */
     }
 
-    /* Sliding Images Section (Carousel) - NEW/MODIFIED */
-    .slider-container {
-      width: 100%;
-      max-width: 1200px; /* Limit width */
-      margin: 20px auto;
-      overflow: hidden;
+
+    /* Hero Section with New Sliding Background Images and Text Overlay */
+    .hero {
       position: relative;
-      border-radius: 12px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-    }
-
-    .slider {
-      display: flex;
-      transition: transform 0.5s ease-in-out;
-    }
-
-    .slider img {
       width: 100%;
-      height: 400px; /* Fixed height for consistency */
-      object-fit: cover; /* Cover the area, crop if necessary */
-      flex-shrink: 0; /* Prevents images from shrinking */
-      border-radius: 12px;
+      height: 65vh; /* Reduced height as requested */
+      overflow: hidden;
     }
 
-    .slider-dots {
+    .slideshow-container {
+      position: absolute; /* Occupy the entire hero space */
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden; /* Hide parts of slides that are not current */
+    }
+
+    .slide {
       position: absolute;
-      bottom: 20px;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      opacity: 0; /* Starts hidden for fade-in effect */
+      animation: fadeSlide 25s infinite; /* 5 slides * 5s = 25s cycle */
+      transition: opacity 1s ease-in-out;
+    }
+
+    /* URLs for the sliding background images (from your provided code) */
+    .slide:nth-child(1) {
+      background-image: url('https://images.unsplash.com/photo-1524995997946-a1c2e315a42f');
+      animation-delay: 0s;
+    }
+
+    .slide:nth-child(2) {
+      background-image: url('https://images.unsplash.com/photo-1512820790803-83ca734da794');
+      animation-delay: 5s;
+    }
+
+    .slide:nth-child(3) {
+      background-image: url('https://images.unsplash.com/photo-1507842217343-583bb7270b66');
+      animation-delay: 10s;
+    }
+
+    .slide:nth-child(4) {
+      background-image: url('https://images.unsplash.com/photo-1529156069898-49953e39b3ac');
+      animation-delay: 15s;
+    }
+
+    .slide:nth-child(5) {
+      background-image: url('https://images.unsplash.com/photo-1581092160619-1f6c25f27c50');
+      animation-delay: 20s;
+    }
+
+    @keyframes fadeSlide {
+      0% { opacity: 0; }
+      4% { opacity: 1; }   /* Fade in */
+      20% { opacity: 1; }  /* Stay visible */
+      24% { opacity: 0; }  /* Fade out */
+      100% { opacity: 0; } /* Remain hidden until next cycle */
+    }
+
+    .welcome-text-overlay { /* New container for all hero text/button */
+      position: absolute;
+      z-index: 10;
+      top: 50%;
       left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      gap: 10px;
-    }
-
-    .dot {
-      width: 12px;
-      height: 12px;
-      background-color: rgba(255, 255, 255, 0.7);
-      border-radius: 50%;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-
-    .dot.active {
-      background-color: var(--secondary-color); /* Gold color for active dot */
-    }
-
-
-    /* Hero Section Styles (Optional - can be removed if slider is main hero) */
-    .hero-section {
-      background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('hero-bg.jpg') no-repeat center center/cover; /* Placeholder background */
-      color: var(--text-primary);
-      padding: 80px 20px;
+      transform: translate(-50%, -50%);
+      color: white;
       text-align: center;
-      margin-top: 20px; /* Add some space below slider if both exist */
+      padding: 0 20px;
+      width: 90%; /* Max width for responsiveness */
+      max-width: 800px; /* Limit text container width */
+      background: rgba(0, 0, 0, 0.5); /* Semi-transparent background for readability */
+      border-radius: 10px;
+      padding: 30px;
+      box-sizing: border-box;
     }
 
-    .hero-section h2 {
-      font-size: 48px;
-      margin-bottom: 15px;
-      font-weight: 600;
+    .welcome-text-overlay h2 { /* Applying the new text style to the H2 */
+      font-size: 3.5rem; /* From your provided .welcome-text */
+      font-weight: bold;
+      text-shadow: 2px 2px 10px #000;
+      margin-bottom: 20px; /* Added spacing */
+      font-family: 'Poppins', sans-serif; /* Ensure Poppins font for hero text */
     }
 
-    .hero-section p {
-      font-size: 20px;
-      max-width: 700px;
-      margin: 0 auto 30px;
-      line-height: 1.6;
+    .welcome-text-overlay p {
+      font-size: 1.25rem; /* Adjusted for better readability */
+      margin-bottom: 30px;
+      line-height: 1.5;
     }
 
-    .hero-button {
-      background-color: var(--secondary-color);
-      color: var(--text-secondary); /* Ensure text is readable on gold button */
-      padding: 15px 30px;
-      text-decoration: none;
+    .welcome-text-overlay a {
+      background: var(--secondary-color);
+      color: var(--text-secondary); /* Text color on gold button */
+      padding: 12px 28px;
       border-radius: 30px;
-      font-size: 18px;
+      text-decoration: none;
       font-weight: 600;
-      transition: background-color 0.3s ease, transform 0.2s ease;
+      font-size: 1rem; /* Consistent button font size */
+      transition: background 0.3s ease;
     }
 
-    .hero-button:hover {
-      background-color: var(--button-hover);
-      transform: translateY(-2px);
+    .welcome-text-overlay a:hover {
+      background: var(--button-hover);
       color: var(--text-secondary);
     }
 
-    /* Categories Section Styles */
-    .categories-section {
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      nav {
+          flex-direction: column; /* Stack items vertically on smaller screens */
+          align-items: center; /* Center items when stacked */
+          padding: 15px; /* Adjust padding for smaller screens */
+      }
+      .search-container {
+          width: 90%; /* Make search bar wider on small screens */
+          max-width: none; /* Remove max-width restriction for very small screens */
+          margin-top: 10px; /* Add spacing when stacked */
+      }
+      .menu {
+          margin-top: 10px; /* Add spacing below search bar */
+          justify-content: center; /* Center menu items */
+          width: 100%; /* Ensure menu takes full width */
+      }
+
+      .hero { height: 55vh; } /* Adjust height for tablets */
+      .welcome-text-overlay h2 { font-size: 2.5rem; }
+      .welcome-text-overlay p { font-size: 1rem; }
+      .welcome-text-overlay { padding: 20px; }
+    }
+    @media (max-width: 480px) {
+      .hero { height: 45vh; } /* Adjust height for smaller mobiles */
+      .welcome-text-overlay h2 { font-size: 1.8rem; margin-bottom: 15px; }
+      .welcome-text-overlay p { font-size: 0.9rem; margin-bottom: 20px; }
+      .welcome-text-overlay a { padding: 10px 20px; font-size: 0.9rem; }
+      .welcome-text-overlay { padding: 15px; }
+    }
+
+
+    /* Category Section Styles */
+    .category-section {
+      background-color: var(--background);
       padding: 60px 20px;
       text-align: center;
-      background-color: var(--background);
     }
-
-    .categories-section h3 {
-      font-size: 32px;
+    .category-section h2 {
+      font-size: 30px;
       color: var(--text-secondary);
-      margin-bottom: 40px;
-      font-weight: 600;
+      margin-bottom: 30px;
     }
 
-    /* Original Category Tabs Design - RESTORED */
-    .category-tabs {
-        display: flex;
-        justify-content: center;
-        gap: 20px;
-        margin-bottom: 40px;
-        flex-wrap: wrap;
-    }
-
-    .category-tab-button {
-        background-color: var(--primary-color); /* Original background */
-        color: var(--text-primary); /* Original text color */
-        padding: 12px 25px;
-        border: none;
-        border-radius: 30px;
-        cursor: pointer;
-        font-size: 16px;
-        font-weight: 500;
-        transition: background-color 0.3s ease, transform 0.2s ease;
-    }
-
-    .category-tab-button.active,
-    .category-tab-button:hover {
-        background-color: var(--secondary-color); /* Gold on active/hover */
-        color: var(--text-secondary); /* Text readable on gold */
-        transform: translateY(-2px);
-    }
-
-    .category-content {
-        display: none; /* Hidden by default */
-    }
-
-    .category-content.active {
-        display: block; /* Show active content */
-    }
-
-    .category-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 30px;
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-
-    .category-item {
-      background: var(--primary-color);
-      color: var(--text-primary);
-      padding: 25px;
-      border-radius: 12px;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      cursor: pointer;
-      text-decoration: none; /* Ensure links don't have underlines */
+    .category-buttons {
       display: flex;
-      flex-direction: column;
       justify-content: center;
-      align-items: center;
-      min-height: 150px;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-bottom: 30px;
     }
 
-    .category-item:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    .category-buttons button {
+      background: var(--secondary-color);
+      color: var(--text-secondary);
+      border: none;
+      padding: 10px 24px;
+      border-radius: 30px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
     }
 
-    .category-item h4 {
-      font-size: 22px;
-      margin-bottom: 10px;
-      font-weight: 600;
+    .category-buttons button:hover {
+      background: var(--button-hover);
+      color: var(--text-secondary);
     }
 
-    .category-item p {
-      font-size: 15px;
-      color: #ccc;
+    .subcategories {
+      display: none;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+
+    .subcategories.active {
+      display: flex;
+    }
+
+    .subcategories a {
+      padding: 10px 20px;
+      background: #f2f2f2; /* A slightly darker white for contrast */
+      border-radius: 20px;
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-weight: 500;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.06);
+      transition: all 0.3s;
+    }
+
+    .subcategories a:hover {
+      background: var(--soft-blue);
+      color: var(--text-primary);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     /* Bookshelf Section Styles */
@@ -605,40 +643,6 @@
     .close-btn:hover {
       color: red;
     }
-
-    /* Responsive adjustments */
-    @media (max-width: 768px) {
-      nav {
-          flex-direction: column; /* Stack items vertically on smaller screens */
-          align-items: center; /* Center items when stacked */
-          padding: 15px; /* Adjust padding for smaller screens */
-      }
-      .search-container {
-          width: 90%; /* Make search bar wider on small screens */
-          max-width: none; /* Remove max-width restriction for very small screens */
-          margin-top: 10px; /* Add spacing when stacked */
-      }
-      .menu {
-          margin-top: 10px; /* Add spacing below search bar */
-          justify-content: center; /* Center menu items */
-          width: 100%; /* Ensure menu takes full width */
-      }
-      .hero-section h2 {
-          font-size: 36px;
-      }
-      .hero-section p {
-          font-size: 18px;
-      }
-      .category-grid {
-          grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      }
-      .book {
-          width: 160px;
-      }
-      .slider img {
-        height: 250px; /* Adjust height for mobile screens */
-      }
-    }
   </style>
 </head>
 <body>
@@ -657,106 +661,71 @@
       <ul id="suggestions"></ul>
     </div>
     <div class="menu">
-      <a href="index.html">Home</a>
+      <a href="#home">Home</a>
       <a href="books.html">Library</a>
       <a href="about.html">About</a>
       <a href="#contact">Contact</a>
     </div>
   </nav>
 
-  <section class="slider-container">
-    <div class="slider" id="imageSlider">
-      <img src="slider1.jpg" alt="Slider Image 1">
-      <img src="slider2.jpg" alt="Slider Image 2">
-      <img src="slider3.jpg" alt="Slider Image 3">
-      </div>
-    <div class="slider-dots" id="sliderDots">
-      </div>
-  </section>
-
-  <section class="hero-section">
-    <h2>Discover Your Next Great Read</h2>
-    <p>Explore a vast collection of free ebooks across various genres, all at your fingertips.</p>
-    <a href="books.html" class="hero-button">Start Reading Now</a>
-  </section>
-
-  <section class="categories-section">
-    <h3>Browse by Category</h3>
-    <div class="category-tabs">
-        <button class="category-tab-button active" onclick="toggleCategory(event, 'fiction')">Fiction</button>
-        <button class="category-tab-button" onclick="toggleCategory(event, 'non-fiction')">Non-Fiction</button>
+  <section class="hero" id="home">
+    <div class="slideshow-container">
+        <div class="slide slide1"></div>
+        <div class="slide slide2"></div>
+        <div class="slide slide3"></div>
+        <div class="slide slide4"></div>
+        <div class="slide slide5"></div>
     </div>
-
-    <div id="fiction-content" class="category-content active">
-        <div class="category-grid">
-            <a href="Fantasy.html" class="category-item">
-                <h4>Fantasy</h4>
-                <p>Immerse in magical worlds</p>
-            </a>
-            <a href="ScienceFiction.html" class="category-item">
-                <h4>Science Fiction</h4>
-                <p>Venture into the future</p>
-            </a>
-            <a href="Mystery.html" class="category-item">
-                <h4>Mystery</h4>
-                <p>Solve intriguing puzzles</p>
-            </a>
-            <a href="Thriller.html" class="category-item">
-                <h4>Thriller</h4>
-                <p>Experience suspense and intrigue</p>
-            </a>
-            <a href="Romance.html" class="category-item">
-                <h4>Romance</h4>
-                <p>Discover captivating love stories</p>
-            </a>
-            <a href="HistoricalFiction.html" class="category-item">
-                <h4>Historical Fiction</h4>
-                <p>Travel through time</p>
-            </a>
-        </div>
-    </div>
-
-    <div id="non-fiction-content" class="category-content">
-        <div class="category-grid">
-            <a href="Biography.html" class="category-item">
-                <h4>Biography</h4>
-                <p>Learn from real lives</p>
-            </a>
-            <a href="SelfHelp.html" class="category-item">
-                <h4>Self-Help</h4>
-                <p>Improve yourself and your life</p>
-            </a>
-            <a href="History.html" class="category-item">
-                <h4>History</h4>
-                <p>Uncover the past</p>
-            </a>
-            <a href="Science.html" class="category-item">
-                <h4>Science</h4>
-                <p>Explore the wonders of knowledge</p>
-            </a>
-            <a href="Technology.html" class="category-item">
-                <h4>Technology</h4>
-                <p>Dive into innovation</p>
-            </a>
-            <a href="Health.html" class="category-item">
-                <h4>Health & Fitness</h4>
-                <p>Achieve a healthier lifestyle</p>
-            </a>
-            <a href="Education.html" class="category-item">
-                <h4>Education</h4>
-                <p>Learn and grow</p>
-            </a>
-            <a href="Philosophy.html" class="category-item">
-                <h4>Philosophy</h4>
-                <p>Ponder life's big questions</p>
-            </a>
-        </div>
+    <div class="welcome-text-overlay">
+      <h2>Welcome to GlobalBookShelf</h2>
+      <p>Explore a world of free books in every language.</p>
+      <a href="books.html">Explore Library</a>
     </div>
   </section>
 
-  <section class="bookshelf-section">
-    <h3>Featured Books</h3>
+  <section class="category-section">
+    <h2>📚 Explore by Genre</h2>
+    <div class="category-buttons">
+      <button onclick="toggleCategory('fiction')">📘 Fiction</button>
+      <button onclick="toggleCategory('nonfiction')">📕 Non-Fiction</button>
+    </div>
+    <div id="fiction" class="subcategories active">
+      <a href="mystery.html">Mystery & Thriller</a>
+      <a href="romance.html">Romance</a>
+      <a href="horror.html">Horror</a>
+      <a href="fantasy.html">Fantasy</a>
+      <a href="historical-fiction.html">Historical Fiction</a>
+      <a href="adventure.html">Adventure</a>
+      <a href="drama.html">Drama</a>
+      <a href="science-fiction.html">Science Fiction</a>
+      <a href="short-stories.html">Short Stories</a>
+    </div>
+    <div id="nonfiction" class="subcategories">
+      <a href="biography.html">Biography</a>
+      <a href="self-help.html">Self Help</a>
+      <a href="history.html">History</a>
+      <a href="religion.html">Religion</a>
+      <a href="politics.html">Politics</a>
+      <a href="science.html">Science</a>
+      <a href="technology.html">Technology</a>
+      <a href="health.html">Health & Fitness</a>
+      <a href="education.html">Education</a>
+      <a href="philosophy.html">Philosophy</a>
+    </div>
+  </section>
+
+  <section class="bookshelf-section" id="featured">
+    <h3>📚 Featured Book Shelf</h3>
     <div class="shelf">
+      <div class="book">
+        <img src="https://i.imgur.com/0y8Ftya.jpeg" alt="Manipulation Book" />
+        <div class="book-info">
+          <div class="book-title">Manipulation – Dark Psychology</div>
+        </div>
+        <div class="book-button-container">
+          <a href="https://raw.githubusercontent.com/Qureshi313737/GlobalBookShelf/main/Manipulation-Dark-Psychology-to-Manipulate-and-Control-People%20(1).pdf" target="_blank" class="book-button">Download</a>
+        </div>
+      </div>
       </div>
   </section>
 
@@ -790,11 +759,11 @@
   </div>
 
   <script>
-    // JavaScript for Search Bar
+    // JavaScript for Search Bar (Integrated from your provided code)
     let books = [
       "Atomic Habits", "Ali Baba", "Aliens in Space", "Alif Laila", "Ali Ka Safar",
-      "Algorithm Design", "All About Love", "Alice in Wonderland", "AI for Beginners",
-      // You can add more book titles here that should appear in search suggestions across all pages
+      "Algorithm Design", "All About Love", "Alice in Wonderland", "AI for Beginners"
+      // You can add more book titles here
     ];
 
     function showSuggestions() {
@@ -835,12 +804,20 @@
     document.addEventListener('click', function(event) {
       const searchContainer = document.querySelector('.search-container');
       const suggestions = document.getElementById('suggestions');
-      if (searchContainer && !searchContainer.contains(event.target)) {
+      if (!searchContainer.contains(event.target)) {
         suggestions.innerHTML = ''; // Clear suggestions if clicked outside
       }
     });
 
-    // General Functions (Newsletter, Modal)
+    // End JavaScript for Search Bar
+
+
+    function toggleCategory(id) {
+      document.getElementById('fiction').classList.remove('active');
+      document.getElementById('nonfiction').classList.remove('active');
+      document.getElementById(id).classList.add('active');
+    }
+
     function subscribeNewsletter(e) {
       e.preventDefault();
       alert("✅ Thanks for subscribing!");
@@ -857,69 +834,10 @@
       document.getElementById('bookModal').style.display = 'none';
     }
 
+    // ESC key to close modal
     window.addEventListener('keydown', function (e) {
       if (e.key === "Escape") closeModal();
     });
-
-    // Function to handle category clicks (for Fiction/Non-Fiction tabs)
-    function toggleCategory(event, categoryType) {
-        const buttons = document.querySelectorAll('.category-tab-button');
-        buttons.forEach(button => button.classList.remove('active'));
-        event.target.classList.add('active');
-
-        const contents = document.querySelectorAll('.category-content');
-        contents.forEach(content => content.classList.remove('active'));
-
-        document.getElementById(categoryType + '-content').classList.add('active');
-    }
-
-    // --- Sliding Image (Carousel) JavaScript ---
-    let slideIndex = 0;
-    const slider = document.getElementById('imageSlider');
-    const dotsContainer = document.getElementById('sliderDots');
-    const slides = slider.children; // Get all images inside the slider
-
-    function showSlides() {
-      if (!slider || !dotsContainer || slides.length === 0) return; // Exit if elements not found
-
-      // Clear existing dots
-      dotsContainer.innerHTML = '';
-
-      // Create dots for each slide
-      for (let i = 0; i < slides.length; i++) {
-        const dot = document.createElement('span');
-        dot.classList.add('dot');
-        if (i === slideIndex) {
-          dot.classList.add('active');
-        }
-        dot.onclick = () => currentSlide(i);
-        dotsContainer.appendChild(dot);
-      }
-
-      // Adjust slider position
-      slider.style.transform = `translateX(${-slideIndex * 100}%)`;
-    }
-
-    function nextSlide() {
-      slideIndex++;
-      if (slideIndex >= slides.length) {
-        slideIndex = 0; // Loop back to the first slide
-      }
-      showSlides();
-    }
-
-    function currentSlide(n) {
-      slideIndex = n;
-      showSlides();
-    }
-
-    // Initial display and auto-advance
-    showSlides();
-    setInterval(nextSlide, 5000); // Change image every 5 seconds (5000ms)
-
-    // Ensure slider updates if window is resized (e.g., orientation change on mobile)
-    window.addEventListener('resize', showSlides);
-
   </script>
 </body>
   </html>
