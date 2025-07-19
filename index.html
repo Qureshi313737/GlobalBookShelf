@@ -3,11 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>GlobalBookShelf</title>
+  <title>GlobalBookShelf - Your Online Library</title>
+  
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5898495207015669"
      crossorigin="anonymous"></script>
+
+  <script async custom-element="amp-auto-ads"
+          src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+  </script>
+
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet"/>
-  
   <style>
     /* Color Variables based on your provided scheme */
     :root {
@@ -97,7 +102,7 @@
       color: var(--text-primary);
     }
 
-    /* Search Bar Styles (Integrated from your provided code) */
+    /* Search Bar Styles */
     .search-container {
       position: relative;
       width: 100%; /* Make it responsive */
@@ -153,219 +158,98 @@
       color: var(--text-secondary); /* Keep text color readable on hover */
     }
 
-
-    /* Hero Section with New Sliding Background Images and Text Overlay */
-    .hero {
-      position: relative;
-      width: 100%;
-      height: 65vh; /* Reduced height as requested */
-      overflow: hidden;
-    }
-
-    .slideshow-container {
-      position: absolute; /* Occupy the entire hero space */
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      overflow: hidden; /* Hide parts of slides that are not current */
-    }
-
-    .slide {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      background-size: cover;
-      background-position: center;
-      opacity: 0; /* Starts hidden for fade-in effect */
-      animation: fadeSlide 25s infinite; /* 5 slides * 5s = 25s cycle */
-      transition: opacity 1s ease-in-out;
-    }
-
-    /* URLs for the sliding background images (from your provided code) */
-    .slide:nth-child(1) {
-      background-image: url('https://images.unsplash.com/photo-1524995997946-a1c2e315a42f');
-      animation-delay: 0s;
-    }
-
-    .slide:nth-child(2) {
-      background-image: url('https://images.unsplash.com/photo-1512820790803-83ca734da794');
-      animation-delay: 5s;
-    }
-
-    .slide:nth-child(3) {
-      background-image: url('https://images.unsplash.com/photo-1507842217343-583bb7270b66');
-      animation-delay: 10s;
-    }
-
-    .slide:nth-child(4) {
-      background-image: url('https://images.unsplash.com/photo-1529156069898-49953e39b3ac');
-      animation-delay: 15s;
-    }
-
-    .slide:nth-child(5) {
-      background-image: url('https://images.unsplash.com/photo-1581092160619-1f6c25f27c50');
-      animation-delay: 20s;
-    }
-
-    @keyframes fadeSlide {
-      0% { opacity: 0; }
-      4% { opacity: 1; }   /* Fade in */
-      20% { opacity: 1; }  /* Stay visible */
-      24% { opacity: 0; }  /* Fade out */
-      100% { opacity: 0; } /* Remain hidden until next cycle */
-    }
-
-    .welcome-text-overlay { /* New container for all hero text/button */
-      position: absolute;
-      z-index: 10;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      color: white;
+    /* Hero Section Styles */
+    .hero-section {
+      background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('hero-bg.jpg') no-repeat center center/cover; /* Placeholder background */
+      color: var(--text-primary);
+      padding: 80px 20px;
       text-align: center;
-      padding: 0 20px;
-      width: 90%; /* Max width for responsiveness */
-      max-width: 800px; /* Limit text container width */
-      background: rgba(0, 0, 0, 0.5); /* Semi-transparent background for readability */
-      border-radius: 10px;
-      padding: 30px;
-      box-sizing: border-box;
     }
 
-    .welcome-text-overlay h2 { /* Applying the new text style to the H2 */
-      font-size: 3.5rem; /* From your provided .welcome-text */
-      font-weight: bold;
-      text-shadow: 2px 2px 10px #000;
-      margin-bottom: 20px; /* Added spacing */
-      font-family: 'Poppins', sans-serif; /* Ensure Poppins font for hero text */
-    }
-
-    .welcome-text-overlay p {
-      font-size: 1.25rem; /* Adjusted for better readability */
-      margin-bottom: 30px;
-      line-height: 1.5;
-    }
-
-    .welcome-text-overlay a {
-      background: var(--secondary-color);
-      color: var(--text-secondary); /* Text color on gold button */
-      padding: 12px 28px;
-      border-radius: 30px;
-      text-decoration: none;
+    .hero-section h2 {
+      font-size: 48px;
+      margin-bottom: 15px;
       font-weight: 600;
-      font-size: 1rem; /* Consistent button font size */
-      transition: background 0.3s ease;
     }
 
-    .welcome-text-overlay a:hover {
-      background: var(--button-hover);
+    .hero-section p {
+      font-size: 20px;
+      max-width: 700px;
+      margin: 0 auto 30px;
+      line-height: 1.6;
+    }
+
+    .hero-button {
+      background-color: var(--secondary-color);
+      color: var(--text-secondary); /* Ensure text is readable on gold button */
+      padding: 15px 30px;
+      text-decoration: none;
+      border-radius: 30px;
+      font-size: 18px;
+      font-weight: 600;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .hero-button:hover {
+      background-color: var(--button-hover);
+      transform: translateY(-2px);
       color: var(--text-secondary);
     }
 
-    /* Responsive adjustments */
-    @media (max-width: 768px) {
-      nav {
-          flex-direction: column; /* Stack items vertically on smaller screens */
-          align-items: center; /* Center items when stacked */
-          padding: 15px; /* Adjust padding for smaller screens */
-      }
-      .search-container {
-          width: 90%; /* Make search bar wider on small screens */
-          max-width: none; /* Remove max-width restriction for very small screens */
-          margin-top: 10px; /* Add spacing when stacked */
-      }
-      .menu {
-          margin-top: 10px; /* Add spacing below search bar */
-          justify-content: center; /* Center menu items */
-          width: 100%; /* Ensure menu takes full width */
-      }
-
-      .hero { height: 55vh; } /* Adjust height for tablets */
-      .welcome-text-overlay h2 { font-size: 2.5rem; }
-      .welcome-text-overlay p { font-size: 1rem; }
-      .welcome-text-overlay { padding: 20px; }
-    }
-    @media (max-width: 480px) {
-      .hero { height: 45vh; } /* Adjust height for smaller mobiles */
-      .welcome-text-overlay h2 { font-size: 1.8rem; margin-bottom: 15px; }
-      .welcome-text-overlay p { font-size: 0.9rem; margin-bottom: 20px; }
-      .welcome-text-overlay a { padding: 10px 20px; font-size: 0.9rem; }
-      .welcome-text-overlay { padding: 15px; }
-    }
-
-
-    /* Category Section Styles */
-    .category-section {
-      background-color: var(--background);
+    /* Categories Section Styles */
+    .categories-section {
       padding: 60px 20px;
       text-align: center;
+      background-color: var(--background);
     }
-    .category-section h2 {
-      font-size: 30px;
+
+    .categories-section h3 {
+      font-size: 32px;
       color: var(--text-secondary);
-      margin-bottom: 30px;
+      margin-bottom: 40px;
+      font-weight: 600;
     }
 
-    .category-buttons {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      flex-wrap: wrap;
-      margin-bottom: 30px;
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+      max-width: 1000px;
+      margin: 0 auto;
     }
 
-    .category-buttons button {
-      background: var(--secondary-color);
-      color: var(--text-secondary);
-      border: none;
-      padding: 10px 24px;
-      border-radius: 30px;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-
-    .category-buttons button:hover {
-      background: var(--button-hover);
-      color: var(--text-secondary);
-    }
-
-    .subcategories {
-      display: none;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 15px;
-      animation: fadeIn 0.3s ease-in-out;
-    }
-
-    .subcategories.active {
-      display: flex;
-    }
-
-    .subcategories a {
-      padding: 10px 20px;
-      background: #f2f2f2; /* A slightly darker white for contrast */
-      border-radius: 20px;
-      color: var(--text-secondary);
-      text-decoration: none;
-      font-weight: 500;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.06);
-      transition: all 0.3s;
-    }
-
-    .subcategories a:hover {
-      background: var(--soft-blue);
+    .category-item {
+      background: var(--primary-color);
       color: var(--text-primary);
+      padding: 25px;
+      border-radius: 12px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+      text-decoration: none; /* Ensure links don't have underlines */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 150px;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
+    .category-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
     }
 
-    /* Bookshelf Section Styles */
+    .category-item h4 {
+      font-size: 22px;
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+
+    .category-item p {
+      font-size: 15px;
+      color: #ccc;
+    }
+
+    /* Bookshelf Section Styles - MODIFIED FOR RESPONSIVE GRID */
     .bookshelf-section {
       background: #f9fafb; /* Slightly off-white for book section */
       padding: 60px 20px;
@@ -380,21 +264,26 @@
     }
 
     .shelf {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 40px;
-      position: relative;
+      display: grid; /* Changed to grid */
+      grid-template-columns: repeat(4, 1fr); /* Default 4 books per row for PC */
+      gap: 30px; /* Spacing between books */
+      justify-items: center; /* Center items within their grid cells */
+      max-width: 1200px; /* Max width for the shelf */
+      margin: 0 auto; /* Center the shelf */
     }
 
     .book {
-      width: 180px;
+      width: 100%; /* Make book take full width of its grid cell */
+      max-width: 180px; /* Keep max width to control size */
       background: white;
       border-radius: 12px;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
       transition: transform 0.3s ease;
       overflow: hidden;
       cursor: pointer;
+      display: flex; /* Flexbox for internal book content */
+      flex-direction: column; /* Stack image and info vertically */
+      justify-content: space-between; /* Push buttons to bottom */
     }
 
     .book:hover {
@@ -408,7 +297,8 @@
     }
 
     .book-info {
-      padding: 15px 12px;
+      padding: 15px 12px 10px; /* Adjusted padding */
+      flex-grow: 1; /* Allow info to grow */
     }
 
     .book-title {
@@ -637,9 +527,61 @@
     .close-btn:hover {
       color: red;
     }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      nav {
+          flex-direction: column; /* Stack items vertically on smaller screens */
+          align-items: center; /* Center items when stacked */
+          padding: 15px; /* Adjust padding for smaller screens */
+      }
+      .search-container {
+          width: 90%; /* Make search bar wider on small screens */
+          max-width: none; /* Remove max-width restriction for very small screens */
+          margin-top: 10px; /* Add spacing when stacked */
+      }
+      .menu {
+          margin-top: 10px; /* Add spacing below search bar */
+          justify-content: center; /* Center menu items */
+          width: 100%; /* Ensure menu takes full width */
+      }
+      .hero-section h2 {
+          font-size: 36px;
+      }
+      .hero-section p {
+          font-size: 18px;
+      }
+      .category-grid {
+          grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      }
+
+      /* Specific adjustments for .shelf on smaller screens (Android) */
+      .shelf {
+        grid-template-columns: repeat(2, 1fr); /* 2 books per row on smaller screens */
+        gap: 20px; /* Adjust gap for smaller screens */
+      }
+      .book {
+        max-width: 160px; /* Slightly smaller book size on mobile */
+      }
+    }
+
+    @media (max-width: 480px) {
+      /* Further adjustments for very small screens */
+      .shelf {
+        grid-template-columns: 1fr; /* One book per row on very small screens if needed, or keep 2 */
+        gap: 15px;
+      }
+      .book {
+        max-width: 200px; /* Allow wider books when only one per row */
+      }
+    }
   </style>
 </head>
 <body>
+  <amp-auto-ads type="adsense"
+          data-ad-client="ca-pub-5898495207015669">
+  </amp-auto-ads>
+
   <header>
     <h1>GlobalBookShelf</h1>
   </header>
@@ -651,64 +593,127 @@
       <ul id="suggestions"></ul>
     </div>
     <div class="menu">
-      <a href="#home">Home</a>
+      <a href="index.html">Home</a>
       <a href="books.html">Library</a>
       <a href="about.html">About</a>
       <a href="#contact">Contact</a>
     </div>
   </nav>
 
-  <section class="hero" id="home">
-    <div class="slideshow-container">
-        <div class="slide slide1"></div>
-        <div class="slide slide2"></div>
-        <div class="slide slide3"></div>
-        <div class="slide slide4"></div>
-        <div class="slide slide5"></div>
-    </div>
-    <div class="welcome-text-overlay">
-      <h2>Welcome to GlobalBookShelf</h2>
-      <p>Explore a world of free books in every language.</p>
-      <a href="books.html">Explore Library</a>
-    </div>
+  <section class="hero-section">
+    <h2>Discover Your Next Great Read</h2>
+    <p>Explore a vast collection of free ebooks across various genres, all at your fingertips.</p>
+    <a href="books.html" class="hero-button">Start Reading Now</a>
   </section>
 
-  <section class="category-section">
-    <h2>📚 Explore by Genre</h2>
-    <div class="category-buttons">
-      <button onclick="toggleCategory('fiction')">📘 Fiction</button>
-      <button onclick="toggleCategory('nonfiction')">📕 Non-Fiction</button>
-    </div>
-    <div id="fiction" class="subcategories active">
-      <a href="mystery.html">Mystery & Thriller</a>
-      <a href="romance.html">Romance</a>
-      <a href="horror.html">Horror</a>
-      <a href="fantasy.html">Fantasy</a>
-      <a href="historical-fiction.html">Historical Fiction</a>
-      <a href="adventure.html">Adventure</a>
-      <a href="drama.html">Drama</a>
-      <a href="science-fiction.html">Science Fiction</a>
-      <a href="short-stories.html">Short Stories</a>
-    </div>
-    <div id="nonfiction" class="subcategoies">
-      <a href="biography.html">Biography</a>
-      <a href="self-help.html">Self Help</a>
-      <a href="history.html">History</a>
-      <a href="religion.html">Religion</a>
-      <a href="politics.html">Politics</a>
-      <a href="science.html">Science</a>
-      <a href="technology.html">Technology</a>
-      <a href="health.html">Health & Fitness</a>
-      <a href="education.html">Education</a>
-      <a href="philosophy.html">Philosophy</a>
-    </div>
+  <section class="categories-section">
+    <h3>Browse by Category</h3>
+    <div class="category-grid">
+      <a href="Politics.html" class="category-item">
+        <h4>Politics</h4>
+        <p>Understand the world's governance</p>
+      </a>
+      <a href="Science.html" class="category-item">
+        <h4>Science</h4>
+        <p>Explore the wonders of knowledge</p>
+      </a>
+      <a href="Technology.html" class="category-item">
+        <h4>Technology</h4>
+        <p>Dive into innovation</p>
+      </a>
+      <a href="Health.html" class="category-item">
+        <h4>Health & Fitness</h4>
+        <p>Achieve a healthier lifestyle</p>
+      </a>
+      <a href="Education.html" class="category-item">
+        <h4>Education</h4>
+        <p>Learn and grow</p>
+      </a>
+      <a href="Philosophy.html" class="category-item">
+        <h4>Philosophy</h4>
+        <p>Ponder life's big questions</p>
+      </a>
+      </div>
   </section>
 
-  <section class="bookshelf-section" id="featured">
-    <h3>📚 Featured Book Shelf</h3>
+  <section class="bookshelf-section">
+    <h3>Featured Books</h3>
     <div class="shelf">
-    
-     
+      <div class="book" onclick="openModal('book1.jpg', 'The Art of War', 'pdfs/The_Art_of_War.pdf')">
+        <img src="book1.jpg" alt="Book Cover 1" />
+        <div class="book-info">
+          <p class="book-title">The Art of War</p>
+          <div class="book-button-container">
+            <a href="pdfs/The_Art_of_War.pdf" download class="book-button">Download PDF</a>
+          </div>
+        </div>
+      </div>
+      <div class="book" onclick="openModal('book2.jpg', 'Deep Work', 'pdfs/Deep_Work.pdf')">
+        <img src="book2.jpg" alt="Book Cover 2" />
+        <div class="book-info">
+          <p class="book-title">Deep Work</p>
+          <div class="book-button-container">
+            <a href="pdfs/Deep_Work.pdf" download class="book-button">Download PDF</a>
+          </div>
+        </div>
+      </div>
+      <div class="book" onclick="openModal('book3.jpg', 'The Subtle Art of Not Giving a F*ck', 'pdfs/The_Subtle_Art_of_Not_Giving_a_F_ck.pdf')">
+        <img src="book3.jpg" alt="Book Cover 3" />
+        <div class="book-info">
+          <p class="book-title">The Subtle Art of Not Giving a F*ck</p>
+          <div class="book-button-container">
+            <a href="pdfs/The_Subtle_Art_of_Not_Giving_a_F_ck.pdf" download class="book-button">Download PDF</a>
+          </div>
+        </div>
+      </div>
+      <div class="book" onclick="openModal('book4.jpg', 'Atomic Habits', 'pdfs/Atomic_Habits.pdf')">
+        <img src="book4.jpg" alt="Book Cover 4" />
+        <div class="book-info">
+          <p class="book-title">Atomic Habits</p>
+          <div class="book-button-container">
+            <a href="pdfs/Atomic_Habits.pdf" download class="book-button">Download PDF</a>
+          </div>
+        </div>
+      </div>
+      <div class="book" onclick="openModal('book5.jpg', 'The Psychology of Money', 'pdfs/The_Psychology_of_Money.pdf')">
+        <img src="book5.jpg" alt="Book Cover 5" />
+        <div class="book-info">
+          <p class="book-title">The Psychology of Money</p>
+          <div class="book-button-container">
+            <a href="pdfs/The_Psychology_of_Money.pdf" download class="book-button">Download PDF</a>
+          </div>
+        </div>
+      </div>
+      <div class="book" onclick="openModal('book6.jpg', 'The Alchemist', 'pdfs/The_Alchemist.pdf')">
+        <img src="book6.jpg" alt="Book Cover 6" />
+        <div class="book-info">
+          <p class="book-title">The Alchemist</p>
+          <div class="book-button-container">
+            <a href="pdfs/The_Alchemist.pdf" download class="book-button">Download PDF</a>
+          </div>
+        </div>
+      </div>
+      <div class="book" onclick="openModal('book7.jpg', 'Sapiens: A Brief History of Humankind', 'pdfs/Sapiens_A_Brief_History_of_Humankind.pdf')">
+        <img src="book7.jpg" alt="Book Cover 7" />
+        <div class="book-info">
+          <p class="book-title">Sapiens</p>
+          <div class="book-button-container">
+            <a href="pdfs/Sapiens_A_Brief_History_of_Humankind.pdf" download class="book-button">Download PDF</a>
+          </div>
+        </div>
+      </div>
+      <div class="book" onclick="openModal('book8.jpg', 'Becoming', 'pdfs/Becoming.pdf')">
+        <img src="book8.jpg" alt="Book Cover 8" />
+        <div class="book-info">
+          <p class="book-title">Becoming</p>
+          <div class="book-button-container">
+            <a href="pdfs/Becoming.pdf" download class="book-button">Download PDF</a>
+          </div>
+        </div>
+      </div>
+      </div>
+  </section>
+
   <section class="newsletter-section">
     <h3>📬 Subscribe to our Newsletter</h3>
     <p>Be the first to know when new books are added to GlobalBookShelf.</p>
@@ -739,11 +744,12 @@
   </div>
 
   <script>
-    // JavaScript for Search Bar (Integrated from your provided code)
+    // JavaScript for Search Bar
     let books = [
-      "Atomic Habits", "Ali Baba", "Aliens in Space", "Alif Laila", "Ali Ka Safar",
-      "Algorithm Design", "All About Love", "Alice in Wonderland", "AI for Beginners"
-      // You can add more book titles here
+      "Atomic Habits", "Deep Work", "The Subtle Art of Not Giving a F*ck", "The Psychology of Money", "The Art of War", "The Alchemist", "Sapiens: A Brief History of Humankind", "Becoming",
+      "Ali Baba", "Aliens in Space", "Alif Laila", "Ali Ka Safar",
+      "Algorithm Design", "All About Love", "Alice in Wonderland", "AI for Beginners",
+      // You can add more book titles here that should appear in search suggestions across all pages
     ];
 
     function showSuggestions() {
@@ -784,20 +790,12 @@
     document.addEventListener('click', function(event) {
       const searchContainer = document.querySelector('.search-container');
       const suggestions = document.getElementById('suggestions');
-      if (!searchContainer.contains(event.target)) {
+      if (searchContainer && !searchContainer.contains(event.target)) {
         suggestions.innerHTML = ''; // Clear suggestions if clicked outside
       }
     });
 
-    // End JavaScript for Search Bar
-
-
-    function toggleCategory(id) {
-      document.getElementById('fiction').classList.remove('active');
-      document.getElementById('nonfiction').classList.remove('active');
-      document.getElementById(id).classList.add('active');
-    }
-
+    // General Functions (Newsletter, Modal)
     function subscribeNewsletter(e) {
       e.preventDefault();
       alert("✅ Thanks for subscribing!");
@@ -814,10 +812,15 @@
       document.getElementById('bookModal').style.display = 'none';
     }
 
-    // ESC key to close modal
     window.addEventListener('keydown', function (e) {
       if (e.key === "Escape") closeModal();
     });
+
+    // Function to handle category clicks (on index.html)
+    function toggleCategory(event, categoryFile) {
+      event.preventDefault(); // Prevent the default link behavior
+      window.location.href = categoryFile; // Navigate to the specified category page
+    }
   </script>
 </body>
   </html>
