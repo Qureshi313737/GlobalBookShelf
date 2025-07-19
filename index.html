@@ -210,6 +210,41 @@
       font-weight: 600;
     }
 
+    .category-tabs {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        margin-bottom: 40px;
+        flex-wrap: wrap;
+    }
+
+    .category-tab-button {
+        background-color: var(--primary-color);
+        color: var(--text-primary);
+        padding: 12px 25px;
+        border: none;
+        border-radius: 30px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: 500;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .category-tab-button.active,
+    .category-tab-button:hover {
+        background-color: var(--secondary-color);
+        color: var(--text-secondary); /* Text readable on gold button */
+        transform: translateY(-2px);
+    }
+
+    .category-content {
+        display: none; /* Hidden by default */
+    }
+
+    .category-content.active {
+        display: block; /* Show active content */
+    }
+
     .category-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -249,7 +284,7 @@
       color: #ccc;
     }
 
-    /* Bookshelf Section Styles - MODIFIED FOR RESPONSIVE GRID */
+    /* Bookshelf Section Styles (no changes from the previous general styling, as it will be empty) */
     .bookshelf-section {
       background: #f9fafb; /* Slightly off-white for book section */
       padding: 60px 20px;
@@ -264,26 +299,21 @@
     }
 
     .shelf {
-      display: grid; /* Changed to grid */
-      grid-template-columns: repeat(4, 1fr); /* Default 4 books per row for PC */
-      gap: 30px; /* Spacing between books */
-      justify-items: center; /* Center items within their grid cells */
-      max-width: 1200px; /* Max width for the shelf */
-      margin: 0 auto; /* Center the shelf */
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 40px;
+      position: relative;
     }
 
     .book {
-      width: 100%; /* Make book take full width of its grid cell */
-      max-width: 180px; /* Keep max width to control size */
+      width: 180px;
       background: white;
       border-radius: 12px;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
       transition: transform 0.3s ease;
       overflow: hidden;
       cursor: pointer;
-      display: flex; /* Flexbox for internal book content */
-      flex-direction: column; /* Stack image and info vertically */
-      justify-content: space-between; /* Push buttons to bottom */
     }
 
     .book:hover {
@@ -297,8 +327,7 @@
     }
 
     .book-info {
-      padding: 15px 12px 10px; /* Adjusted padding */
-      flex-grow: 1; /* Allow info to grow */
+      padding: 15px 12px;
     }
 
     .book-title {
@@ -554,25 +583,8 @@
       .category-grid {
           grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
       }
-
-      /* Specific adjustments for .shelf on smaller screens (Android) */
-      .shelf {
-        grid-template-columns: repeat(2, 1fr); /* 2 books per row on smaller screens */
-        gap: 20px; /* Adjust gap for smaller screens */
-      }
       .book {
-        max-width: 160px; /* Slightly smaller book size on mobile */
-      }
-    }
-
-    @media (max-width: 480px) {
-      /* Further adjustments for very small screens */
-      .shelf {
-        grid-template-columns: 1fr; /* One book per row on very small screens if needed, or keep 2 */
-        gap: 15px;
-      }
-      .book {
-        max-width: 200px; /* Allow wider books when only one per row */
+          width: 160px;
       }
     }
   </style>
@@ -608,109 +620,81 @@
 
   <section class="categories-section">
     <h3>Browse by Category</h3>
-    <div class="category-grid">
-      <a href="Politics.html" class="category-item">
-        <h4>Politics</h4>
-        <p>Understand the world's governance</p>
-      </a>
-      <a href="Science.html" class="category-item">
-        <h4>Science</h4>
-        <p>Explore the wonders of knowledge</p>
-      </a>
-      <a href="Technology.html" class="category-item">
-        <h4>Technology</h4>
-        <p>Dive into innovation</p>
-      </a>
-      <a href="Health.html" class="category-item">
-        <h4>Health & Fitness</h4>
-        <p>Achieve a healthier lifestyle</p>
-      </a>
-      <a href="Education.html" class="category-item">
-        <h4>Education</h4>
-        <p>Learn and grow</p>
-      </a>
-      <a href="Philosophy.html" class="category-item">
-        <h4>Philosophy</h4>
-        <p>Ponder life's big questions</p>
-      </a>
-      </div>
+    <div class="category-tabs">
+        <button class="category-tab-button active" onclick="toggleCategory(event, 'fiction')">Fiction</button>
+        <button class="category-tab-button" onclick="toggleCategory(event, 'non-fiction')">Non-Fiction</button>
+    </div>
+
+    <div id="fiction-content" class="category-content active">
+        <div class="category-grid">
+            <a href="Fantasy.html" class="category-item">
+                <h4>Fantasy</h4>
+                <p>Immerse in magical worlds</p>
+            </a>
+            <a href="ScienceFiction.html" class="category-item">
+                <h4>Science Fiction</h4>
+                <p>Venture into the future</p>
+            </a>
+            <a href="Mystery.html" class="category-item">
+                <h4>Mystery</h4>
+                <p>Solve intriguing puzzles</p>
+            </a>
+            <a href="Thriller.html" class="category-item">
+                <h4>Thriller</h4>
+                <p>Experience suspense and intrigue</p>
+            </a>
+            <a href="Romance.html" class="category-item">
+                <h4>Romance</h4>
+                <p>Discover captivating love stories</p>
+            </a>
+            <a href="HistoricalFiction.html" class="category-item">
+                <h4>Historical Fiction</h4>
+                <p>Travel through time</p>
+            </a>
+        </div>
+    </div>
+
+    <div id="non-fiction-content" class="category-content">
+        <div class="category-grid">
+            <a href="Biography.html" class="category-item">
+                <h4>Biography</h4>
+                <p>Learn from real lives</p>
+            </a>
+            <a href="SelfHelp.html" class="category-item">
+                <h4>Self-Help</h4>
+                <p>Improve yourself and your life</p>
+            </a>
+            <a href="History.html" class="category-item">
+                <h4>History</h4>
+                <p>Uncover the past</p>
+            </a>
+            <a href="Science.html" class="category-item">
+                <h4>Science</h4>
+                <p>Explore the wonders of knowledge</p>
+            </a>
+            <a href="Technology.html" class="category-item">
+                <h4>Technology</h4>
+                <p>Dive into innovation</p>
+            </a>
+            <a href="Health.html" class="category-item">
+                <h4>Health & Fitness</h4>
+                <p>Achieve a healthier lifestyle</p>
+            </a>
+            <a href="Education.html" class="category-item">
+                <h4>Education</h4>
+                <p>Learn and grow</p>
+            </a>
+            <a href="Philosophy.html" class="category-item">
+                <h4>Philosophy</h4>
+                <p>Ponder life's big questions</p>
+            </a>
+        </div>
+    </div>
   </section>
 
   <section class="bookshelf-section">
     <h3>Featured Books</h3>
     <div class="shelf">
-      <div class="book" onclick="openModal('book1.jpg', 'The Art of War', 'pdfs/The_Art_of_War.pdf')">
-        <img src="book1.jpg" alt="Book Cover 1" />
-        <div class="book-info">
-          <p class="book-title">The Art of War</p>
-          <div class="book-button-container">
-            <a href="pdfs/The_Art_of_War.pdf" download class="book-button">Download PDF</a>
-          </div>
-        </div>
-      </div>
-      <div class="book" onclick="openModal('book2.jpg', 'Deep Work', 'pdfs/Deep_Work.pdf')">
-        <img src="book2.jpg" alt="Book Cover 2" />
-        <div class="book-info">
-          <p class="book-title">Deep Work</p>
-          <div class="book-button-container">
-            <a href="pdfs/Deep_Work.pdf" download class="book-button">Download PDF</a>
-          </div>
-        </div>
-      </div>
-      <div class="book" onclick="openModal('book3.jpg', 'The Subtle Art of Not Giving a F*ck', 'pdfs/The_Subtle_Art_of_Not_Giving_a_F_ck.pdf')">
-        <img src="book3.jpg" alt="Book Cover 3" />
-        <div class="book-info">
-          <p class="book-title">The Subtle Art of Not Giving a F*ck</p>
-          <div class="book-button-container">
-            <a href="pdfs/The_Subtle_Art_of_Not_Giving_a_F_ck.pdf" download class="book-button">Download PDF</a>
-          </div>
-        </div>
-      </div>
-      <div class="book" onclick="openModal('book4.jpg', 'Atomic Habits', 'pdfs/Atomic_Habits.pdf')">
-        <img src="book4.jpg" alt="Book Cover 4" />
-        <div class="book-info">
-          <p class="book-title">Atomic Habits</p>
-          <div class="book-button-container">
-            <a href="pdfs/Atomic_Habits.pdf" download class="book-button">Download PDF</a>
-          </div>
-        </div>
-      </div>
-      <div class="book" onclick="openModal('book5.jpg', 'The Psychology of Money', 'pdfs/The_Psychology_of_Money.pdf')">
-        <img src="book5.jpg" alt="Book Cover 5" />
-        <div class="book-info">
-          <p class="book-title">The Psychology of Money</p>
-          <div class="book-button-container">
-            <a href="pdfs/The_Psychology_of_Money.pdf" download class="book-button">Download PDF</a>
-          </div>
-        </div>
-      </div>
-      <div class="book" onclick="openModal('book6.jpg', 'The Alchemist', 'pdfs/The_Alchemist.pdf')">
-        <img src="book6.jpg" alt="Book Cover 6" />
-        <div class="book-info">
-          <p class="book-title">The Alchemist</p>
-          <div class="book-button-container">
-            <a href="pdfs/The_Alchemist.pdf" download class="book-button">Download PDF</a>
-          </div>
-        </div>
-      </div>
-      <div class="book" onclick="openModal('book7.jpg', 'Sapiens: A Brief History of Humankind', 'pdfs/Sapiens_A_Brief_History_of_Humankind.pdf')">
-        <img src="book7.jpg" alt="Book Cover 7" />
-        <div class="book-info">
-          <p class="book-title">Sapiens</p>
-          <div class="book-button-container">
-            <a href="pdfs/Sapiens_A_Brief_History_of_Humankind.pdf" download class="book-button">Download PDF</a>
-          </div>
-        </div>
-      </div>
-      <div class="book" onclick="openModal('book8.jpg', 'Becoming', 'pdfs/Becoming.pdf')">
-        <img src="book8.jpg" alt="Book Cover 8" />
-        <div class="book-info">
-          <p class="book-title">Becoming</p>
-          <div class="book-button-container">
-            <a href="pdfs/Becoming.pdf" download class="book-button">Download PDF</a>
-          </div>
-        </div>
-      </div>
       </div>
   </section>
 
@@ -746,8 +730,7 @@
   <script>
     // JavaScript for Search Bar
     let books = [
-      "Atomic Habits", "Deep Work", "The Subtle Art of Not Giving a F*ck", "The Psychology of Money", "The Art of War", "The Alchemist", "Sapiens: A Brief History of Humankind", "Becoming",
-      "Ali Baba", "Aliens in Space", "Alif Laila", "Ali Ka Safar",
+      "Atomic Habits", "Ali Baba", "Aliens in Space", "Alif Laila", "Ali Ka Safar",
       "Algorithm Design", "All About Love", "Alice in Wonderland", "AI for Beginners",
       // You can add more book titles here that should appear in search suggestions across all pages
     ];
@@ -816,10 +799,16 @@
       if (e.key === "Escape") closeModal();
     });
 
-    // Function to handle category clicks (on index.html)
-    function toggleCategory(event, categoryFile) {
-      event.preventDefault(); // Prevent the default link behavior
-      window.location.href = categoryFile; // Navigate to the specified category page
+    // Function to handle category clicks (for Fiction/Non-Fiction tabs)
+    function toggleCategory(event, categoryType) {
+        const buttons = document.querySelectorAll('.category-tab-button');
+        buttons.forEach(button => button.classList.remove('active'));
+        event.target.classList.add('active');
+
+        const contents = document.querySelectorAll('.category-content');
+        contents.forEach(content => content.classList.remove('active'));
+
+        document.getElementById(categoryType + '-content').classList.add('active');
     }
   </script>
 </body>
