@@ -158,12 +158,60 @@
       color: var(--text-secondary); /* Keep text color readable on hover */
     }
 
-    /* Hero Section Styles */
+    /* Sliding Images Section (Carousel) - NEW/MODIFIED */
+    .slider-container {
+      width: 100%;
+      max-width: 1200px; /* Limit width */
+      margin: 20px auto;
+      overflow: hidden;
+      position: relative;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+
+    .slider {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .slider img {
+      width: 100%;
+      height: 400px; /* Fixed height for consistency */
+      object-fit: cover; /* Cover the area, crop if necessary */
+      flex-shrink: 0; /* Prevents images from shrinking */
+      border-radius: 12px;
+    }
+
+    .slider-dots {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 10px;
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      background-color: rgba(255, 255, 255, 0.7);
+      border-radius: 50%;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .dot.active {
+      background-color: var(--secondary-color); /* Gold color for active dot */
+    }
+
+
+    /* Hero Section Styles (Optional - can be removed if slider is main hero) */
     .hero-section {
       background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('hero-bg.jpg') no-repeat center center/cover; /* Placeholder background */
       color: var(--text-primary);
       padding: 80px 20px;
       text-align: center;
+      margin-top: 20px; /* Add some space below slider if both exist */
     }
 
     .hero-section h2 {
@@ -210,6 +258,7 @@
       font-weight: 600;
     }
 
+    /* Original Category Tabs Design - RESTORED */
     .category-tabs {
         display: flex;
         justify-content: center;
@@ -219,8 +268,8 @@
     }
 
     .category-tab-button {
-        background-color: var(--primary-color);
-        color: var(--text-primary);
+        background-color: var(--primary-color); /* Original background */
+        color: var(--text-primary); /* Original text color */
         padding: 12px 25px;
         border: none;
         border-radius: 30px;
@@ -232,8 +281,8 @@
 
     .category-tab-button.active,
     .category-tab-button:hover {
-        background-color: var(--secondary-color);
-        color: var(--text-secondary); /* Text readable on gold button */
+        background-color: var(--secondary-color); /* Gold on active/hover */
+        color: var(--text-secondary); /* Text readable on gold */
         transform: translateY(-2px);
     }
 
@@ -284,7 +333,7 @@
       color: #ccc;
     }
 
-    /* Bookshelf Section Styles (no changes from the previous general styling, as it will be empty) */
+    /* Bookshelf Section Styles */
     .bookshelf-section {
       background: #f9fafb; /* Slightly off-white for book section */
       padding: 60px 20px;
@@ -586,6 +635,9 @@
       .book {
           width: 160px;
       }
+      .slider img {
+        height: 250px; /* Adjust height for mobile screens */
+      }
     }
   </style>
 </head>
@@ -611,6 +663,16 @@
       <a href="#contact">Contact</a>
     </div>
   </nav>
+
+  <section class="slider-container">
+    <div class="slider" id="imageSlider">
+      <img src="slider1.jpg" alt="Slider Image 1">
+      <img src="slider2.jpg" alt="Slider Image 2">
+      <img src="slider3.jpg" alt="Slider Image 3">
+      </div>
+    <div class="slider-dots" id="sliderDots">
+      </div>
+  </section>
 
   <section class="hero-section">
     <h2>Discover Your Next Great Read</h2>
@@ -810,6 +872,54 @@
 
         document.getElementById(categoryType + '-content').classList.add('active');
     }
+
+    // --- Sliding Image (Carousel) JavaScript ---
+    let slideIndex = 0;
+    const slider = document.getElementById('imageSlider');
+    const dotsContainer = document.getElementById('sliderDots');
+    const slides = slider.children; // Get all images inside the slider
+
+    function showSlides() {
+      if (!slider || !dotsContainer || slides.length === 0) return; // Exit if elements not found
+
+      // Clear existing dots
+      dotsContainer.innerHTML = '';
+
+      // Create dots for each slide
+      for (let i = 0; i < slides.length; i++) {
+        const dot = document.createElement('span');
+        dot.classList.add('dot');
+        if (i === slideIndex) {
+          dot.classList.add('active');
+        }
+        dot.onclick = () => currentSlide(i);
+        dotsContainer.appendChild(dot);
+      }
+
+      // Adjust slider position
+      slider.style.transform = `translateX(${-slideIndex * 100}%)`;
+    }
+
+    function nextSlide() {
+      slideIndex++;
+      if (slideIndex >= slides.length) {
+        slideIndex = 0; // Loop back to the first slide
+      }
+      showSlides();
+    }
+
+    function currentSlide(n) {
+      slideIndex = n;
+      showSlides();
+    }
+
+    // Initial display and auto-advance
+    showSlides();
+    setInterval(nextSlide, 5000); // Change image every 5 seconds (5000ms)
+
+    // Ensure slider updates if window is resized (e.g., orientation change on mobile)
+    window.addEventListener('resize', showSlides);
+
   </script>
 </body>
   </html>
