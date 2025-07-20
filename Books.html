@@ -5,21 +5,88 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Books Library - GlobalBookShelf</title>
   <style>
-    body { font-family: Arial; margin: 0; background: #f9f9f9; }
-    header, footer { background: #0d3b66; color: white; text-align: center; padding: 20px; }
-    .section { padding: 40px 20px; text-align: center; }
-    .books { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
-    .card { background: white; border: 1px solid #ddd; border-radius: 8px; padding: 20px; width: 220px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
-    .download-btn {
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f9f9f9;
+      color: #333;
+    }
+
+    header, footer {
+      background: #0d3b66;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .section {
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    .books {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px; /* Har book card ke beech ka space */
+      max-width: 1200px; /* Max width for the book grid */
+      margin: 0 auto; /* Center the grid */
+    }
+
+    .book-card {
+      background: white;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 15px; /* Card ke andar ka padding */
+      width: 200px; /* Har book card ki consistent width */
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      display: flex; /* Card ke andar ke items ko stack karne ke liye */
+      flex-direction: column; /* Image, title, button ko vertically stack karega */
+      align-items: center; /* Card ke andar items ko horizontally center karega */
+      text-align: center; /* Text ko center karega */
+      transition: transform 0.2s ease-in-out; /* Hover effect ke liye */
+    }
+
+    .book-card:hover {
+      transform: translateY(-5px); /* Hover karne par card thoda upar uthega */
+    }
+
+    .book-card img {
+      max-width: 100%; /* Image card ki width ke andar fit hogi */
+      height: 250px; /* Sabhi images ki height consistent rakhega */
+      object-fit: cover; /* Image ko area mein fit karega, aspect ratio maintain karte hue */
+      border-radius: 4px; /* Images par halka sa border radius */
+      margin-bottom: 12px; /* Image ke neeche space */
+    }
+
+    .book-card .book-title {
+      font-weight: bold;
+      font-size: 1.05em; /* Title ka font size */
+      margin-bottom: 12px; /* Title ke neeche space */
+      color: #333;
+      min-height: 2.5em; /* Title ke liye minimum height, taaki layout shift na ho */
+      display: -webkit-box;
+      -webkit-line-clamp: 2; /* Title ko max 2 lines tak limit karega */
+      -webkit-box-orient: vertical;
+      overflow: hidden; /* Extra text ko hide karega */
+    }
+
+    .book-card .book-button {
       background: linear-gradient(to right, #00c9ff, #92fe9d);
       color: #0d3b66;
       font-weight: bold;
-      padding: 10px 20px;
+      padding: 10px 18px;
       border-radius: 30px;
       text-decoration: none;
-      transition: 0.3s;
+      transition: background 0.3s ease, transform 0.3s ease;
+      display: inline-block; /* Button ko padding aur margin ke liye */
+      margin-top: auto; /* Button ko card ke bottom mein push karega */
     }
-    .download-btn:hover { transform: scale(1.05); }
+
+    .book-card .book-button:hover {
+      background: linear-gradient(to right, #00b0e0, #7ce08e); /* Hover par gradient change */
+      transform: scale(1.05);
+    }
   </style>
 </head>
 <body>
@@ -31,122 +98,79 @@
 <section class="section">
   <h2>Explore All Books</h2>
   <div class="books">
-    <!-- Book 1 -->
-  <div style="width: 180px; background-color: #fff; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.2); padding: 10px; text-align: center;">
-    <img src="https://www.mediafire.com/convkey/7f6e/uze7b5res5e62luzg.jpg" alt="Dark Psychology Secrets" style="width: 100%; height: auto; border-radius: 6px;">
-    <a href="https://www.mediafire.com/file/m4zozpuyv2i3x7a/Dark_Psychology_Secrets_%25281%2529.pdf/file" target="_blank" style="display: inline-block; margin-top: 10px; background-color: #007bff; color: white; padding: 8px 12px; border-radius: 5px; text-decoration: none;">📕 Download</a>
-  </div>
-    
-    <div class="card">
-      <div class="book">
-        <img src="https://i.postimg.cc/HsxP6f86/IMG-20250718-234340.jpg" alt="Masailey Sajde Sahw Book Cover" />
-        <div class="book-info">
-          <div class="book-title">Masailey Sajde Sahw</div>
-        </div>
-        <div class="book-button-container">
-          <a href="https://www.mediafire.com/file/hc29ze1jfv4twwp/Masailey_Sajde_Sahw.pdf/file" target="_blank" class="book-button">Download</a>
-        </div>
-      </div>
 
-      <div class="book">
-        <img src="https://m.media-amazon.com/images/I/61IxJuRI39L.jpg" alt="Think and Grow Rich Book Cover" />
-        <div class="book-info">
-          <div class="book-title">Think and Grow Rich</div>
-        </div>
-        <div class="book-button-container">
-          <a href="https://www.mediafire.com/file/g1ztl71xwagw6qj/Think-And-Grow-Rich_2011-06.pdf/file" target="_blank" class="book-button">Download</a>
-        </div>
-      </div>
+    <div class="book-card">
+        <img src="https://www.mediafire.com/convkey/7f6e/uze7b5res5e62luzg.jpg" alt="Dark Psychology Secrets Book Cover">
+        <div class="book-title">Dark Psychology Secrets</div>
+        <a href="https://www.mediafire.com/file/m4zozpuyv2i3x7a/Dark_Psychology_Secrets_%25281%2529.pdf/file" target="_blank" class="book-button">Download</a>
+    </div>
 
-      <div class="book">
-        <img src="https://i.postimg.cc/bJg3TTyX/download.png" alt="How to Win Friends and Influence People Book Cover" />
-        <div class="book-info">
-          <div class="book-title">How to Win Friends and Influence People</div>
-        </div>
-        <div class="book-button-container">
-          <a href="https://www.mediafire.com/file/npd3yv4b7qssbrh/how-to-win-friends-and-influence-people.pdf/file" target="_blank" class="book-button">Download</a>
-        </div>
-      </div>
+    <div class="book-card">
+        <img src="https://i.postimg.cc/HsxP6f86/IMG-20250718-234340.jpg" alt="Masailey Sajde Sahw Book Cover">
+        <div class="book-title">Masailey Sajde Sahw</div>
+        <a href="https://www.mediafire.com/file/hc29ze1jfv4twwp/Masailey_Sajde_Sahw.pdf/file" target="_blank" class="book-button">Download</a>
+    </div>
 
-      <div class="book">
-        <img src="https://i.postimg.cc/8cCwn6c7/download-1.jpg" alt="The 7 Habits of Highly Effective People Book Cover" />
-        <div class="book-info">
-          <div class="book-title">The 7 Habits of Highly Effective People</div>
-        </div>
-        <div class="book-button-container">
-          <a href="https://www.mediafire.com/file/jpjp2i663kj7lrt/the_7_habits_of_highly_effective_people_.pdf/file" target="_blank" class="book-button">Download</a>
-        </div>
-      </div>
+    <div class="book-card">
+        <img src="https://m.media-amazon.com/images/I/61IxJuRI39L.jpg" alt="Think and Grow Rich Book Cover">
+        <div class="book-title">Think and Grow Rich</div>
+        <a href="https://www.mediafire.com/file/g1ztl71xwagw6qj/Think-And-Grow-Rich_2011-06.pdf/file" target="_blank" class="book-button">Download</a>
+    </div>
 
-<div class="book">
-        <img src="https://i.postimg.cc/fb42Ty2P/IMG-20250719-133611.jpg" alt="The Power of Now Book Cover" />
-        <div class="book-info">
-          <div class="book-title">The Power of Now</div>
-        </div>
-        <div class="book-button-container">
-          <a href="https://www.mediafire.com/file/5k8hbwytb15uudm/The_Power_Of_Now_-_Eckhart_Tolle.pdf/file" target="_blank" class="book-button">Download</a>
-        </div>
-      </div>
+    <div class="book-card">
+        <img src="https://i.postimg.cc/bJg3TTyX/download.png" alt="How to Win Friends and Influence People Book Cover">
+        <div class="book-title">How to Win Friends and Influence People</div>
+        <a href="https://www.mediafire.com/file/npd3yv4b7qssbrh/how-to-win-friends-and-influence-people.pdf/file" target="_blank" class="book-button">Download</a>
+    </div>
 
-<div class="book">
-        <img src="https://i.postimg.cc/NGNd2pCm/images.jpg" alt="Atomic Habits Book Cover" />
-        <div class="book-info">
-          <div class="book-title">Atomic Habits</div>
-        </div>
-        <div class="book-button-container">
-          <a href="https://www.mediafire.com/file/ks95j3x88b9r8lh/Atomic_habits_%2528_PDFDrive_%2529.pdf/file" target="_blank" class="book-button">Download</a>
-        </div>
-      </div>
+    <div class="book-card">
+        <img src="https://i.postimg.cc/8cCwn6c7/download-1.jpg" alt="The 7 Habits of Highly Effective People Book Cover">
+        <div class="book-title">The 7 Habits of Highly Effective People</div>
+        <a href="https://www.mediafire.com/file/jpjp2i663kj7lrt/the_7_habits_of_highly_effective_people_.pdf/file" target="_blank" class="book-button">Download</a>
+    </div>
 
-<div class="book">
-        <img src="https://i.postimg.cc/FsBC8DjN/IMG-20250719-133638.jpg" alt="Mindset - The New Psychology of Success Book Cover" />
-        <div class="book-info">
-          <div class="book-title">Mindset - The New Psychology of Success</div>
-        </div>
-        <div class="book-button-container">
-          <a href="https://www.mediafire.com/file/0bhnlqx8n8lryf2/Mindset-The-New-Psychology-of-Success-Dweck.pdf/file" target="_blank" class="book-button">Download</a>
-        </div>
-</div>
+    <div class="book-card">
+        <img src="https://i.postimg.cc/fb42Ty2P/IMG-20250719-133611.jpg" alt="The Power of Now Book Cover">
+        <div class="book-title">The Power of Now</div>
+        <a href="https://www.mediafire.com/file/5k8hbwytb15uudm/The_Power_Of_Now_-_Eckhart_Tolle.pdf/file" target="_blank" class="book-button">Download</a>
+    </div>
 
-      <div class="book">
-        <img src="https://i.postimg.cc/qqZQfv6j/IMG-20250719-133712.jpg" alt="The Alchemist Book Cover" />
-        <div class="book-info">
-          <div class="book-title">The Alchemist</div>
-        </div>
-        <div class="book-button-container">
-          <a href="https://www.mediafire.com/file/ivyqyn551osn7ae/The-Alchemist-Paulo-Coelho.pdf/file" target="_blank" class="book-button">Download</a>
-        </div>
-      </div>
+    <div class="book-card">
+        <img src="https://i.postimg.cc/NGNd2pCm/images.jpg" alt="Atomic Habits Book Cover">
+        <div class="book-title">Atomic Habits</div>
+        <a href="https://www.mediafire.com/file/ks95j3x88b9r8lh/Atomic_habits_%2528_PDFDrive_%2529.pdf/file" target="_blank" class="book-button">Download</a>
+    </div>
 
-<div class="book">
-        <img src="https://i.postimg.cc/QdKY31b5/IMG-20250719-133654.jpg" alt="Grit: The Power of Passion and Perseverance Book Cover" />
-        <div class="book-info">
-          <div class="book-title">Grit: The Power of Passion and Perseverance</div>
-        </div>
-        <div class="book-button-container">
-          <a href="https://www.mediafire.com/file/5avmyh74yditqp7/grit-the-power-of-passion-and-perserverance-angela-duckworth.pdf/file" target="_blank" class="book-button">Download</a>
-        </div>
-      </div>
+    <div class="book-card">
+        <img src="https://i.postimg.cc/FsBC8DjN/IMG-20250719-133638.jpg" alt="Mindset - The New Psychology of Success Book Cover">
+        <div class="book-title">Mindset - The New Psychology of Success</div>
+        <a href="https://www.mediafire.com/file/0bhnlqx8n8lryf2/Mindset-The-New-Psychology-of-Success-Dweck.pdf/file" target="_blank" class="book-button">Download</a>
+    </div>
 
-<div class="book">
-        <img src="https://i.postimg.cc/63tMnSNL/IMG-20250719-133746.jpg" alt="Your Erroneous Zones Book Cover" />
-        <div class="book-info">
-          <div class="book-title">Your Erroneous Zones</div>
-        </div>
-        <div class="book-button-container">
-          <a href="https://www.mediafire.com/file/iys2unkcjighebk/Your_Erroneous_Zones_PDF.pdf/file" target="_blank" class="book-button">Download</a>
-        </div>
-      </div>
+    <div class="book-card">
+        <img src="https://i.postimg.cc/qqZQfv6j/IMG-20250719-133712.jpg" alt="The Alchemist Book Cover">
+        <div class="book-title">The Alchemist</div>
+        <a href="https://www.mediafire.com/file/ivyqyn551osn7ae/The-Alchemist-Paulo-Coelho.pdf/file" target="_blank" class="book-button">Download</a>
+    </div>
 
-<div class="book">
-        <img src="https://i.postimg.cc/tghr1b84/9781846041242.jpg" alt="Man's Search for Meaning Book Cover" />
-        <div class="book-info">
-          <div class="book-title">Man's Search for Meaning</div>
-        </div>
-        <div class="book-button-container">
-          <a href="https://www.mediafire.com/file/elcw0wgpvwa1map/mans-search-for-meaning.pdf/file" target="_blank" class="book-button">Download</a>
-        </div>
-        </div>
+    <div class="book-card">
+        <img src="https://i.postimg.cc/QdKY31b5/IMG-20250719-133654.jpg" alt="Grit: The Power of Passion and Perseverance Book Cover">
+        <div class="book-title">Grit: The Power of Passion and Perseverance</div>
+        <a href="https://www.mediafire.com/file/5avmyh74yditqp7/grit-the-power-of-passion-and-perserverance-angela-duckworth.pdf/file" target="_blank" class="book-button">Download</a>
+    </div>
+
+    <div class="book-card">
+        <img src="https://i.postimg.cc/63tMnSNL/IMG-20250719-133746.jpg" alt="Your Erroneous Zones Book Cover">
+        <div class="book-title">Your Erroneous Zones</div>
+        <a href="https://www.mediafire.com/file/iys2unkcjighebk/Your_Erroneous_Zones_PDF.pdf/file" target="_blank" class="book-button">Download</a>
+    </div>
+
+    <div class="book-card">
+        <img src="https://i.postimg.cc/tghr1b84/9781846041242.jpg" alt="Man's Search for Meaning Book Cover">
+        <div class="book-title">Man's Search for Meaning</div>
+        <a href="https://www.mediafire.com/file/elcw0wgpvwa1map/mans-search-for-meaning.pdf/file" target="_blank" class="book-button">Download</a>
+    </div>
+
   </div>
 </section>
 
@@ -156,5 +180,3 @@
 
 </body>
 </html>
-<img src="cover.jpg" onclick="openModal('cover.jpg', 'Book Title', 'book.pdf')">
- 
